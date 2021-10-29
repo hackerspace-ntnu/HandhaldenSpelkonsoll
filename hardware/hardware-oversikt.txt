@@ -1,0 +1,8 @@
+mcu: Esp32 
+skjerm: ILI9341 controller 480*320 4.5"
+knapper: buttons
+joystick: ?
+lyd: 3.5mm + innebygd buzzer. 
+batteri: 
+
+hoved kommunikasjons protokoll: 
