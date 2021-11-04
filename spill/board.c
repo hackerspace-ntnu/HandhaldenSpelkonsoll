@@ -1,4 +1,4 @@
-
+#include "board_header.h"
 #define SCREEN_HEIGHT 160
 #define SCREEN_WIDTH 240
 
@@ -7,6 +7,7 @@
 
 #define BLOCK_BLANK 0
 #define BLOCK_FOOD 1
+#define BLOCK_SNAKE 2
 
 int board[BOARD_HEIGHT][BOARD_WIDTH];
 
@@ -26,6 +27,19 @@ int get_square_value(int x, int y) {
     return board[y][x];
 }
 
+void set_square_value(int x, int y, int value){
+    board[y][x] = value;
+}
+
+void initialize_snake(struct Body *snake_head){
+    struct Body *snake_part = snake_head;
+    do{
+        set_square_value(snake_part->x, snake_part->y, BLOCK_SNAKE);
+        snake_part = snake_part->next;
+    }while(snake_part->next != NULL);
+}
+
+
 void place_random_food(void) {
     int x;
     int y;
@@ -41,5 +55,5 @@ void place_random_food(void) {
     } while (existing_value != BLOCK_BLANK);
 
     // Update the board with the new block
-    board[y][x] = BLOCK_FOOD;
+    set_square_value(x, y, BLOCK_FOOD);
 }
