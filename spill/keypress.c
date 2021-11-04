@@ -30,6 +30,7 @@ int keyPressedUnix(void) {
            endwin();
        }
     }
+    return 0;
 }
 
 int keyPressedWindows(void) {
@@ -47,6 +48,7 @@ int keyPressedWindows(void) {
             }
         }
     }
+    return 0;
 }
 
 int main() {
