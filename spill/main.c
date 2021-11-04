@@ -3,5 +3,6 @@
 
 void main() {
     init_board();
-    struct Body* snake_head = initialize_snake();
+    struct Body* snake_head = create_snake();
+    add_snake_to_board(snake_head);
 }

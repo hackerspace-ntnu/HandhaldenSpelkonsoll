@@ -191,7 +191,7 @@ void printList(struct Body* node)
     }
 }
 
-struct Body* initialize_snake(void) {
+struct Body* create_snake(void) {
     struct Body* head = NULL;
     push(&head, 0, 0);
     push(&head, 1, 0);
@@ -200,9 +200,8 @@ struct Body* initialize_snake(void) {
     return head;
 }
 
-int main()
+/*int main()
 {
-    /* Start with the empty list */
     struct Body* head = NULL;
     push(&head, 0, 0);
  
@@ -222,4 +221,4 @@ int main()
  
     getchar();
     return 0;
-}
+}*/

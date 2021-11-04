@@ -1,6 +1,7 @@
-#include "board.h"
 #include "snake.h"
+#include "board.h"
 #include <stddef.h>
+#include <stdlib.h>
 
 int board[BOARD_HEIGHT][BOARD_WIDTH];
 
@@ -24,7 +25,7 @@ void set_square_value(int x, int y, int value){
     board[y][x] = value;
 }
 
-void initialize_snake(struct Body *snake_head){
+void add_snake_to_board(struct Body *snake_head){
     struct Body *snake_part = snake_head;
     do{
         set_square_value(snake_part->x, snake_part->y, BLOCK_SNAKE);

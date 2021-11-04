@@ -11,5 +11,5 @@
 void init_board(void);
 int get_square_value(int x, int y);
 void set_square_value(int x, int y, int value);
-void initialize_snake(struct Body *snake_head);
+void add_snake_to_board(struct Body *snake_head);
 void place_random_food(void);

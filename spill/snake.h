@@ -1,3 +1,5 @@
+#include <stdbool.h>
+
 struct Body {
     short int x;
     short int y;
@@ -13,4 +15,4 @@ struct Body* get_head(struct Body* bodypart);
 struct Body* get_tail(struct Body* bodypart);
 void move(struct Body** node, short int direction_x, short int direction_y, bool eat);
 void printList(struct Body* node);
-struct Body* initialize_snake(void);
+struct Body* create_snake(void);
