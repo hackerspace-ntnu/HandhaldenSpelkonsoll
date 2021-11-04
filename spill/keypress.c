@@ -1,38 +1,62 @@
+#ifdef _WIN64
+#include <conio.h>
+#define KEY_UP 72
+#define KEY_DOWN 80
+#define KEY_LEFT 75
+#define KEY_RIGHT 77
+
+#else
 #include <curses.h>
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 
-int main()
-{
-    WINDOW* w;
-    w = initscr();
-  
+
+int keyPressedUnix(void) { // for Linux and Mac
     int c;
-    /*
-       Enable keypad so the user can press a function key (such as an arrow key) and 
-       getch returns a single value representing the function key, i. e. KEY_DOWN
-    */
-    keypad(w, true); 
-    move(2,0);
+
+    initscr();
+    //  Enable keypad so that getch returns a single value representing an arrow key
+    keypad(stdscr, true); 
 
     while((c=getch()) != 27) { // 27 is the escape key 
 
-        if (c == KEY_DOWN) {
-            printw("Arrow key down pressed");
-        }
-        else if (c == KEY_LEFT) {
-            printw("Arrow key left pressed");
-        }
-        else if (c == KEY_UP) {
-            printw("Arrow key up pressed");
-        }
-        else if (c == KEY_RIGHT) {
-            printw("Arrow key right pressed");
-        }
-        printw("\n");
-
-        refresh();
+       if (c == KEY_UP || c == KEY_DOWN || c == KEY_LEFT || c == KEY_RIGHT) {
+           return c;
+       } else {
+           endwin();
+       }
     }
-    endwin();
+}
+
+int keyPressedWindows(void) { // for Windows
+    char c;
+
+    while ((c=getch()) != 27) {
+        if (c == 0) {
+            switch(getch()) {
+                case KEY_UP:
+                case KEY_DOWN:
+                case KEY_LEFT:
+                case KEY_RIGHT:
+                    return c;
+                    break;
+            }
+        }
+    }
+}
+
+int main() {
+    #ifdef _WIN64
+    char c;
+    c = keyPressedWindows();
+    #else
+    int c;
+    c = keyPressedUnix();
+    if (c == KEY_UP || c == KEY_DOWN || c == KEY_LEFT || c == KEY_RIGHT) {
+           printf("Arrow key pressed");
+    }
+    #endif
     return 0;
 }
