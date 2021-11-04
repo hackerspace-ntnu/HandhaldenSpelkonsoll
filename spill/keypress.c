@@ -12,15 +12,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define ESC 27
 
-int keyPressedUnix(void) { // for Linux and Mac
+
+int keyPressedUnix(void) {
     int c;
 
     initscr();
     //  Enable keypad so that getch returns a single value representing an arrow key
     keypad(stdscr, true); 
 
-    while((c=getch()) != 27) { // 27 is the escape key 
+    while((c=getch()) != ESC) {
 
        if (c == KEY_UP || c == KEY_DOWN || c == KEY_LEFT || c == KEY_RIGHT) {
            return c;
@@ -30,10 +32,10 @@ int keyPressedUnix(void) { // for Linux and Mac
     }
 }
 
-int keyPressedWindows(void) { // for Windows
+int keyPressedWindows(void) {
     char c;
 
-    while ((c=getch()) != 27) {
+    while ((c=getch()) != ESC) {
         if (c == 0) {
             switch(getch()) {
                 case KEY_UP:
@@ -51,6 +53,9 @@ int main() {
     #ifdef _WIN64
     char c;
     c = keyPressedWindows();
+    if (c == KEY_UP || c == KEY_DOWN || c == KEY_LEFT || c == KEY_RIGHT) {
+           printf("Arrow key pressed");
+    }
     #else
     int c;
     c = keyPressedUnix();
