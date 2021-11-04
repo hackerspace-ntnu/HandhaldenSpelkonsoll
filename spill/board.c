@@ -1,13 +1,6 @@
-#include "board_header.h"
-#define SCREEN_HEIGHT 160
-#define SCREEN_WIDTH 240
-
-#define BOARD_HEIGHT 16
-#define BOARD_WIDTH 24
-
-#define BLOCK_BLANK 0
-#define BLOCK_FOOD 1
-#define BLOCK_SNAKE 2
+#include "board.h"
+#include "snake.h"
+#include <stddef.h>
 
 int board[BOARD_HEIGHT][BOARD_WIDTH];
 

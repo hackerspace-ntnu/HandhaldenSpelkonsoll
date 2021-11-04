@@ -6,16 +6,9 @@
 #include <math.h>
 #include <stdbool.h>
 
-/*Making the base based on linked list code that we borrowed from the internet:*/
+#include "snake.h"
 
-/*Body part, node of double linked list*/
-struct Body {
-    short int x;
-    short int y;
-    char isHead; // (1=true, 0=false)
-    struct Body* next; // Pointer to next part of Body
-    struct Body* prev; // Pointer to previous part of Body
-};
+/*Making the base based on linked list code that we borrowed from the internet:*/
 
 /*struct Snake {
     short int id;
@@ -196,6 +189,15 @@ void printList(struct Body* node)
         printf("|");
         last = last->prev;
     }
+}
+
+struct Body* initialize_snake(void) {
+    struct Body* head = NULL;
+    push(&head, 0, 0);
+    push(&head, 1, 0);
+    push(&head, 2, 0);
+
+    return head;
 }
 
 int main()
