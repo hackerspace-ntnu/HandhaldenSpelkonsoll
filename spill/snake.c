@@ -10,9 +10,6 @@
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
-//int direction_x = 1; // -1 = left, 0 = no change, 1 = right
-//int direction_y = 0; // -1 = up,   0 = no change, 1 = down
-
 /* Add new Body element on top of head. */
 void push(struct Body** head_ref, short int new_x, short int new_y)
 {
@@ -38,12 +35,6 @@ void push(struct Body** head_ref, short int new_x, short int new_y)
     /* 5. move the head to point to the new node */
     (*head_ref) = new_node;
 }
-
-/*void pop(struct Body** bodypart) {
-    struct Body* tail = get_tail(bodypart);
-    tail->prev->next = NULL;
-    free(tail);
-}*/
 
 /* Given a node as prev_node, insert a new node after the given node*/
 void insertAfter(struct Body* prev_node, short int new_x, short int new_y)

@@ -2,14 +2,14 @@
 #include "board.h"
 #include <stddef.h>
 #include <stdlib.h>
+#include <stdio.h>
+
+int board[BOARD_HEIGHT][BOARD_WIDTH];
 
 void init_board(void) {
-    int i;
-	int j;
-
 	// Initialize the board with only 0s (clear blocks)
-	for (i = 0; i < BOARD_HEIGHT; i++) {
-		for (j = 0; j < BOARD_WIDTH; j++) {
+	for (int i = 0; i < BOARD_HEIGHT; i++) {
+		for (int j = 0; j < BOARD_WIDTH; j++) {
 			board[i][j] = 0;
 		}
 	}
