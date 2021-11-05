@@ -10,11 +10,6 @@
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
-/*struct Snake {
-    short int id;
-    struct Body bodyparts[];
-};*/
-
 //int direction_x = 1; // -1 = left, 0 = no change, 1 = right
 //int direction_y = 0; // -1 = up,   0 = no change, 1 = down
 
@@ -191,13 +186,17 @@ void printList(struct Body* node)
     }
 }
 
-struct Body* create_snake(void) {
+struct Snake create_snake(void) {
     struct Body* head = NULL;
     push(&head, 0, 0);
     push(&head, 1, 0);
     push(&head, 2, 0);
 
-    return head;
+    struct Snake snake = {
+        .id = 0, .direction_x = 1, .direction_y = 0, .head = head
+    };
+
+    return snake;
 }
 
 /*int main()

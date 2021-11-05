@@ -8,6 +8,8 @@
 #define BLOCK_FOOD 1
 #define BLOCK_SNAKE 2
 
+int board[BOARD_HEIGHT][BOARD_WIDTH];
+
 void init_board(void);
 int get_square_value(int x, int y);
 void set_square_value(int x, int y, int value);
