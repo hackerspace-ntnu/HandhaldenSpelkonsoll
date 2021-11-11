@@ -10,14 +10,6 @@
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
-/*struct Snake {
-    short int id;
-    struct Body bodyparts[];
-};*/
-
-//int direction_x = 1; // -1 = left, 0 = no change, 1 = right
-//int direction_y = 0; // -1 = up,   0 = no change, 1 = down
-
 /* Add new Body element on top of head. */
 void push(struct Body** head_ref, short int new_x, short int new_y)
 {
@@ -43,12 +35,6 @@ void push(struct Body** head_ref, short int new_x, short int new_y)
     /* 5. move the head to point to the new node */
     (*head_ref) = new_node;
 }
-
-/*void pop(struct Body** bodypart) {
-    struct Body* tail = get_tail(bodypart);
-    tail->prev->next = NULL;
-    free(tail);
-}*/
 
 /* Given a node as prev_node, insert a new node after the given node*/
 void insertAfter(struct Body* prev_node, short int new_x, short int new_y)
@@ -191,13 +177,17 @@ void printList(struct Body* node)
     }
 }
 
-struct Body* create_snake(void) {
+struct Snake create_snake(void) {
     struct Body* head = NULL;
     push(&head, 0, 0);
     push(&head, 1, 0);
     push(&head, 2, 0);
 
-    return head;
+    struct Snake snake = {
+        .id = 0, .direction_x = 1, .direction_y = 0, .head = head
+    };
+
+    return snake;
 }
 
 /*int main()

@@ -9,11 +9,9 @@ int board[BOARD_HEIGHT][BOARD_WIDTH];
 
 
 void init_board(void) {
-    int i;
-    int j;
 	// Initialize the board with only 0s (clear blocks)
-	for (i = 0; i < BOARD_HEIGHT; i++) {
-		for (j = 0; j < BOARD_WIDTH; j++) {
+	for (int i = 0; i < BOARD_HEIGHT; i++) {
+		for (int j = 0; j < BOARD_WIDTH; j++) {
 			board[i][j] = 0;
 		}
 	}
@@ -23,17 +21,17 @@ int get_square_value(int x, int y) {
     return board[y][x];
 }
 
-void set_square_value(int x, int y, int value){
+void set_square_value(int x, int y, int value) {
     board[y][x] = value;
 }
 
 // To be used under initialization, put a whole snake on the board
 void add_snake_to_board(struct Body *snake_head){
     struct Body *snake_part = snake_head;
-    do{
+    do {
         set_square_value(snake_part->x, snake_part->y, BLOCK_SNAKE);
         snake_part = snake_part->next;
-    }while(snake_part->next != NULL);
+    } while (snake_part->next != NULL);
 }
 
 //Creates and prints printable board out of current board

@@ -1,31 +1,28 @@
-#include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
+#include <Windows.h>
 
-#define KEY_UP 72
-#define KEY_DOWN 80
-#define KEY_LEFT 75
-#define KEY_RIGHT 77
+#define KEY_UP 87
+#define KEY_DOWN 83
+#define KEY_LEFT 65
+#define KEY_RIGHT 68
+
+bool key_is_pressed(int key) {
+    return (bool)(GetKeyState(key) & 0x8000);
+}
 
 int main() {
-    char c;
-
-    while ((c=getch()) != 27) {
-        if (c == 0) {
-            switch(getch()) {
-                case KEY_UP:
-                    printf("w \n");
-                    break;
-                case KEY_DOWN:
-                    printf("s \n");
-                    break;
-                case KEY_LEFT:
-                    printf("a \n");
-                    break;
-                case KEY_RIGHT:
-                    printf("d \n");
-                    break;
-            }
+    printf("hey\n");
+    while (!key_is_pressed(VK_ESCAPE)) {
+        if (key_is_pressed(KEY_UP)) {
+            printf("w \n");
+        } else if (key_is_pressed(KEY_DOWN)) {
+            printf("s \n");
+        } else if (key_is_pressed(KEY_LEFT)) {
+            printf("a \n");
+        } else if (key_is_pressed(KEY_RIGHT)) {
+            printf("d \n");
         }
     }
     return 0;
