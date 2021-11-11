@@ -2,13 +2,15 @@
 #include "board.h"
 #include <stddef.h>
 #include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
 
 int board[BOARD_HEIGHT][BOARD_WIDTH];
 
+
 void init_board(void) {
     int i;
-	int j;
-
+    int j;
 	// Initialize the board with only 0s (clear blocks)
 	for (i = 0; i < BOARD_HEIGHT; i++) {
 		for (j = 0; j < BOARD_WIDTH; j++) {
@@ -25,6 +27,7 @@ void set_square_value(int x, int y, int value){
     board[y][x] = value;
 }
 
+// To be used under initialization, put a whole snake on the board
 void add_snake_to_board(struct Body *snake_head){
     struct Body *snake_part = snake_head;
     do{
@@ -33,6 +36,40 @@ void add_snake_to_board(struct Body *snake_head){
     }while(snake_part->next != NULL);
 }
 
+//Creates and prints printable board out of current board
+void print_board(){
+    char string_board[BOARD_HEIGHT*BOARD_WIDTH+BOARD_HEIGHT];
+    char *current_char=&string_board[0];
+    char board_value;
+    for (int i = 0; i<BOARD_HEIGHT; i++){
+        for (int j= 0; j<BOARD_WIDTH; j++){
+            board_value = convert_board_int(board[i][j]); //Transelates int on the board to a defined char
+            *current_char = board_value; //Adds the character to the printed board
+            current_char++;
+        }
+        *current_char = '\n'; // Seperates the rows
+        current_char++;
+    }
+    printf("%s", string_board); //Prints the board
+}
+
+//Transelates an int on the digital board to a char for visualization when printing
+char convert_board_int(int num){
+    switch (num) 
+    {
+    case 0:
+        return '#';
+        break;
+    case 1:
+        return 'f';
+        break;
+    case 2:
+        return 's';
+        break;
+    default:
+        return ' ';
+    }
+}
 
 void place_random_food(void) {
     int x;
@@ -51,3 +88,15 @@ void place_random_food(void) {
     // Update the board with the new block
     set_square_value(x, y, BLOCK_FOOD);
 }
+
+int main(int argc, char const *argv[])
+{
+    init_board();
+    printf("Board init clear\n");
+    set_square_value(2,2,1);
+    set_square_value(2,3,2);
+    printf("Square set cleared\n");
+    print_board();
+    return 0;
+}
+
