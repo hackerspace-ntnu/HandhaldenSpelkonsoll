@@ -1,8 +1,8 @@
-// use Arduino-IDE
-
 #include <SPI.h>
 
-#include <TFT_eSPI.h> // Hardware-specific library
+#include <TFT_eSPI.h>
+#include <User_Setup_Select.h>
+#include <User_Setup.h>
 
 TFT_eSPI tft = TFT_eSPI();       // Invoke custom library
 
