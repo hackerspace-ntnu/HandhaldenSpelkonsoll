@@ -1,10 +1,9 @@
 #include <SPI.h>
-
 #include <TFT_eSPI.h>
 #include <User_Setup_Select.h>
 #include <User_Setup.h>
 
-TFT_eSPI tft = TFT_eSPI();       // Invoke custom library
+TFT_eSPI tft = TFT_eSPI();
 
 const int w = tft.width();
 const int h = tft.height();
