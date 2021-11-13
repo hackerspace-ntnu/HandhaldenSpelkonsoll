@@ -1,3 +1,21 @@
+// #ifdef _WIN_64
+//     #include <windows.h>
+//     #define KEY_UP 87
+//     #define KEY_DOWN 83
+//     #define KEY_LEFT 65
+//     #define KEY_RIGHT 68
+
+//     bool key_is_pressed(int key) {
+//     return (bool)(GetKeyState(key) & 0x8000);
+// }
+
+// #else
+//     #include <curses.h>
+//     initscr();
+//     keypad(stdscr, true);
+// #endif
+
+
 #include "board_header.h"
 #define SCREEN_HEIGHT 160
 #define SCREEN_WIDTH 240
