@@ -12,6 +12,14 @@ input: Joystick/dpad + 6 knapper.
 kabinett: 3d printet, cad filer f;lger og det er åpent for tilpassing som i valg av farger.
 
 Software:  
-spill  
+Spill  
 Startet arbeid på ett snake inspirert spill Ormkamp.  
-flere skjermdriver-bibliotek er under vurdering. TFT_eSPI har skrevet til skjermene.  
+Flere skjermdriver-bibliotek er under vurdering. TFT_eSPI har skrevet til skjermene.  
+
+
+### TODO:
+* Lage logikk for å kjøre et faktisk snake spill i c, deretter implementer multiplayer
+* Få spillet til å kjøres på skjermen
+* Lag system for å ta inn input
+* Sette opp trådløs kommunikasjon mellom kontroller
+* Implementere meny-system
