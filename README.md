@@ -9,7 +9,7 @@ Hardware:
 microcontroller: ESP32 dev board.  
 skjerm: ILI9488 controller 480*320 oppløsning 3.5"  
 input: Joystick/dpad + 6 knapper.  
-kabinett: 3d printet, cad filer.  
+kabinett: 3d printet, cad filer f;lger og det er åpent for tilpassing som i valg av farger.
 
 Software:  
 spill  
