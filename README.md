@@ -13,5 +13,5 @@ kabinett: 3d printet, cad filer.
 
 Software:
 spill
-Startet arbeid på ett snkae inspirert spill Ormkkamp.
-mange skjermdriver bibliotek er under vurdering. TFT_eSPI har skrevet til skjermene.
+Startet arbeid på ett snake inspirert spill Ormkamp.
+flere skjermdriver bibliotek er under vurdering. TFT_eSPI har skrevet til skjermene.
