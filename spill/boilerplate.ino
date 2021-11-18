@@ -101,8 +101,8 @@ void moveBlock() {
       }
       break;   
   }
-  tft.fillRect(oldX, oldY, BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
   tft.drawRect(oldX, oldY, BLOCK_SIZE, BLOCK_SIZE, TFT_GREEN);
+  tft.fillRect(oldX, oldY, BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
   tft.fillRect(xPos, yPos, BLOCK_SIZE, BLOCK_SIZE, TFT_WHITE); 
   delay(100);
   
