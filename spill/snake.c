@@ -204,9 +204,7 @@ struct Snake create_snake(void) {
  
     printf("Created DLL is: ");
     printList(head);
-
     move(&head, 50, 50, false);
-
     printList(head);
  
     getchar();
