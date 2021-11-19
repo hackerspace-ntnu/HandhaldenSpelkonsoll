@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-=======
-// #ifdef _WIN_64
-//     #include <windows.h>
-//     #define KEY_UP 87
-//     #define KEY_DOWN 83
-//     #define KEY_LEFT 65
-//     #define KEY_RIGHT 68
-
-//     bool key_is_pressed(int key) {
-//     return (bool)(GetKeyState(key) & 0x8000);
-// }
-
-// #else
-//     #include <curses.h>
-//     initscr();
-//     keypad(stdscr, true);
-// #endif
-
->>>>>>> main
 // #ifdef _WIN_64
 //     #include <windows.h>
 //     #define KEY_UP 87
@@ -133,9 +113,4 @@ int main(int argc, char const *argv[])
     printf("Square set cleared\n");
     print_board();
     return 0;
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> main
