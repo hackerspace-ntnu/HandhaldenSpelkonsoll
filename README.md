@@ -18,8 +18,8 @@ Flere skjermdriver-bibliotek er under vurdering. TFT_eSPI har skrevet til skjerm
 
 
 ### TODO:
-* Lage logikk for å kjøre et faktisk snake spill i c, deretter implementer multiplayer
-* Få spillet til å kjøres på skjermen
-* Lag system for å ta inn input
-* Sette opp trådløs kommunikasjon mellom kontroller
-* Implementere meny-system
+* Lage logikk for å kjøre et faktisk snake spill i c, deretter implementer multiplayer.
+* Få spillet til å kjøres på skjermen (Vise grafikk)
+* Lag system for å ta inn input (Knappetrykk påvirker spillet)
+* Sette opp trådløs kommunikasjon mellom kontroller (Nødvendig for multiplayer WIFI/BLE)
+* Implementere meny-system (instillinger start pause eventuelt mulig for flere minigames)
