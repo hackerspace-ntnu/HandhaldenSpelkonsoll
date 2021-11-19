@@ -1,9 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-struct Body {
-    short int x;
-    short int y;
-    char isHead; // (1=true, 0=false)
-    struct Body* next; // Pointer to next part of Body
-    struct Body* prev; // Pointer to previous part of Body
-};
+#define SCREEN_HEIGHT 160
+#define SCREEN_WIDTH 240
+
+#define BOARD_HEIGHT 16
+#define BOARD_WIDTH 24
+
+#define BLOCK_BLANK 0
+#define BLOCK_FOOD 1
+#define BLOCK_SNAKE 2
+
+void init_board(void);
+int get_square_value(int x, int y);
+void set_square_value(int x, int y, int value);
+void add_snake_to_board(struct Body *snake_head);
+void place_random_food(void);
+char convert_board_int(int num);
