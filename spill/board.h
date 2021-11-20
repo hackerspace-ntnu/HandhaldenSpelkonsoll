@@ -1,8 +1,8 @@
-#define SCREEN_HEIGHT 160
-#define SCREEN_WIDTH 240
+#define SCREEN_HEIGHT 320
+#define SCREEN_WIDTH 480
 
-#define BOARD_HEIGHT 16
-#define BOARD_WIDTH 24
+#define BOARD_HEIGHT 32
+#define BOARD_WIDTH 48
 
 #define BLOCK_BLANK 0
 #define BLOCK_FOOD 1
