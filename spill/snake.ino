@@ -9,9 +9,13 @@ const int YPin = 34;
 
 const int w = tft.width(); // 320
 const int h = tft.height(); // 480
-char currentDirection;
+char currentDirection = 'R';
 int xPos = 0;
 int yPos = 0;
+
+int positions[1][2] = [[0,0]]; // a list with all cordinates.
+int size = 1;
+bool growing = true;
 
 void setup() {
   tft.init();
@@ -58,8 +62,6 @@ void loop() {
   moveBlock();
 }
 
-
-
 void drawFrame() {
   tft.drawFastVLine(0, 0, w, TFT_GREEN);
   tft.drawFastVLine(h-1, 0, w, TFT_GREEN);
@@ -77,8 +79,36 @@ void drawGrid() {
 }
 
 void moveBlock() {
+  //generating new pos for snake head
   int oldX = xPos;
   int oldY = yPos;
+
+
+if (growing)
+{
+  int newPositions[size+1][2];
+  //opying last element to new last
+  newPositions[size+1][0] = positions[size][0];
+  newPositions[size+1][1] = positions[size][1];
+  for (int i = size-1; i > 0; i--)
+  {
+      newPositions[i+1][0] = positions[i][0];
+      newPositions[i+1][1] = positions[i][1];
+  }
+  int positions = newPositions;
+  size ++;
+}else{
+  //if not growing in size overvriting last digit
+  for (int i = size-1; i > 0; i--)
+  {
+      positions[i+1][0] = positions[i][0];
+      positions[i+1][1] = positions[i][1];
+  }
+}
+positions[0][0] = xPos;
+positions[0][1] = yPos;
+
+
   switch(currentDirection) {
     case 'U':
       if (yPos-BLOCK_SIZE >= 0) {
@@ -101,9 +131,23 @@ void moveBlock() {
       }
       break;   
   }
-  tft.drawRect(oldX, oldY, BLOCK_SIZE, BLOCK_SIZE, TFT_GREEN);
-  tft.fillRect(oldX, oldY, BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
-  tft.fillRect(xPos, yPos, BLOCK_SIZE, BLOCK_SIZE, TFT_WHITE); 
+
+  drawSnake();
   delay(100);
+
+
+}
+
+void drawSnake(){
+  if (!growing)
+  {
+    tft.drawRect(positions[size][0], positions[size][0], BLOCK_SIZE, BLOCK_SIZE, TFT_GREEN);
+    tft.fillRect(positions[size][0], positions[size][0], BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
+  }
+  for (int i = 0; i < size; i++)
+  {
+    tft.fillRect(positions[i][0],positions[i][0], BLOCK_SIZE, BLOCK_SIZE, TFT_WHITE); 
+  }
   
+
 }
