@@ -12,8 +12,8 @@ void main() {
     for (int i = 0; i < 9; i++) {
         move(&snake.head, snake.direction_x, snake.direction_y);
     }
-    snake.direction_x = 0;
-    snake.direction_y = 1;
+
+    set_direction(&snake, DIRECTION_DOWN);
 
     for (int i = 0; i < 7; i++) {
         move(&snake.head, snake.direction_x, snake.direction_y);
