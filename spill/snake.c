@@ -7,8 +7,13 @@
 #include <stdbool.h>
 
 #include "snake.h"
+#include "constants.h"
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
+
+int get_square_value(int x, int y);
+int set_square_value(int x, int y, int value);
+void place_random_food();
 
 /* Add new Body element on top of head. */
 void push(struct Body** head_ref, short int new_x, short int new_y)
@@ -122,7 +127,7 @@ struct Body* get_tail(struct Body* bodypart) {
     return bodypart;
 }
 
-void move(struct Body** node, short int direction_x, short int direction_y, bool eat) {
+void move(struct Body** node, short int direction_x, short int direction_y) {
     // Get relevant body parts
     struct Body* head = get_head(*node);
     struct Body* neck = head->next;
@@ -135,23 +140,55 @@ void move(struct Body** node, short int direction_x, short int direction_y, bool
     // Calculate new coordinates
     short int new_x = old_x + direction_x;
     short int new_y = old_y + direction_y;
-    
-    // Don't move if the movement moves the new head into
-    // an already existing body part!
-    if (neck->x == new_x || neck->y == new_y) {
+
+    short int next_value = get_square_value(new_x, new_y);
+
+    if (next_value == BLOCK_SNAKE) {
         return;
     }
 
     // Create new head
     push(&head, new_x, new_y);
+    set_square_value(new_x, new_y, BLOCK_SNAKE);
 
     // Remove tail (do not do this if snake eats!)
-    if (!eat) {
+    if (next_value != BLOCK_FOOD) {
         tail->prev->next = NULL;
+        set_square_value(tail->x, tail->y, BLOCK_BLANK);
+    } else {
+        place_random_food();
     }
 
     // Update ref
     *node = head;
+}
+
+void set_direction(struct Snake* snake, int direction) {
+    switch (direction)
+    {
+    case DIRECTION_UP:
+        snake->direction_x = 0;
+        snake->direction_y = -1;
+        break;
+    case DIRECTION_RIGHT:
+        snake->direction_x = 1;
+        snake->direction_y = 0;
+        break;
+    case DIRECTION_DOWN:
+        snake->direction_x = 0;
+        snake->direction_y = 1;
+        break;
+    case DIRECTION_LEFT:
+        snake->direction_x = -1;
+        snake->direction_y = 0;
+        break;
+    default:
+        break;
+    }
+}
+
+void split_snake(struct Body** node) {
+    (*node)->prev->next = NULL;
 }
 
 void printList(struct Body* node)
@@ -186,6 +223,8 @@ struct Snake create_snake(void) {
     struct Snake snake = {
         .id = 0, .direction_x = 1, .direction_y = 0, .head = head
     };
+
+    set_direction(&snake, DIRECTION_RIGHT);
 
     return snake;
 }

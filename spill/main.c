@@ -1,5 +1,6 @@
 #include "snake.h"
 #include "board.h"
+#include "constants.h"
 #include <stdio.h>
 
 void main() {
@@ -8,8 +9,15 @@ void main() {
     add_snake_to_board(snake.head);
     place_random_food();
 
-    short int next_x = snake.head->x + snake.direction_x;
-    short int next_y = snake.head->y + snake.direction_y;
+    for (int i = 0; i < 9; i++) {
+        move(&snake.head, snake.direction_x, snake.direction_y);
+    }
+    snake.direction_x = 0;
+    snake.direction_y = 1;
 
-    move(&snake.head, snake.direction_x, snake.direction_y, get_square_value(next_x, next_y) == BLOCK_FOOD);
+    for (int i = 0; i < 7; i++) {
+        move(&snake.head, snake.direction_x, snake.direction_y);
+    }
+
+    print_board();
 }

@@ -17,13 +17,13 @@
 
 #include "snake.h"
 #include "board.h"
+#include "constants.h"
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 
 int board[BOARD_HEIGHT][BOARD_WIDTH];
-
 
 void init_board(void) {
 	// Initialize the board with only 0s (clear blocks)
@@ -93,8 +93,8 @@ void place_random_food(void) {
 
     do {
         // Pick new coordinates for where the food should be placed
-        x = 1 + (rand() % (SCREEN_WIDTH - 1));
-        y = 1 + (rand() % (SCREEN_HEIGHT - 1));
+        x = 1 + (rand() % (BOARD_WIDTH - 1));
+        y = 1 + (rand() % (BOARD_HEIGHT - 1));
         // Get the value already present at the new coordinates
         existing_value = get_square_value(x, y);
         // Pick new coordinates as long as the new coordinates already contains a block
@@ -104,7 +104,7 @@ void place_random_food(void) {
     set_square_value(x, y, BLOCK_FOOD);
 }
 
-int main(int argc, char const *argv[])
+/*int main(int argc, char const *argv[])
 {
     init_board();
     printf("Board init clear\n");
@@ -113,4 +113,4 @@ int main(int argc, char const *argv[])
     printf("Square set cleared\n");
     print_board();
     return 0;
-}
+}*/
