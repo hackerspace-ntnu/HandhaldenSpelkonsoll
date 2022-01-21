@@ -13,9 +13,24 @@ char currentDirection = 'R';
 int xPos = 0;
 int yPos = 0;
 
-int positions[1][2] = [[0,0]]; // a list with all cordinates.
-int size = 1;
+
 bool growing = true;
+
+int startPosition[1][2] = {{0,0}}; // a list with all cordinates.
+
+struct Positions{
+  int *posX;
+  int *posY;
+  int size;
+};
+struct Positions positions = {(int*){0},(int*){0},1 };
+
+// struct Positions{
+//   int *pos;
+//   int size;
+// };
+// struct Positions positions = {(int*) startPosition,1 };
+
 
 void setup() {
   tft.init();
@@ -86,27 +101,30 @@ void moveBlock() {
 
 if (growing)
 {
-  int newPositions[size+1][2];
+  int newPositionsX[positions.size+1];
+  int newPositionsY[positions.size+1];
   //opying last element to new last
-  newPositions[size+1][0] = positions[size][0];
-  newPositions[size+1][1] = positions[size][1];
-  for (int i = size-1; i > 0; i--)
+  newPositionsY[positions.size] = positions.posY[positions.size-1];
+  newPositionsX[positions.size] = positions.posX[positions.size-1];
+
+  for (int i = positions.size-1; i > 0; i--)
   {
-      newPositions[i+1][0] = positions[i][0];
-      newPositions[i+1][1] = positions[i][1];
+      newPositionsX[i+1] = positions.posX[i];
+      newPositionsY[i+1] = positions.posY[i];
   }
-  int positions = newPositions;
-  size ++;
+  positions.posX = newPositionsX;
+  positions.posY = newPositionsY;
+  positions.size ++;
 }else{
   //if not growing in size overvriting last digit
-  for (int i = size-1; i > 0; i--)
+  for (int i = positions.size-1; i > 0; i--)
   {
-      positions[i+1][0] = positions[i][0];
-      positions[i+1][1] = positions[i][1];
+      positions.posX[i+1] = positions.posX[i];
+      positions.posY[i+1] = positions.posY[i];
   }
 }
-positions[0][0] = xPos;
-positions[0][1] = yPos;
+positions.posX[0] = xPos;
+positions.posY[0] = yPos;
 
 
   switch(currentDirection) {
@@ -135,19 +153,20 @@ positions[0][1] = yPos;
   drawSnake();
   delay(100);
 
-
 }
 
 void drawSnake(){
   if (!growing)
   {
-    tft.drawRect(positions[size][0], positions[size][0], BLOCK_SIZE, BLOCK_SIZE, TFT_GREEN);
-    tft.fillRect(positions[size][0], positions[size][0], BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
+    tft.drawRect(positions.posX[positions.size-1], positions.posY[positions.size-1], BLOCK_SIZE, BLOCK_SIZE, TFT_GREEN);
+    tft.fillRect(positions.posX[positions.size-1], positions.posY[positions.size-1], BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
   }
-  for (int i = 0; i < size; i++)
+  for (int i = 0; i < positions.size-1; i++)
   {
-    tft.fillRect(positions[i][0],positions[i][0], BLOCK_SIZE, BLOCK_SIZE, TFT_WHITE); 
+    tft.fillRect(positions.posX[i],positions.posY[i], BLOCK_SIZE, BLOCK_SIZE, TFT_WHITE); 
   }
   
 
 }
+
+
