@@ -139,7 +139,35 @@ void move(struct Body** node, short int direction_x, short int direction_y, bool
     // Don't move if the movement moves the new head into
     // an already existing body part!
     if (neck->x == new_x || neck->y == new_y) {
-        return;
+        return; //Should we kill the snake here?
+    }
+
+    // Checks if new head will be inside a wall
+    // If clipping is turned on, head will be put on the opposite side of the field
+    // If clipping is turned off, the snake dies
+    if (new_x>(BOARD_WIDTH-1)){
+        new_x = 0;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_x<0){
+        new_x = BOARD_WIDTH-1;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_y>(BOARD_HEIGHT-1)){
+        new_y = 0;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_y<0){
+        new_y = BOARD_HEIGHT-1;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
     }
 
     // Create new head
