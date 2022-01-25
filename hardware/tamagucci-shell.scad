@@ -66,5 +66,5 @@ module screenHole() {
     wScreen = 85;
     hScreen = 56;
     //skjerm
-    square(size=[wScreen, hSkcreen, center=true);
+    square(size=[wScreen, hScreen], center=true);
 }
