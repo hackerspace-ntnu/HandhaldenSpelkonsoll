@@ -22,5 +22,6 @@ struct Body* get_head(struct Body* bodypart);
 struct Body* get_tail(struct Body* bodypart);
 void move(struct Body** node, short int direction_x, short int direction_y);
 void set_direction(struct Snake* snake, int direction);
+void split_snake(struct Body** node);
 void printList(struct Body* node);
 struct Snake create_snake(void);

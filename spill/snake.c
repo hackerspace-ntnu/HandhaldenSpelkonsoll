@@ -188,7 +188,21 @@ void set_direction(struct Snake* snake, int direction) {
 }
 
 void split_snake(struct Body** node) {
-    (*node)->prev->next = NULL;
+    struct Body* bodypart = (*node);
+    struct Body* current = (*node);
+
+    //struct Body prev = *bodypart->prev;
+
+    //prev.next = NULL;
+    
+    while (current->next != NULL) {
+        set_square_value(current->x, current->y, BLOCK_FOOD);
+        current = current->next;
+    };
+    set_square_value(current->x, current->y, BLOCK_FOOD);
+
+    bodypart->next = NULL;
+    bodypart->prev->next = NULL;
 }
 
 void printList(struct Body* node)
@@ -219,6 +233,9 @@ struct Snake create_snake(void) {
     push(&head, 0, 0);
     push(&head, 1, 0);
     push(&head, 2, 0);
+    push(&head, 3, 0);
+    push(&head, 4, 0);
+    push(&head, 5, 0);
 
     struct Snake snake = {
         .id = 0, .direction_x = 1, .direction_y = 0, .head = head
