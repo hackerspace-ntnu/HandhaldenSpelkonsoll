@@ -242,14 +242,18 @@ void printList(struct Body* node)
     }
 }
 
-struct Snake create_snake(void) {
+struct Snake create_snake(int length, int coords[][2]) {
     struct Body* head = NULL;
-    push(&head, 0, 0);
-    push(&head, 1, 0);
-    push(&head, 2, 0);
-    push(&head, 3, 0);
-    push(&head, 4, 0);
-    push(&head, 5, 0);
+
+    for (int i = 0; i < length; i++) {
+        push(&head, coords[i][0], coords[i][1]);
+    }
+    // push(&head, 0, 0);
+    // push(&head, 1, 0);
+    // push(&head, 2, 0);
+    // push(&head, 3, 0);
+    // push(&head, 4, 0);
+    // push(&head, 5, 0);
 
     struct Snake snake = {
         .id = 0, .direction_x = 1, .direction_y = 0, .head = head, .isAlive = true

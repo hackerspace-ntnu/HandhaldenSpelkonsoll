@@ -25,4 +25,4 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
 void set_direction(struct Snake* snake, int direction);
 void split_snake(struct Snake* snake, struct Body** node, int* count_food);
 void printList(struct Body* node);
-struct Snake create_snake(void);
+struct Snake create_snake(int length, int coords[][2]);

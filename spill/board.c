@@ -50,6 +50,7 @@ void add_snake_to_board(struct Body *snake_head){
         set_square_value(snake_part->x, snake_part->y, BLOCK_SNAKE);
         snake_part = snake_part->next;
     } while (snake_part->next != NULL);
+    set_square_value(snake_part->x, snake_part->y, BLOCK_SNAKE);
 }
 
 //Creates and prints printable board out of current board

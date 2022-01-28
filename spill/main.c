@@ -6,51 +6,27 @@
 void main() {
     int count_food = 0;
     init_board();
-    struct Snake snake = create_snake();
-    add_snake_to_board(snake.head);
+
+    int coords1[][2] = {{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0}};
+    int coords2[][2] = {{0, 3}, {1, 3}, {2, 3}, {3, 3}, {4, 3}, {5, 3}};
+    int length_coords1 = sizeof coords1 / sizeof coords1[0];
+    int length_coords2 = sizeof coords2 / sizeof coords2[0];
+
+    struct Snake snake1 = create_snake(length_coords1, coords1);
+    struct Snake snake2 = create_snake(length_coords2, coords2);
+    add_snake_to_board(snake1.head);
+    add_snake_to_board(snake2.head);
+
     place_random_food(&count_food);
 
     for (int i = 0; i < 2; i++) {
-        move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
+        move(&snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
     }
 
-    struct Body* segment = snake.head->next->next->next;
+    set_direction(&snake2, DIRECTION_UP);
 
-    split_snake(&snake, &(snake.head), &count_food);
-
-    move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-
-    set_direction(&snake, DIRECTION_DOWN);
-
-    move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-
-    set_direction(&snake, DIRECTION_LEFT);
-
-    move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-    move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-    move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-    move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-
-    set_direction(&snake, DIRECTION_UP);
-
-    move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-
-    set_direction(&snake, DIRECTION_LEFT);
-
-    for (int i = 0; i <= 1; i++) {
-        move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-    }
-
-    set_direction(&snake, DIRECTION_DOWN);
-
-    for (int i = 0; i <= 2; i++) {
-        move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
-    }
-
-    set_direction(&snake, DIRECTION_RIGHT);
-    
-    for (int i = 0; i <= 8; i++) {
-        move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
+    for (int i = 0; i < 2; i++) {
+        move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
     }
 
     print_board();
