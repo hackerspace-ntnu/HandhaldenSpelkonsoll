@@ -128,7 +128,11 @@ struct Body* get_tail(struct Body* bodypart) {
     return bodypart;
 }
 
-void move(struct Body** node, short int direction_x, short int direction_y, int* count_food) {
+void move(struct Snake* snake, struct Body** node, short int direction_x, short int direction_y, int* count_food) {
+    if (!snake->isAlive) {
+        return;
+    }
+    
     // Get relevant body parts
     struct Body* head = get_head(*node);
     struct Body* neck = head->next;
@@ -192,7 +196,7 @@ void set_direction(struct Snake* snake, int direction) {
     }
 }
 
-void split_snake(struct Body** node, int* count_food) {
+void split_snake(struct Snake* snake, struct Body** node, int* count_food) {
     struct Body* bodypart = (*node);
     struct Body* current = (*node);
 
@@ -205,6 +209,11 @@ void split_snake(struct Body** node, int* count_food) {
         current = current->next;
     };
     place_food_at_coords(current->x, current->y, count_food);
+
+    if (bodypart->isHead) {
+        snake->isAlive = false;
+        return;
+    }
 
     bodypart->next = NULL;
     bodypart->prev->next = NULL;
@@ -243,7 +252,7 @@ struct Snake create_snake(void) {
     push(&head, 5, 0);
 
     struct Snake snake = {
-        .id = 0, .direction_x = 1, .direction_y = 0, .head = head
+        .id = 0, .direction_x = 1, .direction_y = 0, .head = head, .isAlive = true
     };
 
     set_direction(&snake, DIRECTION_RIGHT);
