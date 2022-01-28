@@ -13,7 +13,8 @@
 
 int get_square_value(int x, int y);
 int set_square_value(int x, int y, int value);
-void place_random_food();
+void place_random_food(int* count_food);
+void place_food_at_coords(int x, int y, int* count_foot);
 
 /* Add new Body element on top of head. */
 void push(struct Body** head_ref, short int new_x, short int new_y)
@@ -127,7 +128,7 @@ struct Body* get_tail(struct Body* bodypart) {
     return bodypart;
 }
 
-void move(struct Body** node, short int direction_x, short int direction_y) {
+void move(struct Body** node, short int direction_x, short int direction_y, int* count_food) {
     // Get relevant body parts
     struct Body* head = get_head(*node);
     struct Body* neck = head->next;
@@ -156,7 +157,11 @@ void move(struct Body** node, short int direction_x, short int direction_y) {
         tail->prev->next = NULL;
         set_square_value(tail->x, tail->y, BLOCK_BLANK);
     } else {
-        place_random_food();
+        if (*count_food <= 1) {
+            place_random_food(count_food);
+        } else {
+            (*count_food)--;
+        }
     }
 
     // Update ref
@@ -187,7 +192,7 @@ void set_direction(struct Snake* snake, int direction) {
     }
 }
 
-void split_snake(struct Body** node) {
+void split_snake(struct Body** node, int* count_food) {
     struct Body* bodypart = (*node);
     struct Body* current = (*node);
 
@@ -196,10 +201,10 @@ void split_snake(struct Body** node) {
     //prev.next = NULL;
     
     while (current->next != NULL) {
-        set_square_value(current->x, current->y, BLOCK_FOOD);
+        place_food_at_coords(current->x, current->y, count_food);
         current = current->next;
     };
-    set_square_value(current->x, current->y, BLOCK_FOOD);
+    place_food_at_coords(current->x, current->y, count_food);
 
     bodypart->next = NULL;
     bodypart->prev->next = NULL;

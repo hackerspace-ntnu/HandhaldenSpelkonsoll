@@ -24,6 +24,7 @@
 #include <stdio.h>
 
 int board[BOARD_HEIGHT][BOARD_WIDTH];
+int count_food;
 
 void init_board(void) {
 	// Initialize the board with only 0s (clear blocks)
@@ -86,7 +87,7 @@ char convert_board_int(int num){
     }
 }
 
-void place_random_food(void) {
+void place_random_food(int* count_food) {
     int x;
     int y;
     int existing_value;
@@ -101,7 +102,12 @@ void place_random_food(void) {
     } while (existing_value != BLOCK_BLANK);
 
     // Update the board with the new block
+    place_food_at_coords(x, y, count_food);
+}
+
+void place_food_at_coords(int x, int y, int* count_food) {
     set_square_value(x, y, BLOCK_FOOD);
+    (*count_food)++;
 }
 
 /*int main(int argc, char const *argv[])
