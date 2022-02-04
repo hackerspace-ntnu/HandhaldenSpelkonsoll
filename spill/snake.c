@@ -6,13 +6,13 @@
 #include <math.h>
 #include <stdbool.h>
 
-#include "snake.h"
-#include "constants.h"
+//#include "snake.h"
+//#include "constants.h"
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
 int get_square_value(int x, int y);
-int set_square_value(int x, int y, int value);
+void set_square_value(int x, int y, int value);
 void place_random_food(int* count_food);
 void place_food_at_coords(int x, int y, int* count_foot);
 

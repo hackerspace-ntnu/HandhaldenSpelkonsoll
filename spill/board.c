@@ -15,9 +15,9 @@
 //     keypad(stdscr, true);
 // #endif
 
-#include "snake.h"
-#include "board.h"
-#include "constants.h"
+//#include "snake.h"
+//#include "board.h"
+//#include "constants.h"
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
