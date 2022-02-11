@@ -155,11 +155,12 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     // Create new head
     push(&head, new_x, new_y);
     set_square_value(new_x, new_y, (intptr_t) head);
-    printf("%d\n", next_value);
+    // printf("%d\n", &next_value);
 
     if (next_value > 1) {
-        struct Body* part = (struct Body*) next_value;
-        printf("%d\n", *part);
+        struct Body* part = (struct Body*) &next_value;
+        printf("%d\n", part->x);
+        printf("%d\n", part->y);
         // printf("%d\n", *part);
         // printf("%d\n", part->x);
         // printf("%d\n\n", part->y);

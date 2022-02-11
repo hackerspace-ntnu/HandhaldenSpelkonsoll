@@ -7,7 +7,7 @@
 #define BOARD_WIDTH 12
 
 #define BLOCK_BLANK 0
-#define BLOCK_FOOD 1
+#define BLOCK_FOOD -1
 // static const int BLOCK_SNAKE = -2;
 
 #define DIRECTION_UP 0

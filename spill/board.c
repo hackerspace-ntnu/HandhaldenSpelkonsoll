@@ -47,16 +47,18 @@ void set_square_value(int x, int y, int value) {
 void add_snake_to_board(struct Body *snake_head){
     struct Body *snake_part = snake_head;
     do {
-        // struct Body* part = (struct Body*) adr;
-        set_square_value(snake_part->x, snake_part->y, (intptr_t) snake_part);
+        intptr_t *adr = (intptr_t *) snake_part;
+        struct Body* part = (struct Body*) *adr;
+        set_square_value(snake_part->x, snake_part->y, *adr);
         snake_part = snake_part->next;
     } while (snake_part->next != NULL);
-    set_square_value(snake_part->x, snake_part->y, (intptr_t) snake_part);
+    intptr_t *adr = (intptr_t *) snake_part;
+    set_square_value(snake_part->x, snake_part->y, *adr);
 }
 
 //Creates and prints printable board out of current board
 void print_board(){
-    char string_board[BOARD_HEIGHT*BOARD_WIDTH+BOARD_HEIGHT];
+    char string_board[BOARD_HEIGHT * BOARD_WIDTH + BOARD_HEIGHT];
     char *current_char = &string_board[0];
     char board_value;
     for (int i = 0; i<BOARD_HEIGHT; i++){
