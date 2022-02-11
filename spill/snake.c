@@ -6,8 +6,8 @@
 #include <math.h>
 #include <stdbool.h>
 
-#include "snake.h"
 #include "constants.h"
+#include "snake.h"
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
@@ -146,15 +146,24 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     short int new_x = old_x + direction_x;
     short int new_y = old_y + direction_y;
 
-    short int next_value = get_square_value(new_x, new_y);
+    intptr_t next_value = get_square_value(new_x, new_y);
 
-    if (next_value == BLOCK_SNAKE) {
-        return;
-    }
+    // if (next_value > 0) {
+    //     return;
+    // }
 
     // Create new head
     push(&head, new_x, new_y);
-    set_square_value(new_x, new_y, BLOCK_SNAKE);
+    set_square_value(new_x, new_y, (intptr_t) head);
+    printf("%d\n", next_value);
+
+    if (next_value > 1) {
+        struct Body* part = (struct Body*) next_value;
+        printf("%d\n", *part);
+        // printf("%d\n", *part);
+        // printf("%d\n", part->x);
+        // printf("%d\n\n", part->y);
+    }
 
     // Remove tail (do not do this if snake eats!)
     if (next_value != BLOCK_FOOD) {
