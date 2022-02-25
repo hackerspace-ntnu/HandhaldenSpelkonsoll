@@ -6,6 +6,7 @@ struct Body {
     bool isHead; // (1=true, 0=false)
     struct Body* next; // Pointer to next part of Body
     struct Body* prev; // Pointer to previous part of Body
+    struct Snake* snake;
 };
 
 struct Snake {
@@ -16,7 +17,7 @@ struct Snake {
     bool isAlive;
 };
 
-void push(struct Body** head_ref, short int new_x, short int new_y);
+void push(struct Body** head_ref, struct Snake* snake, short int new_x, short int new_y);
 void insertAfter(struct Body* prev_node, short int new_x, short int new_y);
 void append(struct Body** head_ref, short int new_x, short int new_y);
 struct Body* get_head(struct Body* bodypart);

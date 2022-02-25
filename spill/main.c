@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 void main() {
-    intptr_t board[BOARD_HEIGHT][BOARD_WIDTH];
+    int board[BOARD_HEIGHT][BOARD_WIDTH];
     int count_food = 0;
     init_board();
 
@@ -20,23 +20,27 @@ void main() {
 
     place_random_food(&count_food);
 
-    // for (int i = 0; i < 4; i++) {
-    //     move(&snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
+    printf("\n");
+
+    for (int i = 0; i < 4; i++) {
+        move(&snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
+    }
+
+    set_direction(&snake2, DIRECTION_UP);
+    for (int i = 0; i < 3; i++) {
+        move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
+    }
+    // set_direction(&snake2, DIRECTION_LEFT);
+    
+    // for (int i = 0; i < 2; i++) {
+    //     move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
     // }
 
-    set_direction(&snake2, DIRECTION_UP);
-    move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
-    set_direction(&snake2, DIRECTION_LEFT);
-    
-    for (int i = 0; i < 2; i++) {
-        move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
-    }
+    // set_direction(&snake2, DIRECTION_UP);
 
-    set_direction(&snake2, DIRECTION_UP);
-
-    for (int i = 0; i < 2; i++) {
-        move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
-    }
+    // for (int i = 0; i < 2; i++) {
+    //     move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
+    // }
 
     // for (int i = 0; i < 3; i++) {
     //     move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);

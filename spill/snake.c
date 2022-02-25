@@ -5,19 +5,20 @@
 #include <inttypes.h>
 #include <math.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 #include "constants.h"
 #include "snake.h"
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
-int get_square_value(int x, int y);
+intptr_t* get_square_value(int x, int y);
 int set_square_value(int x, int y, int value);
 void place_random_food(int* count_food);
 void place_food_at_coords(int x, int y, int* count_foot);
 
 /* Add new Body element on top of head. */
-void push(struct Body** head_ref, short int new_x, short int new_y)
+void push(struct Body** head_ref, struct Snake* snake, short int new_x, short int new_y)
 {
     /* 1. allocate node */
     struct Body* new_node = (struct Body*)malloc(sizeof(struct Body));
@@ -26,6 +27,7 @@ void push(struct Body** head_ref, short int new_x, short int new_y)
     new_node->x = new_x;
     new_node->y = new_y;
     new_node->isHead = 1;
+    new_node->snake = snake;
  
     /* 3. Make next of new node as head and previous as NULL */
     new_node->next = (*head_ref);
@@ -146,25 +148,29 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     short int new_x = old_x + direction_x;
     short int new_y = old_y + direction_y;
 
-    intptr_t next_value = get_square_value(new_x, new_y);
+    int next_value = get_square_value(new_x, new_y);
 
     // if (next_value > 0) {
     //     return;
     // }
 
-    // Create new head
-    push(&head, new_x, new_y);
-    set_square_value(new_x, new_y, (intptr_t) head);
-    // printf("%d\n", &next_value);
-
-    if (next_value > 1) {
-        struct Body* part = (struct Body*) &next_value;
+    if (next_value > 0) {
+        printf("%d\n", next_value);
+        struct Body* part = (struct Body*) next_value;
         printf("%d\n", part->x);
-        printf("%d\n", part->y);
+        // struct Body** part_ptr = &part;
+        // printf("%d\n", part->x);
+        // printf("%d\n", part->y);
+        struct Snake* snake_split = part->snake;
+        split_snake(part->snake, &part, count_food);
         // printf("%d\n", *part);
         // printf("%d\n", part->x);
         // printf("%d\n\n", part->y);
     }
+
+    // Create new head
+    push(&head, snake, new_x, new_y);
+    set_square_value(new_x, new_y, (intptr_t) head);
 
     // Remove tail (do not do this if snake eats!)
     if (next_value != BLOCK_FOOD) {
@@ -207,8 +213,8 @@ void set_direction(struct Snake* snake, int direction) {
 }
 
 void split_snake(struct Snake* snake, struct Body** node, int* count_food) {
-    struct Body* bodypart = (*node);
-    struct Body* current = (*node);
+    struct Body* bodypart = *node;
+    struct Body* current = *node;
 
     //struct Body prev = *bodypart->prev;
 
@@ -255,19 +261,22 @@ void printList(struct Body* node)
 struct Snake create_snake(int length, int coords[][2]) {
     struct Body* head = NULL;
 
+    struct Snake snake = {
+        .id = 0, .direction_x = 1, .direction_y = 0, .isAlive = true
+    };
+
     for (int i = 0; i < length; i++) {
-        push(&head, coords[i][0], coords[i][1]);
+        push(&head, &snake, coords[i][0], coords[i][1]);
     }
+
+    snake.head = head;
+
     // push(&head, 0, 0);
     // push(&head, 1, 0);
     // push(&head, 2, 0);
     // push(&head, 3, 0);
     // push(&head, 4, 0);
     // push(&head, 5, 0);
-
-    struct Snake snake = {
-        .id = 0, .direction_x = 1, .direction_y = 0, .head = head, .isAlive = true
-    };
 
     set_direction(&snake, DIRECTION_RIGHT);
 

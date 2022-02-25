@@ -1,3 +1,12 @@
+#include <stdint.h>
+
+struct BoardPiece {
+    short int piece_type;
+    short int x;
+    short int y;
+
+};
+
 void init_board(void);
 int get_square_value(int x, int y);
 void set_square_value(int x, int y, int value);

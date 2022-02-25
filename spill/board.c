@@ -22,6 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <stdint.h>
 
 int board[BOARD_HEIGHT][BOARD_WIDTH];
 int count_food;
@@ -30,7 +31,7 @@ void init_board(void) {
 	// Initialize the board with only 0s (clear blocks)
 	for (int i = 0; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
-			board[i][j] = 0;
+			board[i][j] = BLOCK_BLANK;
 		}
 	}
 }
@@ -47,16 +48,20 @@ void set_square_value(int x, int y, int value) {
 void add_snake_to_board(struct Body *snake_head){
     struct Body *snake_part = snake_head;
     do {
-        intptr_t *adr = (intptr_t *) snake_part;
-        struct Body* part = (struct Body*) *adr;
-        set_square_value(snake_part->x, snake_part->y, *adr);
+        int adr = (int) snake_part;
+        // struct Body* part = (struct Body*) adr;
+        printf("%d\n", adr);
+        // intptr_t *adr = (intptr_t *) snake_part;
+        // printf("%d\n", adr);
+        // struct Body* part = (struct Body*) adr;
+        set_square_value(snake_part->x, snake_part->y, adr);
         snake_part = snake_part->next;
     } while (snake_part->next != NULL);
-    intptr_t *adr = (intptr_t *) snake_part;
-    set_square_value(snake_part->x, snake_part->y, *adr);
+    int adr = (int) snake_part;
+    set_square_value(snake_part->x, snake_part->y, adr);
 }
 
-//Creates and prints printable board out of current board
+// Creates and prints printable board out of current board
 void print_board(){
     char string_board[BOARD_HEIGHT * BOARD_WIDTH + BOARD_HEIGHT];
     char *current_char = &string_board[0];
