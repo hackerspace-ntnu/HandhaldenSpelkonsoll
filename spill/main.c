@@ -3,10 +3,13 @@
 #include "constants.h"
 #include <stdio.h>
 #include <signal.h>
-
+#include <unistd.h>
+#include <semaphore.h>
 
 #include "snake.c"
 #include "board.c"
+
+sem_t semaphore_move;
 
 int main() {
     int count_food = 0;
@@ -46,12 +49,16 @@ int main() {
 
     place_random_food(&count_food);
 
+    sem_init(&semaphore_move, 0, 1); // Initialize the semaphore
+    int semaphore_value;
     int pid = fork(); //Make a process to move snake every second
     if (pid == 0){
         while(snake.isAlive)
-        {
+        {   
+            print_board();
             sleep(1);
-            move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
+            sem_post(&semaphore_move);
+            //move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
         }
         exit(0);
     }
@@ -75,10 +82,20 @@ int main() {
                 set_direction(&snake, DIRECTION_LEFT);
                 break;
         }
-        //TODO: randomly drop food if no food is present
+        
+        if(count_food < MAX_FOOD_AT_ONCE){
+            place_random_food(&count_food);
+        }
+
+        sem_getvalue(&semaphore_move,&semaphore_value);
+        if(semaphore_value==1){
+            move(&snake, &snake.head, snake.direction_x, snake.direction_y, &count_food);
+            sem_wait(&semaphore_move);
+        }
     }
 
-    int waitstatus;
-    waitpid(pid,&waitstatus, 0); //Only one child, so need only wait for one child process to finish
+    int waitstatus; //For degbug of status of the child
+    waitpid(pid, &waitstatus, 0); //Only one child, so need only wait for one child process to finish
+    sem_destroy(&semaphore_move); // Free the memory of the semaphore
     return(0);
 }
