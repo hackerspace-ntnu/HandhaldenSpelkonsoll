@@ -14,7 +14,7 @@
 int get_square_value(int x, int y);
 void set_square_value(int x, int y, int value);
 void place_random_food(int* count_food);
-void place_food_at_coords(int x, int y, int* count_foot);
+void place_food_at_coords(int x, int y, int* count_food);
 
 /* Add new Body element on top of head. */
 void push(struct Body** head_ref, short int new_x, short int new_y)
@@ -143,13 +143,13 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     short int old_y = head->y;
 
     // Calculate new coordinates
-    short int new_x = old_x + direction_x;
-    short int new_y = old_y + direction_y;
+    short int new_x = old_x + snake->direction_x;
+    short int new_y = old_y + snake->direction_y;
 
     short int next_value = get_square_value(new_x, new_y);
 
     if (next_value == BLOCK_SNAKE) {
-        return;
+        return; // Implement snake death
     }
 
     // Create new head
