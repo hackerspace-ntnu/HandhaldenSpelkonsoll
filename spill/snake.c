@@ -12,7 +12,7 @@
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
-intptr_t* get_square_value(int x, int y);
+long get_square_value(int x, int y);
 int set_square_value(int x, int y, int value);
 void place_random_food(int* count_food);
 void place_food_at_coords(int x, int y, int* count_foot);
@@ -148,24 +148,16 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     short int new_x = old_x + direction_x;
     short int new_y = old_y + direction_y;
 
-    int next_value = get_square_value(new_x, new_y);
+    long next_value = get_square_value(new_x, new_y);
 
     // if (next_value > 0) {
     //     return;
     // }
 
     if (next_value > 0) {
-        printf("%d\n", next_value);
         struct Body* part = (struct Body*) next_value;
-        printf("%d\n", part->x);
-        // struct Body** part_ptr = &part;
-        // printf("%d\n", part->x);
-        // printf("%d\n", part->y);
         struct Snake* snake_split = part->snake;
         split_snake(part->snake, &part, count_food);
-        // printf("%d\n", *part);
-        // printf("%d\n", part->x);
-        // printf("%d\n\n", part->y);
     }
 
     // Create new head

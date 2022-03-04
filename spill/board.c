@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <stdint.h>
 
-int board[BOARD_HEIGHT][BOARD_WIDTH];
+long int board[BOARD_HEIGHT][BOARD_WIDTH];
 int count_food;
 
 void init_board(void) {
@@ -36,11 +36,11 @@ void init_board(void) {
 	}
 }
 
-int get_square_value(int x, int y) {
+long int get_square_value(int x, int y) {
     return board[y][x];
 }
 
-void set_square_value(int x, int y, int value) {
+void set_square_value(int x, int y, long int value) {
     board[y][x] = value;
 }
 
@@ -48,16 +48,12 @@ void set_square_value(int x, int y, int value) {
 void add_snake_to_board(struct Body *snake_head){
     struct Body *snake_part = snake_head;
     do {
-        int adr = (int) snake_part;
-        // struct Body* part = (struct Body*) adr;
-        printf("%d\n", adr);
-        // intptr_t *adr = (intptr_t *) snake_part;
-        // printf("%d\n", adr);
-        // struct Body* part = (struct Body*) adr;
+        long int adr = (long long) snake_part;
         set_square_value(snake_part->x, snake_part->y, adr);
+        struct Body* test = (struct Body*) get_square_value(snake_part->x, snake_part->y);
         snake_part = snake_part->next;
     } while (snake_part->next != NULL);
-    int adr = (int) snake_part;
+    long int adr = (long int) snake_part;
     set_square_value(snake_part->x, snake_part->y, adr);
 }
 
