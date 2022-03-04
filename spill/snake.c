@@ -36,7 +36,8 @@ void push(struct Body** head_ref, short int new_x, short int new_y)
     (*head_ref) = new_node;
 }
 
-/* Given a node as prev_node, insert a new node after the given node*/
+/* Given a node as prev_node, insert a new node after it*/
+//(Put node behind prev_node)
 void insertAfter(struct Body* prev_node, short int new_x, short int new_y)
 {
 	/*1. check if the given prev_node is NULL */
@@ -122,6 +123,8 @@ struct Body* get_tail(struct Body* bodypart) {
     return bodypart;
 }
 
+// Value of direction_x and direction_y should either be 0 or 1, as that transelates
+// to moving one square horisontaly or verticly
 void move(struct Body** node, short int direction_x, short int direction_y, bool eat) {
     // Get relevant body parts
     struct Body* head = get_head(*node);
@@ -139,7 +142,35 @@ void move(struct Body** node, short int direction_x, short int direction_y, bool
     // Don't move if the movement moves the new head into
     // an already existing body part!
     if (neck->x == new_x || neck->y == new_y) {
-        return;
+        return; //Should we kill the snake here?
+    }
+
+    // Checks if new head will be inside a wall
+    // If clipping is turned on, head will be put on the opposite side of the field
+    // If clipping is turned off, the snake dies
+    if (new_x>(BOARD_WIDTH-1)){
+        new_x = 0;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_x<0){
+        new_x = BOARD_WIDTH-1;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_y>(BOARD_HEIGHT-1)){
+        new_y = 0;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_y<0){
+        new_y = BOARD_HEIGHT-1;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
     }
 
     // Create new head
@@ -190,23 +221,23 @@ struct Snake create_snake(void) {
     return snake;
 }
 
-/*int main()
+int main()
 {
     struct Body* head = NULL;
     push(&head, 0, 0);
  
-    push(&head, 10, 10);
+    push(&head, 1, 1);
  
-    push(&head, 20, 20);
+    push(&head, 2, 2);
  
-    insertAfter(head, 5, 5);
-    append(&head, -10, -10);
+    insertAfter(head, 3, 3);
+    append(&head, 4, 4);
  
     printf("Created DLL is: ");
     printList(head);
-    move(&head, 50, 50, false);
+    move(&head, -3, 0, false);
     printList(head);
  
     getchar();
     return 0;
-}*/
+}
