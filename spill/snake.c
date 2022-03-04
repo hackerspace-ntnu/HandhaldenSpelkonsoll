@@ -149,32 +149,32 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     short int new_y = old_y + direction_y;
 
     long next_value = get_square_value(new_x, new_y);
+    bool next_is_body_part = next_value > 0;
 
     // if (next_value > 0) {
     //     return;
     // }
 
-    if (next_value > 0) {
+    if (next_is_body_part) {
         struct Body* part = (struct Body*) next_value;
-        struct Snake* snake_split = part->snake;
         split_snake(part->snake, &part, count_food);
     }
 
-    // Create new head
-    push(&head, snake, new_x, new_y);
-    set_square_value(new_x, new_y, (intptr_t) head);
-
     // Remove tail (do not do this if snake eats!)
-    if (next_value != BLOCK_FOOD) {
-        tail->prev->next = NULL;
-        set_square_value(tail->x, tail->y, BLOCK_BLANK);
-    } else {
+    if (next_value == BLOCK_FOOD || next_is_body_part) {
         if (*count_food <= 1) {
             place_random_food(count_food);
         } else {
             (*count_food)--;
         }
+    } else {
+        tail->prev->next = NULL;
+        set_square_value(tail->x, tail->y, BLOCK_BLANK);
     }
+
+    // Create new head
+    push(&head, snake, new_x, new_y);
+    set_square_value(new_x, new_y, (long int) head);
 
     // Update ref
     *node = head;

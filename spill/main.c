@@ -27,9 +27,12 @@ void main() {
     }
 
     set_direction(&snake2, DIRECTION_UP);
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
         move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
     }
+
+    move(&snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
+
     // set_direction(&snake2, DIRECTION_LEFT);
     
     // for (int i = 0; i < 2; i++) {
