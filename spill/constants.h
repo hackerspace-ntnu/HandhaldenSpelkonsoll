@@ -1,6 +1,8 @@
 #define SCREEN_HEIGHT 320
 #define SCREEN_WIDTH 480
 
+#define MAX_FOOD_AT_ONCE 1 //Will be adjusted on amount of players later
+
 //#define BOARD_HEIGHT 32
 //#define BOARD_WIDTH 48
 #define BOARD_HEIGHT 8
