@@ -148,16 +148,35 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     short int new_x = old_x + direction_x;
     short int new_y = old_y + direction_y;
 
+    // Get the value of the next square where the snake would move to,
+    // and determine whether that square is a body part
     long next_value = get_square_value(new_x, new_y);
     bool next_is_body_part = next_value > 0;
 
-    // if (next_value > 0) {
-    //     return;
-    // }
-
     if (next_is_body_part) {
         struct Body* part = (struct Body*) next_value;
-        split_snake(part->snake, &part, count_food);
+
+        // Get the length of each snake
+        int length_this = get_snake_length(snake->head);
+        int length_other = get_snake_length(part);
+
+        if (part->isHead) {
+            if (length_this == length_other) {
+                snake->isAlive = false;
+                part->snake->isAlive = false;
+                split_snake(part->snake, &part, count_food);
+                split_snake(snake, &head, count_food);
+                return;
+            } else if (length_this > length_other) {
+                part->snake->isAlive = false;
+                split_snake(part->snake, &part, count_food);
+            } else {
+                snake->isAlive = false;
+                split_snake(snake, &head, count_food);
+                return;
+            }
+        }
+
     }
 
     // Remove tail (do not do this if snake eats!)
@@ -225,6 +244,18 @@ void split_snake(struct Snake* snake, struct Body** node, int* count_food) {
 
     bodypart->next = NULL;
     bodypart->prev->next = NULL;
+}
+
+int get_snake_length(struct Body* head) {
+    struct Body* current = head;
+    int length = 1;
+
+    while (current->next != NULL) {
+        length++;
+        current = current->next;
+    };
+
+    return length;
 }
 
 void printList(struct Body* node)
