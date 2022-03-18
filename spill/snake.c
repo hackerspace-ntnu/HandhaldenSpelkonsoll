@@ -156,6 +156,13 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     if (next_is_body_part) {
         struct Body* part = (struct Body*) next_value;
 
+        // If snake collides with itself: Die.
+        if (part->snake->id == snake->id) {
+            split_snake(snake, &head, count_food);
+            snake->isAlive = false;
+            return;
+        }
+
         // Get the length of each snake
         int length_this = get_snake_length(snake->head);
         int length_other = get_snake_length(part);
@@ -281,18 +288,23 @@ void printList(struct Body* node)
     }
 }
 
-struct Snake create_snake(int length, int coords[][2]) {
+struct Snake create_snake(int length, int coords[][2], int* snake_id_counter) {
     struct Body* head = NULL;
 
-    struct Snake snake = {
-        .id = 0, .direction_x = 1, .direction_y = 0, .isAlive = true
-    };
+    struct Snake* snake = (struct Snake *) malloc(sizeof (struct Snake));
+
+    snake->id = *snake_id_counter;
+    snake->direction_x = 1;
+    snake->direction_y = 0;
+    snake->isAlive = true;
+
+    (*snake_id_counter)++;
 
     for (int i = 0; i < length; i++) {
-        push(&head, &snake, coords[i][0], coords[i][1]);
+        push(&head, snake, coords[i][0], coords[i][1]);
     }
 
-    snake.head = head;
+    snake->head = head;
 
     // push(&head, 0, 0);
     // push(&head, 1, 0);
@@ -301,9 +313,9 @@ struct Snake create_snake(int length, int coords[][2]) {
     // push(&head, 4, 0);
     // push(&head, 5, 0);
 
-    set_direction(&snake, DIRECTION_RIGHT);
+    set_direction(snake, DIRECTION_RIGHT);
 
-    return snake;
+    return *snake;
 }
 
 /*int main()
