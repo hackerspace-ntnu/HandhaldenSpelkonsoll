@@ -44,7 +44,8 @@ void push(struct Body** head_ref, struct Snake* snake, short int new_x, short in
     (*head_ref) = new_node;
 }
 
-/* Given a node as prev_node, insert a new node after the given node*/
+/* Given a node as prev_node, insert a new node after it*/
+//(Put node behind prev_node)
 void insertAfter(struct Body* prev_node, short int new_x, short int new_y)
 {
 	/*1. check if the given prev_node is NULL */
@@ -134,7 +135,6 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     if (!snake->isAlive) {
         return;
     }
-    
     // Get relevant body parts
     struct Body* head = get_head(*node);
     struct Body* neck = head->next;
@@ -147,6 +147,34 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     // Calculate new coordinates
     short int new_x = old_x + direction_x;
     short int new_y = old_y + direction_y;
+
+    // Checks if new head will be inside a wall
+    // If clipping is turned on, head will be put on the opposite side of the field
+    // If clipping is turned off, the snake dies
+    if (new_x>(BOARD_WIDTH-1)){
+        new_x = 0;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_x<0){
+        new_x = BOARD_WIDTH-1;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_y>(BOARD_HEIGHT-1)){
+        new_y = 0;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_y<0){
+        new_y = BOARD_HEIGHT-1;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
 
     // Get the value of the next square where the snake would move to,
     // and determine whether that square is a body part
@@ -318,23 +346,23 @@ struct Snake create_snake(int length, int coords[][2], int* snake_id_counter) {
     return *snake;
 }
 
-/*int main()
+int main()
 {
     struct Body* head = NULL;
     push(&head, 0, 0);
  
-    push(&head, 10, 10);
+    push(&head, 1, 1);
  
-    push(&head, 20, 20);
+    push(&head, 2, 2);
  
-    insertAfter(head, 5, 5);
-    append(&head, -10, -10);
+    insertAfter(head, 3, 3);
+    append(&head, 4, 4);
  
     printf("Created DLL is: ");
     printList(head);
-    move(&head, 50, 50, false);
+    move(&head, -3, 0, false);
     printList(head);
  
     getchar();
     return 0;
-}*/
+}
