@@ -161,11 +161,7 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
         tail->prev->next = NULL;
         set_square_value(tail->x, tail->y, BLOCK_BLANK);
     } else {
-        if (*count_food <= 1) {
-            place_random_food(count_food);
-        } else {
-            (*count_food)--;
-        }
+        place_random_food(count_food);
     }
 
     // Update ref
