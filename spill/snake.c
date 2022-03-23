@@ -152,6 +152,34 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
         return; // Implement snake death
     }
 
+    // Checks if new head will be inside a wall
+    // If clipping is turned on, head will be put on the opposite side of the field
+    // If clipping is turned off, the snake dies
+    if (new_x>(BOARD_WIDTH-1)){
+        new_x = 0;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_x<0){
+        new_x = BOARD_WIDTH-1;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_y>(BOARD_HEIGHT-1)){
+        new_y = 0;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+    if (new_y<0){
+        new_y = BOARD_HEIGHT-1;
+        if (!WRAPPING_ENABLED){
+            return; //Put snake death here
+        }
+    }
+
     // Create new head
     push(&head, new_x, new_y);
     set_square_value(new_x, new_y, BLOCK_SNAKE);
