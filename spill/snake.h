@@ -14,6 +14,15 @@ struct Snake {
     short int direction_y;
     struct Body* head;
     bool isAlive;
+    //Add colour for easier multiplayer?
+};
+
+struct multiplayer_info{
+    short int id; // To know which snake to update
+    int direction; // UP, DOWN, LEFT OR RIGHT
+    int new_food; // 0 = no new food, 1 = new food (check for its coordinates)
+    int food_coord_x; // When new food is placed, use this to signal where
+    int food_coord_y;// When new food is placed, use this to signal where
 };
 
 void push(struct Body** head_ref, short int new_x, short int new_y);
