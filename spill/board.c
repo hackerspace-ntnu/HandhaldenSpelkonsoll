@@ -1,20 +1,3 @@
-// #ifdef _WIN_64
-//     #include <windows.h>
-//     #define KEY_UP 87
-//     #define KEY_DOWN 83
-//     #define KEY_LEFT 65
-//     #define KEY_RIGHT 68
-
-//     bool key_is_pressed(int key) {
-//     return (bool)(GetKeyState(key) & 0x8000);
-// }
-
-// #else
-//     #include <curses.h>
-//     initscr();
-//     keypad(stdscr, true);
-// #endif
-
 #include "snake.h"
 #include "board.h"
 #include "constants.h"
@@ -24,37 +7,37 @@
 #include <stdio.h>
 #include <stdint.h>
 
-long int board[BOARD_HEIGHT][BOARD_WIDTH];
+struct BoardPiece board[BOARD_HEIGHT][BOARD_WIDTH];
 int count_food;
 
 void init_board(void) {
 	// Initialize the board with only 0s (clear blocks)
 	for (int i = 0; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
-			board[i][j] = BLOCK_BLANK;
+            set_square_value(j, i, BLOCK_BLANK, NULL);
 		}
 	}
 }
 
-long int get_square_value(int x, int y) {
+struct BoardPiece get_square_value(int x, int y) {
     return board[y][x];
 }
 
-void set_square_value(int x, int y, long int value) {
-    board[y][x] = value;
+void set_square_value(int x, int y, short int piece_type, struct Body* part) {
+    struct BoardPiece piece = board[y][x];
+    piece.piece_type = piece_type;
+    piece.part = part;
+    board[y][x] = piece;
 }
 
 // To be used under initialization, put a whole snake on the board
 void add_snake_to_board(struct Body *snake_head){
     struct Body *snake_part = snake_head;
     do {
-        long int adr = (long long) snake_part;
-        set_square_value(snake_part->x, snake_part->y, adr);
-        struct Body* test = (struct Body*) get_square_value(snake_part->x, snake_part->y);
+        set_square_value(snake_part->x, snake_part->y, BLOCK_SNAKE, snake_part);
         snake_part = snake_part->next;
     } while (snake_part->next != NULL);
-    long int adr = (long int) snake_part;
-    set_square_value(snake_part->x, snake_part->y, adr);
+    set_square_value(snake_part->x, snake_part->y, BLOCK_SNAKE, snake_part);
 }
 
 // Creates and prints printable board out of current board
@@ -75,10 +58,10 @@ void print_board(){
 }
 
 // Translates an int on the digital board to a char for visualization when printing
-char convert_board_int(int num){
-    if (num == BLOCK_BLANK) {
+char convert_board_int(struct BoardPiece piece){
+    if (piece.piece_type == BLOCK_BLANK) {
         return '#';
-    } else if (num == BLOCK_FOOD) {
+    } else if (piece.piece_type == BLOCK_FOOD) {
         return 'f';
     } else {
         return 's';
@@ -95,7 +78,7 @@ void place_random_food(int* count_food) {
         x = 1 + (rand() % (BOARD_WIDTH - 1));
         y = 1 + (rand() % (BOARD_HEIGHT - 1));
         // Get the value already present at the new coordinates
-        existing_value = get_square_value(x, y);
+        existing_value = get_square_value(x, y).piece_type;
         // Pick new coordinates as long as the new coordinates already contains a block
     } while (existing_value != BLOCK_BLANK);
 
@@ -104,17 +87,6 @@ void place_random_food(int* count_food) {
 }
 
 void place_food_at_coords(int x, int y, int* count_food) {
-    set_square_value(x, y, BLOCK_FOOD);
+    set_square_value(x, y, BLOCK_FOOD, NULL);
     (*count_food)++;
 }
-
-/*int main(int argc, char const *argv[])
-{
-    init_board();
-    printf("Board init clear\n");
-    set_square_value(2,2,1);
-    set_square_value(2,3,2);
-    printf("Square set cleared\n");
-    print_board();
-    return 0;
-}*/

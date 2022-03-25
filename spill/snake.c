@@ -9,11 +9,11 @@
 
 #include "constants.h"
 #include "snake.h"
+#include "board.h"
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
-
-long get_square_value(int x, int y);
-int set_square_value(int x, int y, int value);
+struct BoardPiece get_square_value(int x, int y);
+void set_square_value(int x, int y, short int piece_type, struct Body* part);
 void place_random_food(int* count_food);
 void place_food_at_coords(int x, int y, int* count_foot);
 
@@ -42,6 +42,8 @@ void push(struct Body** head_ref, struct Snake* snake, short int new_x, short in
  
     /* 5. move the head to point to the new node */
     (*head_ref) = new_node;
+
+    set_square_value(new_x, new_y, BLOCK_SNAKE, new_node);
 }
 
 /* Given a node as prev_node, insert a new node after it*/
@@ -74,6 +76,8 @@ void insertAfter(struct Body* prev_node, short int new_x, short int new_y)
 	/* 7. Change previous of new_node's next node */
 	if (new_node->next != NULL)
 		new_node->next->prev = new_node;
+    
+    set_square_value(new_x, new_y, BLOCK_SNAKE, new_node);
 }
 
 /* Given a reference (pointer to pointer) to the head
@@ -114,6 +118,8 @@ void append(struct Body** head_ref, short int new_x, short int new_y)
 	/* 7. Make last node as previous of new node */
 	new_node->prev = last;
 
+    set_square_value(new_x, new_y, BLOCK_SNAKE, new_node);
+
 	return;
 }
 
@@ -151,38 +157,50 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     // Checks if new head will be inside a wall
     // If clipping is turned on, head will be put on the opposite side of the field
     // If clipping is turned off, the snake dies
-    if (new_x>(BOARD_WIDTH-1)){
+    
+    if (new_x > (BOARD_WIDTH - 1)) {
         new_x = 0;
         if (!WRAPPING_ENABLED){
-            return; //Put snake death here
+            split_snake(snake, &head, count_food);
+            snake->isAlive = false;
+            return;
         }
     }
-    if (new_x<0){
-        new_x = BOARD_WIDTH-1;
-        if (!WRAPPING_ENABLED){
-            return; //Put snake death here
+    else if (new_x < 0) {
+        new_x = BOARD_WIDTH - 1;
+        printf("x=end\n");
+        if (!WRAPPING_ENABLED) {
+            split_snake(snake, &head, count_food);
+            snake->isAlive = false;
+            return;
         }
     }
-    if (new_y>(BOARD_HEIGHT-1)){
+    else if (new_y > (BOARD_HEIGHT-1)) {
         new_y = 0;
-        if (!WRAPPING_ENABLED){
-            return; //Put snake death here
+        printf("y=0\n");
+        if (!WRAPPING_ENABLED) {
+            split_snake(snake, &head, count_food);
+            snake->isAlive = false;
+            return;
         }
     }
-    if (new_y<0){
-        new_y = BOARD_HEIGHT-1;
-        if (!WRAPPING_ENABLED){
-            return; //Put snake death here
+    else if (new_y < 0) {
+        new_y = BOARD_HEIGHT - 1;
+        printf("y=end\n");
+        if (!WRAPPING_ENABLED) {
+            split_snake(snake, &head, count_food);
+            snake->isAlive = false;
+            return;
         }
     }
 
     // Get the value of the next square where the snake would move to,
     // and determine whether that square is a body part
-    long next_value = get_square_value(new_x, new_y);
-    bool next_is_body_part = next_value > 0;
-
+    struct BoardPiece next_piece = get_square_value(new_x, new_y);
+    bool next_is_body_part = next_piece.piece_type == BLOCK_SNAKE;
+    
     if (next_is_body_part) {
-        struct Body* part = (struct Body*) next_value;
+        struct Body* part = next_piece.part;
 
         // If snake collides with itself: Die.
         if (part->snake->id == snake->id) {
@@ -210,12 +228,13 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
                 split_snake(snake, &head, count_food);
                 return;
             }
+        } else {
+            split_snake(part->snake, &part, count_food);
         }
-
     }
 
     // Remove tail (do not do this if snake eats!)
-    if (next_value == BLOCK_FOOD || next_is_body_part) {
+    if (next_piece.piece_type == BLOCK_FOOD || next_is_body_part) {
         if (*count_food <= 1) {
             place_random_food(count_food);
         } else {
@@ -223,12 +242,12 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
         }
     } else {
         tail->prev->next = NULL;
-        set_square_value(tail->x, tail->y, BLOCK_BLANK);
+        set_square_value(tail->x, tail->y, BLOCK_BLANK, NULL);
     }
 
     // Create new head
     push(&head, snake, new_x, new_y);
-    set_square_value(new_x, new_y, (long int) head);
+    set_square_value(new_x, new_y, BLOCK_SNAKE, head);
 
     // Update ref
     *node = head;
@@ -346,23 +365,23 @@ struct Snake create_snake(int length, int coords[][2], int* snake_id_counter) {
     return *snake;
 }
 
-int main()
-{
-    struct Body* head = NULL;
-    push(&head, 0, 0);
+// int main()
+// {
+//     struct Body* head = NULL;
+//     push(&head, 0, 0);
  
-    push(&head, 1, 1);
+//     push(&head, 1, 1);
  
-    push(&head, 2, 2);
+//     push(&head, 2, 2);
  
-    insertAfter(head, 3, 3);
-    append(&head, 4, 4);
+//     insertAfter(head, 3, 3);
+//     append(&head, 4, 4);
  
-    printf("Created DLL is: ");
-    printList(head);
-    move(&head, -3, 0, false);
-    printList(head);
+//     printf("Created DLL is: ");
+//     printList(head);
+//     move(&head, -3, 0, false);
+//     printList(head);
  
-    getchar();
-    return 0;
-}
+//     getchar();
+//     return 0;
+// }

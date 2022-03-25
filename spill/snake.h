@@ -1,9 +1,5 @@
 #include <stdbool.h>
 
-#define BOARD_HEIGHT 32
-#define BOARD_WIDTH 48
-#define WRAPPING_ENABLED 1
-
 struct Body {
     short int x;
     short int y;
