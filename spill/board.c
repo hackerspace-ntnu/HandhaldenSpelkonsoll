@@ -31,8 +31,8 @@ void set_square_value(int x, int y, short int piece_type, struct Body* part) {
 }
 
 // To be used under initialization, put a whole snake on the board
-void add_snake_to_board(struct Body *snake_head){
-    struct Body *snake_part = snake_head;
+void add_snake_to_board(struct Body* snake_head){
+    struct Body* snake_part = snake_head;
     do {
         set_square_value(snake_part->x, snake_part->y, BLOCK_SNAKE, snake_part);
         snake_part = snake_part->next;

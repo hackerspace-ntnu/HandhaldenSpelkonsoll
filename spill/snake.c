@@ -280,10 +280,6 @@ void set_direction(struct Snake* snake, int direction) {
 void split_snake(struct Snake* snake, struct Body** node, int* count_food) {
     struct Body* bodypart = *node;
     struct Body* current = *node;
-
-    //struct Body prev = *bodypart->prev;
-
-    //prev.next = NULL;
     
     while (current->next != NULL) {
         place_food_at_coords(current->x, current->y, count_food);
@@ -312,33 +308,10 @@ int get_snake_length(struct Body* head) {
     return length;
 }
 
-void printList(struct Body* node)
-{
-    struct Body* last;
-    printf("\nTraversal in forward direction \n");
-    while (node != NULL) {
-        printf(" %d ", node->x);
-        printf(" %d ", node->y);
-        printf(" %d ", node->isHead);
-        printf("|");
-        last = node;
-        node = node->next;
-    }
- 
-    printf("\nTraversal in reverse direction \n");
-    while (last != NULL) {
-        printf(" %d ", last->x);
-        printf(" %d ", last->y);
-        printf(" %d ", last->isHead);
-        printf("|");
-        last = last->prev;
-    }
-}
-
 struct Snake create_snake(int length, int coords[][2], int* snake_id_counter) {
     struct Body* head = NULL;
 
-    struct Snake* snake = (struct Snake *) malloc(sizeof (struct Snake));
+    struct Snake* snake = (struct Snake*) malloc(sizeof (struct Snake));
 
     snake->id = *snake_id_counter;
     snake->direction_x = 1;
@@ -353,35 +326,7 @@ struct Snake create_snake(int length, int coords[][2], int* snake_id_counter) {
 
     snake->head = head;
 
-    // push(&head, 0, 0);
-    // push(&head, 1, 0);
-    // push(&head, 2, 0);
-    // push(&head, 3, 0);
-    // push(&head, 4, 0);
-    // push(&head, 5, 0);
-
     set_direction(snake, DIRECTION_RIGHT);
 
     return *snake;
 }
-
-// int main()
-// {
-//     struct Body* head = NULL;
-//     push(&head, 0, 0);
- 
-//     push(&head, 1, 1);
- 
-//     push(&head, 2, 2);
- 
-//     insertAfter(head, 3, 3);
-//     append(&head, 4, 4);
- 
-//     printf("Created DLL is: ");
-//     printList(head);
-//     move(&head, -3, 0, false);
-//     printList(head);
- 
-//     getchar();
-//     return 0;
-// }

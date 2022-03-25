@@ -4,7 +4,6 @@
 #include <stdio.h>
 
 void main() {
-    int board[BOARD_HEIGHT][BOARD_WIDTH];
     int count_food = 0;
     int snake_id_counter = 0;
     init_board();
