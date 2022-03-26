@@ -1,4 +1,4 @@
-16925958490188175
+16937482125612287
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -69111,6 +69111,27 @@ https://www.farnell.com/cad/316865.pdf?_ga=2.37208032.177107060.1530611323-24901
 48
 48
 Strøm
+18650holder
+
+
+0
+2
+2
+Strøm
+B3F-3152
+
+
+0
+4
+4
+Strøm
+B3F1052
+
+
+0
+4
+4
+Strøm
 BQ24202DGN
 
 
@@ -75277,6 +75298,34 @@ varistor SIOV
 0
 2
 2
+footprints
+18650holder
+
+
+0
+2
+2
+footprints
+B3F-3152
+
+
+0
+4
+4
+footprints
+B3F1052
+
+
+0
+4
+4
+footprints
+BQ24202DGN
+
+
+0
+9
+9
 kretskort
 hs_logo
 
