@@ -25,6 +25,13 @@ struct multiplayer_info{
     int food_coord_y;// When new food is placed, use this to signal where
 };
 
+typedef struct move_all{
+    struct multiplayer_info player0;
+    struct multiplayer_info player1;
+    struct multiplayer_info player2;
+    struct multiplayer_info player3;
+};
+
 void push(struct Body** head_ref, short int new_x, short int new_y);
 void insertAfter(struct Body* prev_node, short int new_x, short int new_y);
 void append(struct Body** head_ref, short int new_x, short int new_y);
