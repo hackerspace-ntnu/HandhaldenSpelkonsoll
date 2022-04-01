@@ -20,10 +20,20 @@ void init_board(void) {
 }
 
 struct BoardPiece get_square_value(int x, int y) {
+    if (x >= BOARD_WIDTH) x = BOARD_WIDTH - 1;
+    else if (x < 0) x = 0;
+    
+    if (y >= BOARD_HEIGHT) y = BOARD_HEIGHT - 1;
+    else if (y < 0) y = 0;
+
     return board[y][x];
 }
 
 void set_square_value(int x, int y, short int piece_type, struct Body* part) {
+    if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
+        return;
+    }
+    
     struct BoardPiece piece = board[y][x];
     piece.piece_type = piece_type;
     piece.part = part;
