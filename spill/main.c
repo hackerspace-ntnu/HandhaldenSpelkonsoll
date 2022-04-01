@@ -20,6 +20,7 @@ int main() {
     int *multi_info_buffer_stack_pointer = malloc(sizeof(int));
     *multi_info_buffer_stack_pointer = 0;
     
+    int snake_id_counter = 0;
     init_board();
    
     struct Snake snake1;
@@ -27,7 +28,6 @@ int main() {
     struct Snake snake3;
     struct Snake snake4;
  
-
     int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
     int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
     int init_coordinates3[][2] = {{0, BOARD_HEIGHT-1}, {1, BOARD_HEIGHT-1}, {2, BOARD_HEIGHT-1}}; 
@@ -46,7 +46,7 @@ int main() {
         init_coordinates1[1][1] = BOARD_HEIGHT/2; 
         init_coordinates1[2][1] = BOARD_HEIGHT/2; 
 
-        snake1 = create_snake(3, init_coordinates1);
+        snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
         add_snake_to_board(snake1.head);
 
         //initial food
@@ -54,8 +54,8 @@ int main() {
         break;
 
     case 2:
-        snake1 = create_snake(3, init_coordinates1);
-        snake2 = create_snake(3, init_coordinates2);
+        snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
+        snake2 = create_snake(3, init_coordinates2, &snake_id_counter);
         add_snake_to_board(snake1.head);
         add_snake_to_board(snake2.head);
 
@@ -64,9 +64,9 @@ int main() {
         break;
     
     case 3:
-        snake1 = create_snake(3, init_coordinates1);
-        snake2 = create_snake(3, init_coordinates2);
-        snake3 = create_snake(3, init_coordinates3);
+        snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
+        snake2 = create_snake(3, init_coordinates2, &snake_id_counter);
+        snake3 = create_snake(3, init_coordinates3, &snake_id_counter);
         add_snake_to_board(snake1.head);
         add_snake_to_board(snake2.head);
         add_snake_to_board(snake3.head);
@@ -77,10 +77,10 @@ int main() {
         break;
     
     case 4:
-        snake1 = create_snake(3, init_coordinates1);
-        snake2 = create_snake(3, init_coordinates2);
-        snake3 = create_snake(3, init_coordinates3);
-        snake4 = create_snake(3, init_coordinates4);
+        snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
+        snake2 = create_snake(3, init_coordinates2, &snake_id_counter);
+        snake3 = create_snake(3, init_coordinates3, &snake_id_counter);
+        snake4 = create_snake(3, init_coordinates4, &snake_id_counter);
        
         add_snake_to_board(snake1.head);
         add_snake_to_board(snake2.head);
