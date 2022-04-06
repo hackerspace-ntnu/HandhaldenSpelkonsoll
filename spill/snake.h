@@ -31,7 +31,7 @@ typedef struct move_all{
     struct multiplayer_info player1;
     struct multiplayer_info player2;
     struct multiplayer_info player3;
-};
+}move_all;
 
 void push(struct Body** head_ref, struct Snake* snake, short int new_x, short int new_y);
 void insertAfter(struct Body* prev_node, short int new_x, short int new_y);

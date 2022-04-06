@@ -5,6 +5,12 @@
 #include <signal.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <inttypes.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stdint.h> 
 
 #include "snake.c"
 #include "board.c"
@@ -15,11 +21,11 @@ int main() {
     int count_food = 0;
     int do_movement = 1;
 
-    struct multiplayer_info *multi_info_buffer[MULTIPLAYER_BUFFER_SIZE];
-    //multi_info_buffer = malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
+    struct multiplayer_info **multi_info_buffer;
+    multi_info_buffer = malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
     int *multi_info_buffer_stack_pointer = malloc(sizeof(int));
     *multi_info_buffer_stack_pointer = 0;
-    
+
     int snake_id_counter = 0;
     init_board();
    
@@ -118,7 +124,7 @@ int main() {
         }
 
         if(*multi_info_buffer_stack_pointer > 0){ // If there are updates from other players in the buffer
-            struct multiplayer_info m_info = multi_info_buffer[*multi_info_buffer_stack_pointer];
+            struct multiplayer_info *m_info = multi_info_buffer[*multi_info_buffer_stack_pointer];
             switch (m_info->id)
             {
             case 0:
