@@ -20,6 +20,7 @@ int main() {
     int game_on = 1;
     int count_food = 0;
     int do_movement = 1;
+    char keypress[3];
 
     struct multiplayer_info **multi_info_buffer;
     multi_info_buffer = malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
@@ -103,12 +104,33 @@ int main() {
         break;
     }
    
+   printf("Game start! Press w, s, a or d to move\n");
     while (snake1.isAlive){
-        int keypress = getchar();
         fflush(stdin);
+        fgets(keypress, 2, stdin);
+        keypress[strcspn(keypress, "\r\n")] = 0;
+        /* int keypress = getchar();
+        fflush(stdin); */
 
+        printf("input: %s\n", keypress);
         //Move with wasd for debugging purposes, replace with button input when they are implemented
-        switch(keypress){
+        if (!strcmp(keypress, "w")){
+            printf("w\n");
+            set_direction(&snake1, DIRECTION_UP);
+        }
+        else if (!strcmp(keypress, "s")){
+            printf("s\n");
+            set_direction(&snake1, DIRECTION_DOWN);
+        }
+        else if (!strcmp(keypress, "d")){
+            printf("d\n");
+            set_direction(&snake1, DIRECTION_RIGHT);
+        }
+        else if (!strcmp(keypress, "a")){
+            printf("a\n");
+            set_direction(&snake1, DIRECTION_LEFT);
+        }
+        /* switch(keypress){
             case 'w':
                 set_direction(&snake1, DIRECTION_UP);
                 break;
@@ -121,7 +143,7 @@ int main() {
             case 'a':
                 set_direction(&snake1, DIRECTION_LEFT);
                 break;
-        }
+        } */
 
         if(*multi_info_buffer_stack_pointer > 0){ // If there are updates from other players in the buffer
             struct multiplayer_info *m_info = multi_info_buffer[*multi_info_buffer_stack_pointer];
@@ -177,6 +199,7 @@ int main() {
             
         }
     }
+    printf("Game over\n");
     free(multi_info_buffer);
     return(0);
 }
