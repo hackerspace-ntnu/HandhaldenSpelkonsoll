@@ -24,8 +24,8 @@ Flere skjermdriver-bibliotek er under vurdering. TFT_eSPI har skrevet til skjerm
 * Lag system for å ta inn input (Knappetrykk påvirker spillet) "det er trivielt" -Joakim
 * Sette opp trådløs kommunikasjon mellom kontroller (Nødvendig for multiplayer WIFI/BLE)
 * Implementere meny-system (instillinger start pause eventuelt mulig for flere minigames)
-* Rense opp i minnebruk, har bare 384 kiB
+* Rense opp i minnebruk, har bare 384 kiB (bare gå gjennom koden og free mallocer som det har blitt glemt å frigjøres)
 * Lag revidert utgave av kretskort, aka fiks det som må fikses
 * Lage fancy trigger greie
 * TO MØTER MED PIZZA (eller annen mat)!!
-* fix bug
+* Test spillet litt mer og se etter bugs (Nåværende, mest oppdaterte branch er an-attempt-at-game, hvor en del bugs allerede er blitt fikset)
