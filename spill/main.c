@@ -145,7 +145,7 @@ int main() {
                 break;
         } */
 
-        if(*multi_info_buffer_stack_pointer > 0){ // If there are updates from other players in the buffer
+       /*  if(*multi_info_buffer_stack_pointer > 0){ // If there are updates from other players in the buffer
             struct multiplayer_info *m_info = multi_info_buffer[*multi_info_buffer_stack_pointer];
             switch (m_info->id)
             {
@@ -182,12 +182,16 @@ int main() {
             if(m_info->new_food & IS_HOST){ //restricted food, only master snake can give it out
                 place_food_at_coords(m_info->food_coord_x, m_info->food_coord_y, &count_food);
             }
-        }
+        } */
 
         //Just to test multiple snake movement
         set_direction(&snake2, (rand() % 4));
+        printf("Snake2 x: %d, y: %d\n", snake2.direction_x, snake2.direction_y);
         set_direction(&snake3, (rand() % 4));
+        printf("Snake3 x: %d, y: %d\n", snake3.direction_x, snake3.direction_y);
         set_direction(&snake4, (rand() % 4));
+        printf("Snake4 x: %d, y: %d\n", snake4.direction_x, snake4.direction_y);
+
 
         if(do_movement){ //Should be set to 1 every second
             move(&snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
