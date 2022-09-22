@@ -1,21 +1,21 @@
-#include <stdio.h>
+/* #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <inttypes.h>
 #include <math.h>
 #include <stdbool.h>
-#include <stdint.h>
+#include <stdint.h> */
 
-#include "constants.h"
+/* #include "constants.h"
 #include "snake.h"
-#include "board.h"
+#include "board.h" */
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 struct BoardPiece get_square_value(int x, int y);
 void set_square_value(int x, int y, short int piece_type, struct Body* part);
 void place_random_food(int* count_food);
-void place_food_at_coords(int x, int y, int* count_foot);
+void place_food_at_coords(int x, int y, int* count_food);
 
 /* Add new Body element on top of head. */
 void push(struct Body** head_ref, struct Snake* snake, short int new_x, short int new_y)
@@ -151,13 +151,13 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     short int old_y = head->y;
 
     // Calculate new coordinates
-    short int new_x = old_x + direction_x;
-    short int new_y = old_y + direction_y;
+    short int new_x = old_x + snake->direction_x;
+    short int new_y = old_y + snake->direction_y;
 
     // Checks if new head will be inside a wall
     // If clipping is turned on, head will be put on the opposite side of the field
     // If clipping is turned off, the snake dies
-    
+    printf("Calculated new position\n");
     if (new_x > (BOARD_WIDTH - 1)) {
         new_x = 0;
         if (!WRAPPING_ENABLED){
@@ -168,7 +168,6 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     }
     else if (new_x < 0) {
         new_x = BOARD_WIDTH - 1;
-        printf("x=end\n");
         if (!WRAPPING_ENABLED) {
             split_snake(snake, &head, count_food);
             snake->isAlive = false;
@@ -177,7 +176,6 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     }
     else if (new_y > (BOARD_HEIGHT-1)) {
         new_y = 0;
-        printf("y=0\n");
         if (!WRAPPING_ENABLED) {
             split_snake(snake, &head, count_food);
             snake->isAlive = false;
@@ -186,7 +184,6 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     }
     else if (new_y < 0) {
         new_y = BOARD_HEIGHT - 1;
-        printf("y=end\n");
         if (!WRAPPING_ENABLED) {
             split_snake(snake, &head, count_food);
             snake->isAlive = false;
@@ -194,11 +191,22 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
         }
     }
 
+    printf("Poyo\n");
+    // Prevents snake from moving into its own neck
+    if(neck != NULL){
+       if (new_x == neck->x & new_y == neck->y){
+            printf("Don't eat your own neck >:^(\n");
+            return;
+        } 
+    }
+
+    printf("Wah\n");
     // Get the value of the next square where the snake would move to,
     // and determine whether that square is a body part
     struct BoardPiece next_piece = get_square_value(new_x, new_y);
     bool next_is_body_part = next_piece.piece_type == BLOCK_SNAKE;
     
+    printf("Next square is %s\n", next_is_body_part ? "body" : "not body");
     if (next_is_body_part) {
         struct Body* part = next_piece.part;
 
@@ -206,6 +214,7 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
         if (part->snake->id == snake->id) {
             split_snake(snake, &head, count_food);
             snake->isAlive = false;
+            printf("self collision\n");
             return;
         }
 
@@ -234,6 +243,7 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     }
 
     // Remove tail (do not do this if snake eats!)
+    int single_piece_snake = tail->prev == NULL;
     if (next_piece.piece_type == BLOCK_FOOD || next_is_body_part) {
         if (*count_food <= 1) {
             place_random_food(count_food);
@@ -241,13 +251,20 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
             (*count_food)--;
         }
     } else {
-        tail->prev->next = NULL;
+        //printf("is tail null: %s\n", tail == NULL ? "yes" : "no");
+        if (!single_piece_snake){
+            tail->prev->next = NULL;
+        }
         set_square_value(tail->x, tail->y, BLOCK_BLANK, NULL);
     }
 
     // Create new head
     push(&head, snake, new_x, new_y);
     set_square_value(new_x, new_y, BLOCK_SNAKE, head);
+
+    if(single_piece_snake){
+        head->next = NULL;
+    }
 
     // Update ref
     *node = head;
