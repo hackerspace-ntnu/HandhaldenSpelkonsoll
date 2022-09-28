@@ -3,10 +3,6 @@
 #include "board.h" 
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
-struct BoardPiece get_square_value(int x, int y);
-void set_square_value(int x, int y, short int piece_type, struct Body* part);
-void place_random_food(int* count_food);
-void place_food_at_coords(int x, int y, int* count_food);
 
 /* Add new Body element on top of head. */
 void push(struct Body** head_ref, struct Snake* snake, short int new_x, short int new_y)

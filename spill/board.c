@@ -3,8 +3,6 @@
 #include "constants.h"
 #include <stddef.h>
 
-struct BoardPiece board[BOARD_HEIGHT][BOARD_WIDTH];
-int count_food;
 
 void init_board(void) {
 	// Initialize the board with only 0s (clear blocks)
