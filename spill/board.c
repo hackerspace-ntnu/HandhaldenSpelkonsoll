@@ -1,11 +1,7 @@
-/* #include "snake.h"
+#include "snake.h"
 #include "board.h"
-#include "constants.h" */
+#include "constants.h"
 #include <stddef.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include <stdint.h>
 
 struct BoardPiece board[BOARD_HEIGHT][BOARD_WIDTH];
 int count_food;

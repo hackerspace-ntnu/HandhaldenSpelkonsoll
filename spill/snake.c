@@ -1,15 +1,6 @@
-/* #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-#include <inttypes.h>
-#include <math.h>
-#include <stdbool.h>
-#include <stdint.h> */
-
-/* #include "constants.h"
+#include "constants.h"
 #include "snake.h"
-#include "board.h" */
+#include "board.h" 
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 struct BoardPiece get_square_value(int x, int y);

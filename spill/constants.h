@@ -1,3 +1,17 @@
+#include <stdio.h>
+#include <signal.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#include <inttypes.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stdint.h> 
+
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
 #define SCREEN_HEIGHT 320
 #define SCREEN_WIDTH 480
 
@@ -21,3 +35,5 @@
 #define DIRECTION_RIGHT 1
 #define DIRECTION_DOWN 2
 #define DIRECTION_LEFT 3
+
+#endif

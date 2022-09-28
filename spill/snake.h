@@ -1,5 +1,8 @@
 #include <stdbool.h>
 
+#ifndef SNAKE_H
+#define SNAKE_H
+
 struct Body {
     short int x;
     short int y;
@@ -43,3 +46,5 @@ void set_direction(struct Snake* snake, int direction);
 void split_snake(struct Snake* snake, struct Body** node, int* count_food);
 struct Snake create_snake(int length, int coords[][2], int* snake_id_counter);
 int get_snake_length(struct Body* head);
+
+#endif

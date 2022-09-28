@@ -1,5 +1,8 @@
 #include <stdint.h>
 
+#ifndef BOARD_H
+#define BOARD_H
+
 struct BoardPiece {
     short int piece_type;
     struct Body* part;
@@ -13,3 +16,5 @@ void place_random_food(int* count_food);
 void place_food_at_coords(int x, int y, int* count_food);
 char convert_board_int(struct BoardPiece piece);
 void print_board();
+
+#endif
