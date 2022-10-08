@@ -1,8 +1,10 @@
-#include <Arduino.h>
 #include <esp_now.h>
-#include "WiFi.h"
+#include <WiFi.h>
 
 uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+
+String masterMACAddress = "";
+String slaveMACAddress = "";
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success 1" : "Delivery Fail 1");
@@ -14,10 +16,19 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   }
 
   Serial.println();
-}       
+}  
 
-void setup()
-{
+void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
+  String dataReceived;
+  memcpy(&dataReceived, incomingData, sizeof(dataReceived));
+
+  Serial.print("Data Received: ");
+  Serial.println(dataReceived);
+
+  Serial.println();    
+}
+
+void setup() {
 
   Serial.begin(115200);
 
@@ -25,8 +36,9 @@ void setup()
 
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
-
-  Serial.println(WiFi.macAddress());
+  masterMACAddress = WiFi.macAddress();
+  Serial.print("Master MAC Address: ");
+  Serial.println(masterMACAddress);
 
   // Init ESP-NOW
   if (esp_now_init() != ESP_OK) {
@@ -51,16 +63,16 @@ void setup()
   if (esp_now_add_peer(&peerInfo) != ESP_OK){
     Serial.println("Failed to add peer");
     for(;;) {      delay(1);  } // do not initialize wait forever
-  }            
+  }     
+
+  esp_now_register_recv_cb(OnDataRecv);       
 }
 
-int dataToSend = 1;
-void loop()
-{
-    dataToSend++;
+String dataToSend = WiFi.macAddress();
+void loop() {
 
     // Send message via ESP-NOW (size of an int is 4 bytes on ESP32)
-    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &dataToSend, 4);
+    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &dataToSend, sizeof(dataToSend));
    
     if (result == ESP_OK) {
       Serial.println("Sent with success");
@@ -68,7 +80,6 @@ void loop()
     else {
       Serial.println("Error sending the data");
     }
-
-    //Serial.println(WiFi.macAddress());    
-    delay(1000);
+  
+    delay(3000);
 }
