@@ -1,23 +1,18 @@
-mcu: Esp32 
+mcu: ESP32 
 skjerm: ILI9488 controller 480*320 4.5"
 knapper: buttons
-joystick: ?
-lyd: 3.5mm + innebygd buzzer. 
-batteri: 
+batteri: 18650 Li-ion (3.6 V, 2600 mAh)
 
-hovedkommunikasjons protokoll: 
+hovedkommunikasjons protokoll: ESP-NOW
 
+koblinger mellom ILI9488 og ESP32
 
-
-
-Koblinger mellom ILI9488 og ESP32
-
-SDO(MISO) ->  19 
+SDO(MISO) ->  19
 SDI(MOSI) ->  23
 SCK       ->  18
-CS        ->  15  Chip Select
+CS        ->   5  Chip Select
 DC/RS     ->   2  Data Command
 RST       ->   4  Reset
-VCC       ->  5V
-LED       ->  5V
+VCC       ->  VCC
+LED       ->  VCC
 GND       ->  GND
