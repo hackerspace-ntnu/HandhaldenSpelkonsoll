@@ -1,12 +1,26 @@
 #include <esp_now.h>
 #include <WiFi.h>
 
+
 uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 String masterMACAddress = "";
 String slaveMACAddress = "";
 
+
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+  Serial.print("MAC: ");
+  Serial.print(mac_addr[0], HEX);
+  Serial.print(":");
+  Serial.print(mac_addr[1], HEX);
+  Serial.print(":");
+  Serial.print(mac_addr[2], HEX);
+  Serial.print(":");
+  Serial.print(mac_addr[3], HEX);
+  Serial.print(":");
+  Serial.print(mac_addr[4], HEX);
+  Serial.print(":");
+  Serial.println(mac_addr[5], HEX);
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success 1" : "Delivery Fail 1");
   if (status ==0){
     Serial.println("Delivery Success 2");
@@ -26,6 +40,28 @@ void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
   Serial.println(dataReceived);
 
   Serial.println();    
+}
+
+void handleError(esp_err_t error) {
+    switch(error) {
+        case ESP_OK:
+            Serial.println("All good");
+            break;
+        case ESP_ERR_ESPNOW_NOT_INIT:
+            Serial.println("esp-now not initialized!");
+            break;
+        case ESP_ERR_ESPNOW_ARG:
+            Serial.println("invalid argument!");
+            break;
+        case ESP_ERR_ESPNOW_NO_MEM:
+            Serial.println("out of memory!");
+            break;
+        case ESP_ERR_ESPNOW_EXIST:
+            Serial.println("peer has existed, whatever that means");
+            break;
+        default:
+            Serial.println("error not recognized!");
+    }
 }
 
 void setup() {
@@ -74,12 +110,6 @@ void loop() {
     // Send message via ESP-NOW (size of an int is 4 bytes on ESP32)
     esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &dataToSend, sizeof(dataToSend));
    
-    if (result == ESP_OK) {
-      Serial.println("Sent with success");
-    }
-    else {
-      Serial.println("Error sending the data");
-    }
-  
+    handleError(result);
     delay(3000);
 }
