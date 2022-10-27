@@ -7,20 +7,17 @@ uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 String masterMACAddress = "";
 String slaveMACAddress = "";
 
+void serialPrintMAC(const uint8_t *mac) {
+  Serial.println("MAC");
+  for (int i=0; i<6; i++) {
+    Serial.print(mac[i], HEX);
+    if (i<5) Serial.print(":");
+  }
+}
+
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
-  Serial.print("MAC: ");
-  Serial.print(mac_addr[0], HEX);
-  Serial.print(":");
-  Serial.print(mac_addr[1], HEX);
-  Serial.print(":");
-  Serial.print(mac_addr[2], HEX);
-  Serial.print(":");
-  Serial.print(mac_addr[3], HEX);
-  Serial.print(":");
-  Serial.print(mac_addr[4], HEX);
-  Serial.print(":");
-  Serial.println(mac_addr[5], HEX);
+  serialPrintMAC(mac_addr);
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success 1" : "Delivery Fail 1");
   if (status ==0){
     Serial.println("Delivery Success 2");
@@ -33,6 +30,7 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
 }  
 
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
+  serialPrintMAC(mac);
   String dataReceived;
   memcpy(&dataReceived, incomingData, sizeof(dataReceived));
 
