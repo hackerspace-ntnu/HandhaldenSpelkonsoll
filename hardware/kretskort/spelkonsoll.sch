@@ -16,611 +16,690 @@ $EndDescr
 $Comp
 L spelkonsoll-rescue:ILI9488-ILI9488 U2
 U 1 1 61F441BE
-P 3050 5000
-F 0 "U2" H 3050 5915 50  0000 C CNN
-F 1 "ILI9488" H 3050 5824 50  0000 C CNN
-F 2 "ESP32-DEVKITC-32D:ILI9488" H 2550 5950 50  0001 C CNN
-F 3 "" H 2550 5950 50  0001 C CNN
-	1    3050 5000
+P 8800 5150
+F 0 "U2" H 8800 6065 50  0000 C CNN
+F 1 "ILI9488" H 8800 5974 50  0000 C CNN
+F 2 "ESP32-DEVKITC-32D:ILI9488" H 8300 6100 50  0001 C CNN
+F 3 "" H 8300 6100 50  0001 C CNN
+	1    8800 5150
 	1    0    0    -1  
 $EndComp
 $Comp
 L spelkonsoll-rescue:ESP32-DEVKITC-32D-ESP32-DEVKITC-32D U1
 U 1 1 61F1CC6B
-P 3050 2200
-F 0 "U1" H 3050 3367 50  0000 C CNN
-F 1 "ESP32-DEVKITC-32D" H 3050 3276 50  0000 C CNN
-F 2 "ESP32-DEVKITC-32D:MODULE_ESP32-DEVKITC-32D" H 3050 2200 50  0001 L BNN
-F 3 "" H 3050 2200 50  0001 L BNN
-F 4 "4" H 3050 2200 50  0001 L BNN "PARTREV"
-F 5 "Espressif Systems" H 3050 2200 50  0001 L BNN "MANUFACTURER"
-	1    3050 2200
+P 9300 2150
+F 0 "U1" H 9300 3317 50  0000 C CNN
+F 1 "ESP32-DEVKITC-32D" H 9300 3226 50  0000 C CNN
+F 2 "ESP32-DEVKITC-32D:MODULE_ESP32-DEVKITC-32D" H 9300 2150 50  0001 L BNN
+F 3 "" H 9300 2150 50  0001 L BNN
+F 4 "4" H 9300 2150 50  0001 L BNN "PARTREV"
+F 5 "Espressif Systems" H 9300 2150 50  0001 L BNN "MANUFACTURER"
+	1    9300 2150
 	1    0    0    -1  
-$EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR05
-U 1 1 61F50C10
-P 2150 3100
-F 0 "#PWR05" H 2150 2950 50  0001 C CNN
-F 1 "+5V" V 2165 3228 50  0000 L CNN
-F 2 "" H 2150 3100 50  0001 C CNN
-F 3 "" H 2150 3100 50  0001 C CNN
-	1    2150 3100
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	2250 3100 2150 3100
-$Comp
-L spelkonsoll-rescue:GND-power #PWR06
-U 1 1 61F5615F
-P 3950 1300
-F 0 "#PWR06" H 3950 1050 50  0001 C CNN
-F 1 "GND" V 3955 1172 50  0000 R CNN
-F 2 "" H 3950 1300 50  0001 C CNN
-F 3 "" H 3950 1300 50  0001 C CNN
-	1    3950 1300
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	3950 1300 3850 1300
-Text GLabel 3850 2000 2    50   Input ~ 0
-MISO
-Text GLabel 3850 1400 2    50   Input ~ 0
-MOSI
-Text GLabel 1750 5250 0    50   Input ~ 0
-DC\RS
-Text GLabel 3850 2300 2    50   Input ~ 0
-DC\RS
-Text GLabel 3850 2500 2    50   Input ~ 0
-RESET
-Text GLabel 3850 2100 2    50   Input ~ 0
-SCK
-Text GLabel 3850 2400 2    50   Input ~ 0
-CS
-NoConn ~ 1750 4350
-NoConn ~ 1750 4450
-NoConn ~ 1750 4550
-NoConn ~ 1750 4650
-NoConn ~ 1750 4750
-NoConn ~ 4350 4850
-NoConn ~ 4350 4950
-NoConn ~ 4350 5050
-NoConn ~ 4350 5150
-Text GLabel 1750 4850 0    50   Input ~ 0
-MISO
-Text GLabel 1750 5050 0    50   Input ~ 0
-SCK
-Text GLabel 1750 5150 0    50   Input ~ 0
-MOSI
-Text GLabel 1750 5350 0    50   Input ~ 0
-RESET
-Text GLabel 1750 5450 0    50   Input ~ 0
-CS
-$Comp
-L spelkonsoll-rescue:SW_Push-Switch SW5
-U 1 1 62030F73
-P 8750 2300
-F 0 "SW5" H 8750 2585 50  0000 C CNN
-F 1 "SW_Push" H 8750 2494 50  0000 C CNN
-F 2 "footprints:B3F1052" H 8750 2500 50  0001 C CNN
-F 3 "~" H 8750 2500 50  0001 C CNN
-	1    8750 2300
-	1    0    0    -1  
-$EndComp
-$Comp
-L spelkonsoll-rescue:SW_Push-Switch SW6
-U 1 1 620331E8
-P 8750 2900
-F 0 "SW6" H 8750 3185 50  0000 C CNN
-F 1 "SW_Push" H 8750 3094 50  0000 C CNN
-F 2 "footprints:B3F1052" H 8750 3100 50  0001 C CNN
-F 3 "~" H 8750 3100 50  0001 C CNN
-	1    8750 2900
-	1    0    0    -1  
-$EndComp
-Text GLabel 8550 2300 0    50   Input ~ 0
-BTN_A
-Text GLabel 3850 1800 2    50   Input ~ 0
-BTN_A
-Text GLabel 8550 2900 0    50   Input ~ 0
-BTN_B
-Text GLabel 2250 1900 0    50   Input ~ 0
-BTN_B
-$Comp
-L spelkonsoll-rescue:SW_Push-Switch SW7
-U 1 1 62044CE9
-P 8750 3500
-F 0 "SW7" H 8750 3785 50  0000 C CNN
-F 1 "SW_Push" H 8750 3694 50  0000 C CNN
-F 2 "footprints:B3F1052" H 8750 3700 50  0001 C CNN
-F 3 "~" H 8750 3700 50  0001 C CNN
-	1    8750 3500
-	1    0    0    -1  
-$EndComp
-$Comp
-L spelkonsoll-rescue:SW_Push-Switch SW8
-U 1 1 62045913
-P 8750 4100
-F 0 "SW8" H 8750 4385 50  0000 C CNN
-F 1 "SW_Push" H 8750 4294 50  0000 C CNN
-F 2 "footprints:B3F1052" H 8750 4300 50  0001 C CNN
-F 3 "~" H 8750 4300 50  0001 C CNN
-	1    8750 4100
-	1    0    0    -1  
-$EndComp
-Text GLabel 8550 3500 0    50   Input ~ 0
-BTN_X
-Text GLabel 8550 4100 0    50   Input ~ 0
-BTN_Y
-Text GLabel 2250 2000 0    50   Input ~ 0
-BTN_X
-Text GLabel 2250 2100 0    50   Input ~ 0
-BTN_Y
-$Comp
-L spelkonsoll-rescue:SW_Push-Switch SW1
-U 1 1 6208388F
-P 7550 2300
-F 0 "SW1" H 7550 2585 50  0000 C CNN
-F 1 "SW_Push" H 7550 2494 50  0000 C CNN
-F 2 "footprints:B3F1052" H 7550 2500 50  0001 C CNN
-F 3 "~" H 7550 2500 50  0001 C CNN
-	1    7550 2300
-	1    0    0    -1  
-$EndComp
-$Comp
-L spelkonsoll-rescue:SW_Push-Switch SW2
-U 1 1 62083D6E
-P 7550 2900
-F 0 "SW2" H 7550 3185 50  0000 C CNN
-F 1 "SW_Push" H 7550 3094 50  0000 C CNN
-F 2 "footprints:B3F1052" H 7550 3100 50  0001 C CNN
-F 3 "~" H 7550 3100 50  0001 C CNN
-	1    7550 2900
-	1    0    0    -1  
-$EndComp
-$Comp
-L spelkonsoll-rescue:SW_Push-Switch SW3
-U 1 1 620840F6
-P 7550 3500
-F 0 "SW3" H 7550 3785 50  0000 C CNN
-F 1 "SW_Push" H 7550 3694 50  0000 C CNN
-F 2 "footprints:B3F1052" H 7550 3700 50  0001 C CNN
-F 3 "~" H 7550 3700 50  0001 C CNN
-	1    7550 3500
-	1    0    0    -1  
-$EndComp
-$Comp
-L spelkonsoll-rescue:SW_Push-Switch SW4
-U 1 1 620844B6
-P 7550 4100
-F 0 "SW4" H 7550 4385 50  0000 C CNN
-F 1 "SW_Push" H 7550 4294 50  0000 C CNN
-F 2 "footprints:B3F1052" H 7550 4300 50  0001 C CNN
-F 3 "~" H 7550 4300 50  0001 C CNN
-	1    7550 4100
-	1    0    0    -1  
-$EndComp
-Text GLabel 7350 2300 0    50   Input ~ 0
-BTN_DP_UP
-Text GLabel 7350 2900 0    50   Input ~ 0
-BTN_DP_DOWN
-Text GLabel 7350 3500 0    50   Input ~ 0
-BTN_DP_LEFT
-Text GLabel 7350 4100 0    50   Input ~ 0
-BTN_DP_RIGHT
-Text GLabel 2250 2200 0    50   Input ~ 0
-BTN_DP_UP
-Text GLabel 2250 2300 0    50   Input ~ 0
-BTN_DP_DOWN
-Text GLabel 2250 2400 0    50   Input ~ 0
-BTN_DP_LEFT
-Text GLabel 2250 2700 0    50   Input ~ 0
-BTN_DP_RIGHT
-Text Notes 7900 1850 0    50   ~ 0
-BUTTONS ’N
-NoConn ~ 2250 1300
-NoConn ~ 2250 1400
-NoConn ~ 2250 1500
-NoConn ~ 2250 1600
-NoConn ~ 3850 1500
-NoConn ~ 3850 1600
-NoConn ~ 3850 1700
-NoConn ~ 3850 2200
-NoConn ~ 3850 2600
-NoConn ~ 2250 2800
-NoConn ~ 2250 2900
-NoConn ~ 2250 3000
-NoConn ~ 3850 2900
-NoConn ~ 3850 3000
-NoConn ~ 3850 3100
-$Comp
-L spelkonsoll-rescue:GND-power #PWR07
-U 1 1 61FCBFD5
-P 3950 1900
-F 0 "#PWR07" H 3950 1650 50  0001 C CNN
-F 1 "GND" V 3955 1772 50  0000 R CNN
-F 2 "" H 3950 1900 50  0001 C CNN
-F 3 "" H 3950 1900 50  0001 C CNN
-	1    3950 1900
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	3950 1900 3850 1900
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR01
-U 1 1 620FF538
-P 1650 4950
-F 0 "#PWR01" H 1650 4800 50  0001 C CNN
-F 1 "+5V" V 1665 5078 50  0000 L CNN
-F 2 "" H 1650 4950 50  0001 C CNN
-F 3 "" H 1650 4950 50  0001 C CNN
-	1    1650 4950
-	0    -1   -1   0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR03
-U 1 1 61F52AEC
-P 1650 5650
-F 0 "#PWR03" H 1650 5500 50  0001 C CNN
-F 1 "+5V" V 1665 5778 50  0000 L CNN
-F 2 "" H 1650 5650 50  0001 C CNN
-F 3 "" H 1650 5650 50  0001 C CNN
-	1    1650 5650
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	1750 5650 1650 5650
-$Comp
-L spelkonsoll-rescue:GND-power #PWR02
-U 1 1 61F5AB18
-P 1650 5550
-F 0 "#PWR02" H 1650 5300 50  0001 C CNN
-F 1 "GND" V 1655 5422 50  0000 R CNN
-F 2 "" H 1650 5550 50  0001 C CNN
-F 3 "" H 1650 5550 50  0001 C CNN
-	1    1650 5550
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	1650 5550 1750 5550
-$Comp
-L spelkonsoll-rescue:GND-power #PWR04
-U 1 1 61F59FD0
-P 2150 2600
-F 0 "#PWR04" H 2150 2350 50  0001 C CNN
-F 1 "GND" V 2155 2472 50  0000 R CNN
-F 2 "" H 2150 2600 50  0001 C CNN
-F 3 "" H 2150 2600 50  0001 C CNN
-	1    2150 2600
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	2150 2600 2250 2600
-Wire Wire Line
-	9050 4100 8950 4100
-Wire Wire Line
-	8950 3500 9050 3500
-Wire Wire Line
-	9050 2300 8950 2300
-Wire Wire Line
-	7750 3500 7850 3500
-Wire Wire Line
-	7850 2900 7750 2900
-Wire Wire Line
-	7750 2300 7850 2300
-Wire Wire Line
-	8950 2900 9050 2900
-Wire Wire Line
-	7850 4100 7750 4100
-Wire Wire Line
-	1650 4950 1750 4950
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR013
-U 1 1 6233968B
-P 7850 2300
-F 0 "#PWR013" H 7850 2150 50  0001 C CNN
-F 1 "+5V" V 7865 2428 50  0000 L CNN
-F 2 "" H 7850 2300 50  0001 C CNN
-F 3 "" H 7850 2300 50  0001 C CNN
-	1    7850 2300
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR014
-U 1 1 6233E20C
-P 7850 2900
-F 0 "#PWR014" H 7850 2750 50  0001 C CNN
-F 1 "+5V" V 7865 3028 50  0000 L CNN
-F 2 "" H 7850 2900 50  0001 C CNN
-F 3 "" H 7850 2900 50  0001 C CNN
-	1    7850 2900
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR015
-U 1 1 6233E43F
-P 7850 3500
-F 0 "#PWR015" H 7850 3350 50  0001 C CNN
-F 1 "+5V" V 7865 3628 50  0000 L CNN
-F 2 "" H 7850 3500 50  0001 C CNN
-F 3 "" H 7850 3500 50  0001 C CNN
-	1    7850 3500
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR016
-U 1 1 6233E66E
-P 7850 4100
-F 0 "#PWR016" H 7850 3950 50  0001 C CNN
-F 1 "+5V" V 7865 4228 50  0000 L CNN
-F 2 "" H 7850 4100 50  0001 C CNN
-F 3 "" H 7850 4100 50  0001 C CNN
-	1    7850 4100
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR024
-U 1 1 6233E91E
-P 9050 4100
-F 0 "#PWR024" H 9050 3950 50  0001 C CNN
-F 1 "+5V" V 9065 4228 50  0000 L CNN
-F 2 "" H 9050 4100 50  0001 C CNN
-F 3 "" H 9050 4100 50  0001 C CNN
-	1    9050 4100
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR023
-U 1 1 6233ECD0
-P 9050 3500
-F 0 "#PWR023" H 9050 3350 50  0001 C CNN
-F 1 "+5V" V 9065 3628 50  0000 L CNN
-F 2 "" H 9050 3500 50  0001 C CNN
-F 3 "" H 9050 3500 50  0001 C CNN
-	1    9050 3500
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR022
-U 1 1 6233EF03
-P 9050 2900
-F 0 "#PWR022" H 9050 2750 50  0001 C CNN
-F 1 "+5V" V 9065 3028 50  0000 L CNN
-F 2 "" H 9050 2900 50  0001 C CNN
-F 3 "" H 9050 2900 50  0001 C CNN
-	1    9050 2900
-	0    1    1    0   
 $EndComp
 $Comp
 L spelkonsoll-rescue:+5V-power #PWR021
-U 1 1 6233F162
-P 9050 2300
-F 0 "#PWR021" H 9050 2150 50  0001 C CNN
-F 1 "+5V" V 9065 2428 50  0000 L CNN
-F 2 "" H 9050 2300 50  0001 C CNN
-F 3 "" H 9050 2300 50  0001 C CNN
-	1    9050 2300
-	0    1    1    0   
+U 1 1 61F50C10
+P 8400 3050
+F 0 "#PWR021" H 8400 2900 50  0001 C CNN
+F 1 "+5V" V 8415 3178 50  0000 L CNN
+F 2 "" H 8400 3050 50  0001 C CNN
+F 3 "" H 8400 3050 50  0001 C CNN
+	1    8400 3050
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	8500 3050 8400 3050
+$Comp
+L spelkonsoll-rescue:GND-power #PWR022
+U 1 1 61F5615F
+P 10200 1250
+F 0 "#PWR022" H 10200 1000 50  0001 C CNN
+F 1 "GND" V 10205 1122 50  0000 R CNN
+F 2 "" H 10200 1250 50  0001 C CNN
+F 3 "" H 10200 1250 50  0001 C CNN
+	1    10200 1250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	10200 1250 10100 1250
+Text GLabel 10100 1950 2    50   Input ~ 0
+MISO
+Text GLabel 10100 1350 2    50   Input ~ 0
+MOSI
+Text GLabel 7500 5400 0    50   Input ~ 0
+DC\RS
+Text GLabel 10100 2250 2    50   Input ~ 0
+DC\RS
+Text GLabel 10100 2450 2    50   Input ~ 0
+RESET
+Text GLabel 10100 2050 2    50   Input ~ 0
+SCK
+Text GLabel 10100 2350 2    50   Input ~ 0
+CS
+NoConn ~ 7500 4500
+NoConn ~ 7500 4600
+NoConn ~ 7500 4700
+NoConn ~ 7500 4800
+NoConn ~ 7500 4900
+NoConn ~ 10100 5000
+NoConn ~ 10100 5100
+NoConn ~ 10100 5200
+NoConn ~ 10100 5300
+Text GLabel 7500 5000 0    50   Input ~ 0
+MISO
+Text GLabel 7500 5200 0    50   Input ~ 0
+SCK
+Text GLabel 7500 5300 0    50   Input ~ 0
+MOSI
+Text GLabel 7500 5500 0    50   Input ~ 0
+RESET
+Text GLabel 7500 5600 0    50   Input ~ 0
+CS
+Text GLabel 2650 4550 0    50   Input ~ 0
+BTN_A
+Text GLabel 10100 1750 2    50   Input ~ 0
+BTN_A
+Text GLabel 2650 5350 0    50   Input ~ 0
+BTN_B
+Text GLabel 8500 1850 0    50   Input ~ 0
+BTN_B
+Text GLabel 2650 6150 0    50   Input ~ 0
+BTN_X
+Text GLabel 2650 6950 0    50   Input ~ 0
+BTN_Y
+Text GLabel 8500 1950 0    50   Input ~ 0
+BTN_X
+Text GLabel 8500 2050 0    50   Input ~ 0
+BTN_Y
+Text GLabel 2650 1350 0    50   Input ~ 0
+BTN_DP_UP
+Text GLabel 2650 2150 0    50   Input ~ 0
+BTN_DP_DOWN
+Text GLabel 2650 2950 0    50   Input ~ 0
+BTN_DP_LEFT
+Text GLabel 2650 3750 0    50   Input ~ 0
+BTN_DP_RIGHT
+Text GLabel 8500 2150 0    50   Input ~ 0
+BTN_DP_UP
+Text GLabel 8500 2250 0    50   Input ~ 0
+BTN_DP_DOWN
+Text GLabel 8500 2350 0    50   Input ~ 0
+BTN_DP_LEFT
+Text GLabel 8500 2650 0    50   Input ~ 0
+BTN_DP_RIGHT
+NoConn ~ 8500 1250
+NoConn ~ 8500 1350
+NoConn ~ 8500 1450
+NoConn ~ 8500 1550
+NoConn ~ 10100 1450
+NoConn ~ 10100 1550
+NoConn ~ 10100 1650
+NoConn ~ 10100 2150
+NoConn ~ 10100 2550
+NoConn ~ 8500 2750
+NoConn ~ 8500 2850
+NoConn ~ 8500 2950
+NoConn ~ 10100 2850
+NoConn ~ 10100 2950
+NoConn ~ 10100 3050
+$Comp
+L spelkonsoll-rescue:GND-power #PWR023
+U 1 1 61FCBFD5
+P 10200 1850
+F 0 "#PWR023" H 10200 1600 50  0001 C CNN
+F 1 "GND" V 10205 1722 50  0000 R CNN
+F 2 "" H 10200 1850 50  0001 C CNN
+F 3 "" H 10200 1850 50  0001 C CNN
+	1    10200 1850
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	10200 1850 10100 1850
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR017
+U 1 1 620FF538
+P 7400 5100
+F 0 "#PWR017" H 7400 4950 50  0001 C CNN
+F 1 "+5V" V 7415 5228 50  0000 L CNN
+F 2 "" H 7400 5100 50  0001 C CNN
+F 3 "" H 7400 5100 50  0001 C CNN
+	1    7400 5100
+	0    -1   -1   0   
 $EndComp
 $Comp
-L spelkonsoll-rescue:GND-power #PWR012
-U 1 1 623A8B1C
-P 7350 4250
-F 0 "#PWR012" H 7350 4000 50  0001 C CNN
-F 1 "GND" V 7355 4122 50  0000 R CNN
-F 2 "" H 7350 4250 50  0001 C CNN
-F 3 "" H 7350 4250 50  0001 C CNN
-	1    7350 4250
+L spelkonsoll-rescue:+5V-power #PWR019
+U 1 1 61F52AEC
+P 7400 5800
+F 0 "#PWR019" H 7400 5650 50  0001 C CNN
+F 1 "+5V" V 7415 5928 50  0000 L CNN
+F 2 "" H 7400 5800 50  0001 C CNN
+F 3 "" H 7400 5800 50  0001 C CNN
+	1    7400 5800
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7500 5800 7400 5800
+$Comp
+L spelkonsoll-rescue:GND-power #PWR018
+U 1 1 61F5AB18
+P 7400 5700
+F 0 "#PWR018" H 7400 5450 50  0001 C CNN
+F 1 "GND" V 7405 5572 50  0000 R CNN
+F 2 "" H 7400 5700 50  0001 C CNN
+F 3 "" H 7400 5700 50  0001 C CNN
+	1    7400 5700
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	7750 4100 7750 4250
-Connection ~ 7750 4100
-Wire Wire Line
-	7450 4250 7350 4250
-Wire Wire Line
-	8950 3650 8950 3500
-Connection ~ 8950 3500
-$Comp
-L spelkonsoll-rescue:GND-power #PWR019
-U 1 1 623F3731
-P 8550 3650
-F 0 "#PWR019" H 8550 3400 50  0001 C CNN
-F 1 "GND" V 8555 3522 50  0000 R CNN
-F 2 "" H 8550 3650 50  0001 C CNN
-F 3 "" H 8550 3650 50  0001 C CNN
-	1    8550 3650
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8550 3650 8650 3650
-Wire Wire Line
-	7750 3650 7750 3500
-Connection ~ 7750 3500
-$Comp
-L spelkonsoll-rescue:GND-power #PWR011
-U 1 1 623FAAD8
-P 7350 3650
-F 0 "#PWR011" H 7350 3400 50  0001 C CNN
-F 1 "GND" V 7355 3522 50  0000 R CNN
-F 2 "" H 7350 3650 50  0001 C CNN
-F 3 "" H 7350 3650 50  0001 C CNN
-	1    7350 3650
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	7350 3650 7450 3650
-$Comp
-L spelkonsoll-rescue:R-Device R4
-U 1 1 623FF6EB
-P 7600 4250
-F 0 "R4" V 7500 4250 50  0000 C CNN
-F 1 "10K" V 7600 4250 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 7530 4250 50  0001 C CNN
-F 3 "~" H 7600 4250 50  0001 C CNN
-	1    7600 4250
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:R-Device R3
-U 1 1 6240010B
-P 7600 3650
-F 0 "R3" V 7500 3650 50  0000 C CNN
-F 1 "10K" V 7600 3650 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 7530 3650 50  0001 C CNN
-F 3 "~" H 7600 3650 50  0001 C CNN
-	1    7600 3650
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:R-Device R7
-U 1 1 62400357
-P 8800 3650
-F 0 "R7" V 8700 3650 50  0000 C CNN
-F 1 "10K" V 8800 3650 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 8730 3650 50  0001 C CNN
-F 3 "~" H 8800 3650 50  0001 C CNN
-	1    8800 3650
-	0    1    1    0   
-$EndComp
-$Comp
-L spelkonsoll-rescue:R-Device R8
-U 1 1 624006AD
-P 8800 4250
-F 0 "R8" V 8700 4250 50  0000 C CNN
-F 1 "10K" V 8800 4250 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 8730 4250 50  0001 C CNN
-F 3 "~" H 8800 4250 50  0001 C CNN
-	1    8800 4250
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8950 4250 8950 4100
-Connection ~ 8950 4100
+	7400 5700 7500 5700
 $Comp
 L spelkonsoll-rescue:GND-power #PWR020
-U 1 1 62401C76
-P 8550 4250
-F 0 "#PWR020" H 8550 4000 50  0001 C CNN
-F 1 "GND" V 8555 4122 50  0000 R CNN
-F 2 "" H 8550 4250 50  0001 C CNN
-F 3 "" H 8550 4250 50  0001 C CNN
-	1    8550 4250
+U 1 1 61F59FD0
+P 8400 2550
+F 0 "#PWR020" H 8400 2300 50  0001 C CNN
+F 1 "GND" V 8405 2422 50  0000 R CNN
+F 2 "" H 8400 2550 50  0001 C CNN
+F 3 "" H 8400 2550 50  0001 C CNN
+	1    8400 2550
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	8550 4250 8650 4250
+	8400 2550 8500 2550
+Wire Wire Line
+	7400 5100 7500 5100
+NoConn ~ 8500 1650
+NoConn ~ 8500 1750
+NoConn ~ 8500 2450
+NoConn ~ 10100 2650
+NoConn ~ 10100 2750
 $Comp
-L spelkonsoll-rescue:R-Device R2
-U 1 1 6247A9BD
-P 7600 3050
-F 0 "R2" V 7500 3050 50  0000 C CNN
-F 1 "10K" V 7600 3050 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 7530 3050 50  0001 C CNN
-F 3 "~" H 7600 3050 50  0001 C CNN
-	1    7600 3050
+L Button:B3F-1052 SW1
+U 1 1 6365325D
+P 2650 1350
+F 0 "SW1" H 3450 1737 60  0000 C CNN
+F 1 "B3F-1052" H 3450 1631 60  0000 C CNN
+F 2 "footprints:Button" H 3450 1590 60  0001 C CNN
+F 3 "" H 2650 1350 60  0000 C CNN
+	1    2650 1350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Button:B3F-1052 SW2
+U 1 1 63672A1A
+P 2650 2150
+F 0 "SW2" H 3450 2537 60  0000 C CNN
+F 1 "B3F-1052" H 3450 2431 60  0000 C CNN
+F 2 "footprints:Button" H 3450 2390 60  0001 C CNN
+F 3 "" H 2650 2150 60  0000 C CNN
+	1    2650 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Button:B3F-1052 SW3
+U 1 1 63674E4F
+P 2650 2950
+F 0 "SW3" H 3450 3337 60  0000 C CNN
+F 1 "B3F-1052" H 3450 3231 60  0000 C CNN
+F 2 "footprints:Button" H 3450 3190 60  0001 C CNN
+F 3 "" H 2650 2950 60  0000 C CNN
+	1    2650 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Button:B3F-1052 SW4
+U 1 1 63698C00
+P 2650 3750
+F 0 "SW4" H 3450 4137 60  0000 C CNN
+F 1 "B3F-1052" H 3450 4031 60  0000 C CNN
+F 2 "footprints:Button" H 3450 3990 60  0001 C CNN
+F 3 "" H 2650 3750 60  0000 C CNN
+	1    2650 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Button:B3F-1052 SW5
+U 1 1 63699BCA
+P 2650 4550
+F 0 "SW5" H 3450 4937 60  0000 C CNN
+F 1 "B3F-1052" H 3450 4831 60  0000 C CNN
+F 2 "footprints:Button" H 3450 4790 60  0001 C CNN
+F 3 "" H 2650 4550 60  0000 C CNN
+	1    2650 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Button:B3F-1052 SW6
+U 1 1 6369AF97
+P 2650 5350
+F 0 "SW6" H 3450 5737 60  0000 C CNN
+F 1 "B3F-1052" H 3450 5631 60  0000 C CNN
+F 2 "footprints:Button" H 3450 5590 60  0001 C CNN
+F 3 "" H 2650 5350 60  0000 C CNN
+	1    2650 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Button:B3F-1052 SW7
+U 1 1 6369C6EE
+P 2650 6150
+F 0 "SW7" H 3450 6537 60  0000 C CNN
+F 1 "B3F-1052" H 3450 6431 60  0000 C CNN
+F 2 "footprints:Button" H 3450 6390 60  0001 C CNN
+F 3 "" H 2650 6150 60  0000 C CNN
+	1    2650 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Button:B3F-1052 SW8
+U 1 1 6369E93C
+P 2650 6950
+F 0 "SW8" H 3450 7337 60  0000 C CNN
+F 1 "B3F-1052" H 3450 7231 60  0000 C CNN
+F 2 "footprints:Button" H 3450 7190 60  0001 C CNN
+F 3 "" H 2650 6950 60  0000 C CNN
+	1    2650 6950
+	1    0    0    -1  
+$EndComp
+NoConn ~ 4250 1350
+NoConn ~ 4250 1450
+NoConn ~ 4250 2150
+NoConn ~ 4250 2250
+NoConn ~ 4250 2950
+NoConn ~ 4250 3050
+NoConn ~ 4250 3750
+NoConn ~ 4250 3850
+NoConn ~ 4250 4550
+NoConn ~ 4250 4650
+Wire Wire Line
+	2250 1550 2200 1550
+Wire Wire Line
+	2550 1450 2650 1450
+Connection ~ 2550 1450
+Wire Wire Line
+	2550 1550 2550 1450
+Wire Wire Line
+	2200 1450 2550 1450
+$Comp
+L spelkonsoll-rescue:GND-power #PWR02
+U 1 1 624803D7
+P 2200 1550
+F 0 "#PWR02" H 2200 1300 50  0001 C CNN
+F 1 "GND" V 2205 1422 50  0000 R CNN
+F 2 "" H 2200 1550 50  0001 C CNN
+F 3 "" H 2200 1550 50  0001 C CNN
+	1    2200 1550
 	0    1    1    0   
 $EndComp
 $Comp
 L spelkonsoll-rescue:R-Device R1
 U 1 1 6247AD48
-P 7600 2450
-F 0 "R1" V 7500 2450 50  0000 C CNN
-F 1 "10K" V 7600 2450 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 7530 2450 50  0001 C CNN
-F 3 "~" H 7600 2450 50  0001 C CNN
-	1    7600 2450
+P 2400 1550
+F 0 "R1" V 2500 1550 50  0000 C CNN
+F 1 "10K" V 2400 1550 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2330 1550 50  0001 C CNN
+F 3 "~" H 2400 1550 50  0001 C CNN
+	1    2400 1550
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR01
+U 1 1 6233968B
+P 2200 1450
+F 0 "#PWR01" H 2200 1300 50  0001 C CNN
+F 1 "+5V" V 2215 1578 50  0000 L CNN
+F 2 "" H 2200 1450 50  0001 C CNN
+F 3 "" H 2200 1450 50  0001 C CNN
+	1    2200 1450
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2250 2350 2200 2350
+Wire Wire Line
+	2550 2250 2650 2250
+Connection ~ 2550 2250
+Wire Wire Line
+	2550 2350 2550 2250
+Wire Wire Line
+	2200 2250 2550 2250
+$Comp
+L spelkonsoll-rescue:GND-power #PWR04
+U 1 1 636DF599
+P 2200 2350
+F 0 "#PWR04" H 2200 2100 50  0001 C CNN
+F 1 "GND" V 2205 2222 50  0000 R CNN
+F 2 "" H 2200 2350 50  0001 C CNN
+F 3 "" H 2200 2350 50  0001 C CNN
+	1    2200 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:R-Device R2
+U 1 1 636DF59F
+P 2400 2350
+F 0 "R2" V 2500 2350 50  0000 C CNN
+F 1 "10K" V 2400 2350 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2330 2350 50  0001 C CNN
+F 3 "~" H 2400 2350 50  0001 C CNN
+	1    2400 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR03
+U 1 1 636DF5A5
+P 2200 2250
+F 0 "#PWR03" H 2200 2100 50  0001 C CNN
+F 1 "+5V" V 2215 2378 50  0000 L CNN
+F 2 "" H 2200 2250 50  0001 C CNN
+F 3 "" H 2200 2250 50  0001 C CNN
+	1    2200 2250
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2250 3150 2200 3150
+Wire Wire Line
+	2550 3050 2650 3050
+Connection ~ 2550 3050
+Wire Wire Line
+	2550 3150 2550 3050
+Wire Wire Line
+	2200 3050 2550 3050
+$Comp
+L spelkonsoll-rescue:GND-power #PWR06
+U 1 1 636DFF05
+P 2200 3150
+F 0 "#PWR06" H 2200 2900 50  0001 C CNN
+F 1 "GND" V 2205 3022 50  0000 R CNN
+F 2 "" H 2200 3150 50  0001 C CNN
+F 3 "" H 2200 3150 50  0001 C CNN
+	1    2200 3150
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:R-Device R3
+U 1 1 636DFF0B
+P 2400 3150
+F 0 "R3" V 2500 3150 50  0000 C CNN
+F 1 "10K" V 2400 3150 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2330 3150 50  0001 C CNN
+F 3 "~" H 2400 3150 50  0001 C CNN
+	1    2400 3150
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR05
+U 1 1 636DFF11
+P 2200 3050
+F 0 "#PWR05" H 2200 2900 50  0001 C CNN
+F 1 "+5V" V 2215 3178 50  0000 L CNN
+F 2 "" H 2200 3050 50  0001 C CNN
+F 3 "" H 2200 3050 50  0001 C CNN
+	1    2200 3050
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2250 3950 2200 3950
+Wire Wire Line
+	2550 3850 2650 3850
+Connection ~ 2550 3850
+Wire Wire Line
+	2550 3950 2550 3850
+Wire Wire Line
+	2200 3850 2550 3850
+$Comp
+L spelkonsoll-rescue:GND-power #PWR08
+U 1 1 636E0A69
+P 2200 3950
+F 0 "#PWR08" H 2200 3700 50  0001 C CNN
+F 1 "GND" V 2205 3822 50  0000 R CNN
+F 2 "" H 2200 3950 50  0001 C CNN
+F 3 "" H 2200 3950 50  0001 C CNN
+	1    2200 3950
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:R-Device R4
+U 1 1 636E0A6F
+P 2400 3950
+F 0 "R4" V 2500 3950 50  0000 C CNN
+F 1 "10K" V 2400 3950 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2330 3950 50  0001 C CNN
+F 3 "~" H 2400 3950 50  0001 C CNN
+	1    2400 3950
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR07
+U 1 1 636E0A75
+P 2200 3850
+F 0 "#PWR07" H 2200 3700 50  0001 C CNN
+F 1 "+5V" V 2215 3978 50  0000 L CNN
+F 2 "" H 2200 3850 50  0001 C CNN
+F 3 "" H 2200 3850 50  0001 C CNN
+	1    2200 3850
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2250 4750 2200 4750
+Wire Wire Line
+	2550 4650 2650 4650
+Connection ~ 2550 4650
+Wire Wire Line
+	2550 4750 2550 4650
+Wire Wire Line
+	2200 4650 2550 4650
+$Comp
+L spelkonsoll-rescue:GND-power #PWR010
+U 1 1 636E17EA
+P 2200 4750
+F 0 "#PWR010" H 2200 4500 50  0001 C CNN
+F 1 "GND" V 2205 4622 50  0000 R CNN
+F 2 "" H 2200 4750 50  0001 C CNN
+F 3 "" H 2200 4750 50  0001 C CNN
+	1    2200 4750
 	0    1    1    0   
 $EndComp
 $Comp
 L spelkonsoll-rescue:R-Device R5
-U 1 1 6247B07B
-P 8800 2450
-F 0 "R5" V 8700 2450 50  0000 C CNN
-F 1 "10K" V 8800 2450 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 8730 2450 50  0001 C CNN
-F 3 "~" H 8800 2450 50  0001 C CNN
-	1    8800 2450
+U 1 1 636E17F0
+P 2400 4750
+F 0 "R5" V 2500 4750 50  0000 C CNN
+F 1 "10K" V 2400 4750 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2330 4750 50  0001 C CNN
+F 3 "~" H 2400 4750 50  0001 C CNN
+	1    2400 4750
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR09
+U 1 1 636E17F6
+P 2200 4650
+F 0 "#PWR09" H 2200 4500 50  0001 C CNN
+F 1 "+5V" V 2215 4778 50  0000 L CNN
+F 2 "" H 2200 4650 50  0001 C CNN
+F 3 "" H 2200 4650 50  0001 C CNN
+	1    2200 4650
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2250 5550 2200 5550
+Wire Wire Line
+	2550 5450 2650 5450
+Connection ~ 2550 5450
+Wire Wire Line
+	2550 5550 2550 5450
+Wire Wire Line
+	2200 5450 2550 5450
+$Comp
+L spelkonsoll-rescue:GND-power #PWR012
+U 1 1 636E27FB
+P 2200 5550
+F 0 "#PWR012" H 2200 5300 50  0001 C CNN
+F 1 "GND" V 2205 5422 50  0000 R CNN
+F 2 "" H 2200 5550 50  0001 C CNN
+F 3 "" H 2200 5550 50  0001 C CNN
+	1    2200 5550
 	0    1    1    0   
 $EndComp
 $Comp
 L spelkonsoll-rescue:R-Device R6
-U 1 1 6247B486
-P 8800 3050
-F 0 "R6" V 8700 3050 50  0000 C CNN
-F 1 "10K" V 8800 3050 50  0000 C CNN
-F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 8730 3050 50  0001 C CNN
-F 3 "~" H 8800 3050 50  0001 C CNN
-	1    8800 3050
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	8950 3050 8950 2900
-Connection ~ 8950 2900
-Wire Wire Line
-	8950 2450 8950 2300
-Connection ~ 8950 2300
-Wire Wire Line
-	7750 2300 7750 2450
-Connection ~ 7750 2300
-Wire Wire Line
-	7750 2900 7750 3050
-Connection ~ 7750 2900
-$Comp
-L spelkonsoll-rescue:GND-power #PWR010
-U 1 1 624800B4
-P 7350 3050
-F 0 "#PWR010" H 7350 2800 50  0001 C CNN
-F 1 "GND" V 7355 2922 50  0000 R CNN
-F 2 "" H 7350 3050 50  0001 C CNN
-F 3 "" H 7350 3050 50  0001 C CNN
-	1    7350 3050
+U 1 1 636E2801
+P 2400 5550
+F 0 "R6" V 2500 5550 50  0000 C CNN
+F 1 "10K" V 2400 5550 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2330 5550 50  0001 C CNN
+F 3 "~" H 2400 5550 50  0001 C CNN
+	1    2400 5550
 	0    1    1    0   
 $EndComp
 $Comp
-L spelkonsoll-rescue:GND-power #PWR09
-U 1 1 624803D7
-P 7350 2450
-F 0 "#PWR09" H 7350 2200 50  0001 C CNN
-F 1 "GND" V 7355 2322 50  0000 R CNN
-F 2 "" H 7350 2450 50  0001 C CNN
-F 3 "" H 7350 2450 50  0001 C CNN
-	1    7350 2450
+L spelkonsoll-rescue:+5V-power #PWR011
+U 1 1 636E2807
+P 2200 5450
+F 0 "#PWR011" H 2200 5300 50  0001 C CNN
+F 1 "+5V" V 2215 5578 50  0000 L CNN
+F 2 "" H 2200 5450 50  0001 C CNN
+F 3 "" H 2200 5450 50  0001 C CNN
+	1    2200 5450
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	2250 6350 2200 6350
+Wire Wire Line
+	2550 6250 2650 6250
+Connection ~ 2550 6250
+Wire Wire Line
+	2550 6350 2550 6250
+Wire Wire Line
+	2200 6250 2550 6250
+$Comp
+L spelkonsoll-rescue:GND-power #PWR014
+U 1 1 636E3A25
+P 2200 6350
+F 0 "#PWR014" H 2200 6100 50  0001 C CNN
+F 1 "GND" V 2205 6222 50  0000 R CNN
+F 2 "" H 2200 6350 50  0001 C CNN
+F 3 "" H 2200 6350 50  0001 C CNN
+	1    2200 6350
 	0    1    1    0   
 $EndComp
 $Comp
-L spelkonsoll-rescue:GND-power #PWR017
-U 1 1 624806FE
-P 8550 2450
-F 0 "#PWR017" H 8550 2200 50  0001 C CNN
-F 1 "GND" V 8555 2322 50  0000 R CNN
-F 2 "" H 8550 2450 50  0001 C CNN
-F 3 "" H 8550 2450 50  0001 C CNN
-	1    8550 2450
+L spelkonsoll-rescue:R-Device R7
+U 1 1 636E3A2B
+P 2400 6350
+F 0 "R7" V 2500 6350 50  0000 C CNN
+F 1 "10K" V 2400 6350 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2330 6350 50  0001 C CNN
+F 3 "~" H 2400 6350 50  0001 C CNN
+	1    2400 6350
 	0    1    1    0   
 $EndComp
 $Comp
-L spelkonsoll-rescue:GND-power #PWR018
-U 1 1 62480AF9
-P 8550 3050
-F 0 "#PWR018" H 8550 2800 50  0001 C CNN
-F 1 "GND" V 8555 2922 50  0000 R CNN
-F 2 "" H 8550 3050 50  0001 C CNN
-F 3 "" H 8550 3050 50  0001 C CNN
-	1    8550 3050
-	0    1    1    0   
+L spelkonsoll-rescue:+5V-power #PWR013
+U 1 1 636E3A31
+P 2200 6250
+F 0 "#PWR013" H 2200 6100 50  0001 C CNN
+F 1 "+5V" V 2215 6378 50  0000 L CNN
+F 2 "" H 2200 6250 50  0001 C CNN
+F 3 "" H 2200 6250 50  0001 C CNN
+	1    2200 6250
+	0    -1   -1   0   
 $EndComp
 Wire Wire Line
-	8550 3050 8650 3050
+	2250 7150 2200 7150
 Wire Wire Line
-	8650 2450 8550 2450
+	2550 7050 2650 7050
+Connection ~ 2550 7050
 Wire Wire Line
-	7450 2450 7350 2450
+	2550 7150 2550 7050
 Wire Wire Line
-	7350 3050 7450 3050
-NoConn ~ 2250 1700
-NoConn ~ 2250 1800
-NoConn ~ 2250 2500
-NoConn ~ 3850 2700
-NoConn ~ 3850 2800
+	2200 7050 2550 7050
+$Comp
+L spelkonsoll-rescue:GND-power #PWR016
+U 1 1 636E4EDB
+P 2200 7150
+F 0 "#PWR016" H 2200 6900 50  0001 C CNN
+F 1 "GND" V 2205 7022 50  0000 R CNN
+F 2 "" H 2200 7150 50  0001 C CNN
+F 3 "" H 2200 7150 50  0001 C CNN
+	1    2200 7150
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:R-Device R8
+U 1 1 636E4EE1
+P 2400 7150
+F 0 "R8" V 2500 7150 50  0000 C CNN
+F 1 "10K" V 2400 7150 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" V 2330 7150 50  0001 C CNN
+F 3 "~" H 2400 7150 50  0001 C CNN
+	1    2400 7150
+	0    1    1    0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR015
+U 1 1 636E4EE7
+P 2200 7050
+F 0 "#PWR015" H 2200 6900 50  0001 C CNN
+F 1 "+5V" V 2215 7178 50  0000 L CNN
+F 2 "" H 2200 7050 50  0001 C CNN
+F 3 "" H 2200 7050 50  0001 C CNN
+	1    2200 7050
+	0    -1   -1   0   
+$EndComp
+Text Notes 2900 800  0    50   ~ 0
+BUTTONS
+Wire Notes Line
+	1800 7400 1800 850 
+Wire Notes Line
+	1800 850  4400 850 
+Wire Notes Line
+	4400 850  4400 7400
+Wire Notes Line
+	4400 7400 1800 7400
+NoConn ~ 4250 5350
+NoConn ~ 4250 5450
+NoConn ~ 4250 6150
+NoConn ~ 4250 6250
+NoConn ~ 4250 6950
+NoConn ~ 4250 7050
+Text Notes 5900 3400 0    50   ~ 0
+18650 BATTERY
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR0101
+U 1 1 63725E0B
+P 5300 3850
+F 0 "#PWR0101" H 5300 3700 50  0001 C CNN
+F 1 "+5V" V 5315 3978 50  0000 L CNN
+F 2 "" H 5300 3850 50  0001 C CNN
+F 3 "" H 5300 3850 50  0001 C CNN
+	1    5300 3850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L spelkonsoll-rescue:GND-power #PWR0102
+U 1 1 63726722
+P 7100 3850
+F 0 "#PWR0102" H 7100 3600 50  0001 C CNN
+F 1 "GND" V 7105 3722 50  0000 R CNN
+F 2 "" H 7100 3850 50  0001 C CNN
+F 3 "" H 7100 3850 50  0001 C CNN
+	1    7100 3850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L 18650holder:1043 U3
+U 1 1 6372E8C0
+P 5400 3850
+F 0 "U3" H 6200 4237 60  0000 C CNN
+F 1 "1043" H 6200 4131 60  0000 C CNN
+F 2 "footprints:18650holder" H 6200 4090 60  0001 C CNN
+F 3 "" H 5400 3850 60  0000 C CNN
+	1    5400 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7100 3850 7000 3850
+Wire Wire Line
+	5300 3850 5400 3850
 $EndSCHEMATC
