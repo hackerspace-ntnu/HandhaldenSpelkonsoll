@@ -48,6 +48,9 @@ void handleError(esp_err_t error) {
         case ESP_ERR_ESPNOW_NOT_INIT:
             Serial.println("esp-now not initialized!");
             break;
+        case ESP_ERR_ESPNOW_FULL:
+            Serial.println("peer list is full!");
+            break;
         case ESP_ERR_ESPNOW_ARG:
             Serial.println("invalid argument!");
             break;
