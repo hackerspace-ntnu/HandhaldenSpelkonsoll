@@ -1,12 +1,12 @@
-# Hardware (endringer kan forekomme)
-MCU: ESP32 
-Skjerm: ILI9488 controller 480*320 4.5"
-Knapper: buttons 
-Batteri: 18650 Li-ion (3.6 V, 2600 mAh)
+## Hardware (endringer kan forekomme)
+* MCU: ESP32 
+* Skjerm: ILI9488 controller 480*320 4.5"
+* Knapper: buttons 
+* Batteri: 18650 Li-ion (3.6 V, 2600 mAh)
 
 
 
-# Koblinger mellom ILI9488 og ESP32
+## Koblinger mellom ILI9488 og ESP32
 |ILI9488    | ESP32 | Notes:             |
 |-----------|-------|--------------------|
 | SDO(MISO) |  19   | Master In Slave Out|
