@@ -18,3 +18,15 @@
 | VCC       |  5V   | Or 3.3V            |
 | LED       |  5V   | Or 3.3V            |
 | GND       |  GND  | Ground             |
+
+## Koblinger mellom knapper og ESP32
+| Knapp        | ESP32 |
+|--------------|-------|
+| BTN_A        |  21   | 
+| BTN_B        |  32   |
+| BTN_X        |  33   |
+| BTN_Y        |  25   |
+| BTN_DP_LEFT  |  14   | 
+| BTN_DP_RIGHT |  13   | 
+| BTN_DP_UP    |  26   | 
+| BTN_DP_DOWN  |  27   |
