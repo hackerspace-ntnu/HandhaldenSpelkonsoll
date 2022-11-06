@@ -1,4 +1,4 @@
-# HandheldtSpelkonsoll
+# HandhaldenSpelkonsoll
   
 Dette er ett prosjekt i startfasen under utvikling med mål om å utvikle en håndholdt spillkonsoll basert på ESP32 og skjermkontrolleren ILI9488.  
 Målet er å lage et multiplayer snake spill til den håndholdte spillkonsollen så alle som har en konsoll kan spille mot hverandre.  
@@ -15,7 +15,7 @@ Målet er å lage et multiplayer snake spill til den håndholdte spillkonsollen 
 #### Software:  
 * Spill: snake  
 * Foreløpig brukes biblioteket [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) for å skrive til skjermene. 
-* Kommunikasjons protokoll: [ESP-NOW](https://github.com/espressif/esp-now) 
+* Kommunikasjonsprotokoll: [ESP-NOW](https://github.com/espressif/esp-now) 
 
 
 ### TODO:
