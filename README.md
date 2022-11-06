@@ -20,9 +20,9 @@ Målet er å lage et multiplayer snake spill til den håndholdte spillkonsollen 
 
 ### TODO:
 * ~~Lage logikk for å kjøre et faktisk snake spill i c~~, deretter implementer multiplayer.
-* Få spillet til å kjøres på skjermen (Vise grafikk) "det er trivielt" -Joakim ([påbegynt](https://github.com/hackerspace-ntnu/HandhaldenSpelkonsoll/tree/game-graphics))
+* Få spillet til å kjøres på skjermen (Vise grafikk) "det er trivielt" -Joakim ([påbegynt](https://github.com/hackerspace-ntnu/HandhaldenSpelkonsoll/pull/12))
 * Lag system for å ta inn input (Knappetrykk påvirker spillet) "det er trivielt" -Joakim
-* Sette opp trådløs kommunikasjon mellom kontroller (Nødvendig for multiplayer WIFI/BLE) ([påbegynt](https://github.com/hackerspace-ntnu/HandhaldenSpelkonsoll/tree/esp-now))
+* Sette opp trådløs kommunikasjon mellom kontroller (Nødvendig for multiplayer WIFI/BLE) ([påbegynt](https://github.com/hackerspace-ntnu/HandhaldenSpelkonsoll/pull/14))
 * Implementere meny-system (instillinger start pause eventuelt mulig for flere minigames)
 * Rense opp i minnebruk, har bare 384 kiB (bare gå gjennom koden og free mallocer som det har blitt glemt å frigjøres)
 * Lag revidert utgave av kretskort, aka fiks det som må fikses ([påbegynt](https://github.com/hackerspace-ntnu/HandhaldenSpelkonsoll/tree/circuit-board-design))
