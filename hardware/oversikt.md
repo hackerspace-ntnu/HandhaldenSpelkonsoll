@@ -1,6 +1,6 @@
 ## Hardware (endringer kan forekomme)
 * MCU: ESP32 
-* Skjerm: ILI9488 controller 480*320,  3.5"
+* Skjerm: ILI9488 480*320, 3.5"
 * Knapper: Dpad + 4  
 * Batteri: 18650 Li-ion (3.6 V, 2600 mAh)
 
