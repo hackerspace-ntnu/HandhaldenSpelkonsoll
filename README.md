@@ -1,8 +1,7 @@
 # HandhaldenSpelkonsoll
   
-Dette er et prosjekt under utvikling med mål om å utvikle en håndholdt spillkonsoll basert på ESP32 og skjermkontrolleren ILI9488.  
-Målet er å lage et multiplayer snake spill til den håndholdte spillkonsollen så alle som har en konsoll kan spille mot hverandre.  
-  
+Dette er et prosjekt med mål om å utvikle en håndholdt spillkonsoll basert på ESP32 og skjermkontrolleren ILI9488.  
+Spillkonsollen kommer med et egetutviklet multiplayer snake-spill slik at opptil 4 stykker kan spille med hverandre. 
   
 # Features som er planlagt og i utvikling:  
 #### Hardware:  
