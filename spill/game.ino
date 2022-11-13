@@ -2,37 +2,32 @@
 #include "snake.h"
 #include <TFT_eSPI.h>
 
-
 TFT_eSPI tft;
-
 
 int tick = 0;
 int count_food = 0;
 int do_movement = 1;
 
-struct multiplayer_info **multi_info_buffer = NULL;
+// struct multiplayer_info **multi_info_buffer = NULL;
 
-int *multi_info_buffer_stack_pointer = (int*)malloc(sizeof(int));
+// int *multi_info_buffer_stack_pointer = (int*)malloc(sizeof(int));
 int snake_id_counter = 0;
-
 
 struct Snake snake1;
 struct Snake snake2;
-
 
 int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
 int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
 
 void serial_print_board();
 void draw_board();
-void draw_grid();
 void gfx_init();
 
 void setup() {
   Serial.begin(115200);
   gfx_init();
-  multi_info_buffer = (struct multiplayer_info**)malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
-  *multi_info_buffer_stack_pointer = 0;
+  // multi_info_buffer = (struct multiplayer_info**)malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
+  // *multi_info_buffer_stack_pointer = 0;
   init_board();
 
   switch (PLAYER_NUMBER){
@@ -81,9 +76,8 @@ void loop() {
         }
         draw_board();  
         tick++;          
-        
     }
-    if (tick > 10){
+    if (tick > 20){
       snake1.isAlive = false;
       snake2.isAlive = false;
     }
@@ -126,13 +120,4 @@ void gfx_init() {
   tft.init();
   tft.setRotation(3); // when the pins are on the left side, the top left corner is now (0,0)
   tft.fillScreen(TFT_BLACK); // black background
-}
-
-void draw_grid() {
-  for (int i=0; i<SCREEN_WIDTH; i+=BLOCK_SIZE) {
-    tft.drawFastVLine(i, 0, SCREEN_WIDTH, TFT_GREEN);
-  }
-  for (int j=0; j<SCREEN_HEIGHT; j+=BLOCK_SIZE) {
-    tft.drawFastHLine(0, j, SCREEN_HEIGHT, TFT_GREEN);
-  }
 }
