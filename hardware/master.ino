@@ -2,10 +2,10 @@
 #include <WiFi.h>
 
 
-uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+uint8_t broadcastAddress[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
-String masterMACAddress = "";
-String slaveMACAddress = "";
+uint8_t* masterMACAddress;
+uint8_t* slaveMACAddress;
 
 void serialPrintMAC(const uint8_t *mac) {
   Serial.println("MAC");
@@ -15,24 +15,34 @@ void serialPrintMAC(const uint8_t *mac) {
   }
 }
 
-
+/**
+  * @brief Callback when data is sent 
+  * @param     mac  peer MAC address (who sent the data)
+  * @param     status Status of sending ESPNOW data
+*/
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+  Serial.println("OnDataSent");
   serialPrintMAC(mac_addr);
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success 1" : "Delivery Fail 1");
-  if (status ==0){
+  if (status ==0) {
     Serial.println("Delivery Success 2");
   }
-  else{
+  else {
     Serial.println("Delivery fail 2");
   }
-
   Serial.println();
 }  
-
+/**
+  * @brief Callback when data is received 
+  * @param     mac  peer MAC address (who sent the data)
+  * @param     incomingData  data received
+  * @param     len  length of data
+*/
 void OnDataRecv(const uint8_t *mac, const uint8_t *incomingData, int len) {
+  Serial.println("OnDataRecv");
   serialPrintMAC(mac);
-  String dataReceived;
-  memcpy(&dataReceived, incomingData, sizeof(dataReceived));
+  uint8_t dataReceived;
+  memcpy(&dataReceived, incomingData, len);
 
   Serial.print("Data Received: ");
   Serial.println(dataReceived);
@@ -73,9 +83,7 @@ void setup() {
 
   // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
-  masterMACAddress = WiFi.macAddress();
-  Serial.print("Master MAC Address: ");
-  Serial.println(masterMACAddress);
+  WiFi.macAddress(masterMACAddress);
 
   // Init ESP-NOW
   if (esp_now_init() != ESP_OK) {
@@ -105,11 +113,10 @@ void setup() {
   esp_now_register_recv_cb(OnDataRecv);       
 }
 
-String dataToSend = WiFi.macAddress();
 void loop() {
 
-    // Send message via ESP-NOW (size of an int is 4 bytes on ESP32)
-    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *) &dataToSend, sizeof(dataToSend));
+    // Send message via ESP-NOW 
+    esp_err_t result = esp_now_send(broadcastAddress, masterMACAddress, sizeof(masterMACAddress)*6);
    
     handleError(result);
     delay(3000);
