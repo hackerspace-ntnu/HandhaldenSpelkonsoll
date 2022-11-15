@@ -9,14 +9,14 @@ uint8_t* other_mac_address;
 
 bool CONNECTION_MADE = false;
 
-void serialPrintMAC(const uint8_t *mac) {
+void serial_print_mac(const uint8_t* mac) {
   for (int i=0; i<6; i++) {
     Serial.print(mac[i], HEX);
     if (i<5) Serial.print(":");
   }
 }
 
-bool check_mac(const uint8_t* mac, int len) {
+bool not_my_own_mac(const uint8_t* mac, int len) {
     // check if the received mac is not my own mac
     for (int i=0; i<len; i++) {
         if (my_mac_address[i] != mac[i]) {
@@ -31,9 +31,9 @@ bool check_mac(const uint8_t* mac, int len) {
   * @param     mac  peer MAC address (who sent the data)
   * @param     status Status of sending ESPNOW data
 */
-void on_data_sent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+void on_data_sent(const uint8_t* mac_addr, esp_now_send_status_t status) {
   Serial.println("on_data_sent");
-  serialPrintMAC(mac_addr);
+  serial_print_mac(mac_addr);
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success 1" : "Delivery Fail 1");
   if (status ==0) {
     Serial.println("Delivery Success 2");
@@ -49,11 +49,12 @@ void on_data_sent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   * @param     incomingData  data received
   * @param     len  length of data
 */
-void on_data_recv(const uint8_t *mac, const uint8_t *incomingData, int len) {
+void on_data_recv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   Serial.println("on_data_recv");
-  serialPrintMAC(mac);
+  serial_print_mac(mac);
  
-  if (check_mac(incomingData, len)) { // the received mac is not mine
+  if (not_my_own_mac(incomingData, len)) { // the received mac is not mine
+    Serial.print("Received a new mac address");
     memcpy(other_mac_address, incomingData, len);
 
     // add peer
@@ -66,6 +67,11 @@ void on_data_recv(const uint8_t *mac, const uint8_t *incomingData, int len) {
         Serial.println("Failed to add peer");
         for(;;) {      delay(1);  } // do not initialize wait forever
     }
+
+    CONNECTION_MADE = true;
+
+    //delete the dummy peer
+    esp_now_del_peer(broadcast_address);
 
   }
 
@@ -125,7 +131,7 @@ void setup() {
   // get the status of Trasnmitted packet
   esp_now_register_send_cb(on_data_sent);
 
-   // Register peer
+   // Register dummy peer
   esp_now_peer_info_t peerInfo;
   memcpy(peerInfo.peer_addr, broadcast_address, 6);
   peerInfo.channel = 0;  
