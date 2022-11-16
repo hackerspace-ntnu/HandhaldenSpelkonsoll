@@ -16,11 +16,10 @@ void serial_print_mac(const uint8_t* mac) {
   }
 }
 
-bool not_my_own_mac(const uint8_t* mac, int len) {
-    // check if the received mac is not my own mac
-    for (int i=0; i<len; i++) {
+bool not_my_own_mac(const uint8_t* mac) {
+    for (int i=0; i<6; i++) {
         if (my_mac_address[i] != mac[i]) {
-            return true;
+          return true;
         }
     }
     return false;
@@ -31,9 +30,9 @@ bool not_my_own_mac(const uint8_t* mac, int len) {
   * @param     mac  peer MAC address (who sent the data)
   * @param     status Status of sending ESPNOW data
 */
-void on_data_sent(const uint8_t* mac_addr, esp_now_send_status_t status) {
+void on_data_sent(const uint8_t* mac, esp_now_send_status_t status) {
   Serial.println("on_data_sent");
-  serial_print_mac(mac_addr);
+  serial_print_mac(mac);
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success 1" : "Delivery Fail 1");
   if (status ==0) {
     Serial.println("Delivery Success 2");
@@ -53,11 +52,11 @@ void on_data_recv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   Serial.println("on_data_recv");
   serial_print_mac(mac);
  
-  if (not_my_own_mac(incomingData, len)) { // the received mac is not mine
-    Serial.print("Received a new mac address");
+  if (not_my_own_mac(incomingData)) { // the received mac is not mine
+    Serial.println("Received a new mac address");
     memcpy(other_mac_address, incomingData, len);
 
-    // add peer
+    // add new peer
     esp_now_peer_info_t peerInfo;
     memcpy(peerInfo.peer_addr, other_mac_address, 6);
     peerInfo.channel = 0;  
@@ -65,7 +64,7 @@ void on_data_recv(const uint8_t* mac, const uint8_t* incomingData, int len) {
        
     if (esp_now_add_peer(&peerInfo) != ESP_OK){
         Serial.println("Failed to add peer");
-        for(;;) {      delay(1);  } // do not initialize wait forever
+        for(;;) {      delay(1);  } 
     }
 
     CONNECTION_MADE = true;
@@ -140,7 +139,7 @@ void setup() {
    // Add peer        
   if (esp_now_add_peer(&peerInfo) != ESP_OK){
     Serial.println("Failed to add peer");
-    for(;;) {      delay(1);  } // do not initialize wait forever
+    for(;;) {      delay(1);  } 
   }     
 
   esp_now_register_recv_cb(on_data_recv);       
