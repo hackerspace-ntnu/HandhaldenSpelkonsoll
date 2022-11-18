@@ -2,13 +2,33 @@
 #include <WiFi.h>
 
 
-uint8_t broadcast_address[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+uint8_t dummy_address[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 
 uint8_t* my_mac_address;
 uint8_t* other_mac_address;
 
 bool CONNECTION_MADE = false;
 
+/**
+ * @brief Add new peer
+ * @param mac peer MAC address
+*/
+void add_new_peer(const uint8_t* mac) {
+    esp_now_peer_info_t peerInfo;
+    memcpy(peerInfo.peer_addr, mac, 6);
+    peerInfo.channel = 0;  
+    peerInfo.encrypt = false;
+       
+    if (esp_now_add_peer(&peerInfo) != ESP_OK){
+        Serial.println("Failed to add peer");
+        for(;;) delay(1); 
+    }
+}
+
+/**
+ * @brief Print to serial monitor (in HEX)
+ * @param mac MAC address
+*/
 void serial_print_mac(const uint8_t* mac) {
   for (int i=0; i<6; i++) {
     Serial.print(mac[i], HEX);
@@ -16,13 +36,19 @@ void serial_print_mac(const uint8_t* mac) {
   }
 }
 
-bool not_my_own_mac(const uint8_t* mac) {
-    for (int i=0; i<6; i++) {
-        if (my_mac_address[i] != mac[i]) {
-          return true;
+/** 
+ * @brief check whether the given data is equal
+ * @param a1 data to compare
+ * @param a2 data to compare with
+ * @return true if the given data is equal, false otherwise 
+*/
+bool compare_data(const uint8_t* a1, const uint8_t* a2,  int len) {
+    for (int i=0; i<len; i++) {
+        if (a1[i] != a2[i]) {
+          return false;
         }
     }
-    return false;
+    return true;
 }   
 
 /**
@@ -34,7 +60,7 @@ void on_data_sent(const uint8_t* mac, esp_now_send_status_t status) {
   Serial.println("on_data_sent");
   serial_print_mac(mac);
   Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success 1" : "Delivery Fail 1");
-  if (status ==0) {
+  if (status == 0) {
     Serial.println("Delivery Success 2");
   }
   else {
@@ -52,109 +78,55 @@ void on_data_recv(const uint8_t* mac, const uint8_t* incomingData, int len) {
   Serial.println("on_data_recv");
   serial_print_mac(mac);
  
-  if (not_my_own_mac(incomingData)) { // the received mac is not mine
+  if (!compare_data(my_mac_address, incomingData, len)) {
     Serial.println("Received a new mac address");
     memcpy(other_mac_address, incomingData, len);
-
-    // add new peer
-    esp_now_peer_info_t peerInfo;
-    memcpy(peerInfo.peer_addr, other_mac_address, 6);
-    peerInfo.channel = 0;  
-    peerInfo.encrypt = false;
-       
-    if (esp_now_add_peer(&peerInfo) != ESP_OK){
-        Serial.println("Failed to add peer");
-        for(;;) {      delay(1);  } 
-    }
+    
+    add_new_peer(other_mac_address);
 
     CONNECTION_MADE = true;
 
     //delete the dummy peer
-    esp_now_del_peer(broadcast_address);
-
+    esp_now_del_peer(dummy_address);
   }
 
   int data_recv;
   memcpy(&data_recv, incomingData, len);
   Serial.print("Received: ");
   Serial.println(data_recv);
-
-  Serial.println();    
-}
-
-void handle_error(esp_err_t error) {
-    switch(error) {
-        case ESP_OK:
-            Serial.println("All good");
-            break;
-        case ESP_ERR_ESPNOW_NOT_INIT:
-            Serial.println("esp-now not initialized!");
-            break;
-        case ESP_ERR_ESPNOW_FULL:
-            Serial.println("peer list is full!");
-            break;
-        case ESP_ERR_ESPNOW_ARG:
-            Serial.println("invalid argument!");
-            break;
-        case ESP_ERR_ESPNOW_NO_MEM:
-            Serial.println("out of memory!");
-            break;
-        case ESP_ERR_ESPNOW_EXIST:
-            Serial.println("peer has existed, whatever that means");
-            break;
-        default:
-            Serial.println("error not recognized!");
-    }
+  Serial.println("-------------------------------");    
 }
 
 void setup() {
 
   Serial.begin(115200);
 
-  Serial.println("Starting...\n");
-
-  // Set device as a Wi-Fi Station
   WiFi.mode(WIFI_STA);
   WiFi.macAddress(my_mac_address);
 
   // Init ESP-NOW
   if (esp_now_init() != ESP_OK) {
     Serial.println("Error initializing ESP-NOW");
-    for(;;) {      delay(1);  } // do not initialize wait forever
+    for(;;) delay(1);
   }
 
-  Serial.println("initialized ESP-NOW");
-
-
-  // Once ESPNow is successfully Init, we will register for Send CB to
-  // get the status of Trasnmitted packet
+  // Register callbacks for sending and receiveing data
   esp_now_register_send_cb(on_data_sent);
-
-   // Register dummy peer
-  esp_now_peer_info_t peerInfo;
-  memcpy(peerInfo.peer_addr, broadcast_address, 6);
-  peerInfo.channel = 0;  
-  peerInfo.encrypt = false;
-
-   // Add peer        
-  if (esp_now_add_peer(&peerInfo) != ESP_OK){
-    Serial.println("Failed to add peer");
-    for(;;) {      delay(1);  } 
-  }     
-
   esp_now_register_recv_cb(on_data_recv);       
+
+  add_new_peer(dummy_address);     
 }
 
 void loop() {
-
     // Send message via ESP-NOW 
     esp_err_t result;
     if (!CONNECTION_MADE) {
-        result = esp_now_send(broadcast_address, my_mac_address, sizeof(my_mac_address)*6);
+      // broadcast my mac address for others to receive
+        result = esp_now_send(dummy_address, my_mac_address, sizeof(my_mac_address)*6);
     } else {
         result = esp_now_send(other_mac_address, (uint8_t*)42, sizeof(int));
     }
    
-    handle_error(result);
+    Serial.println(esp_err_to_name(result));
     delay(3000);
 }
