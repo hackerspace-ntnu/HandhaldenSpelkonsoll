@@ -1,20 +1,6 @@
 #include "snake.h"
 #include "board.h"
 #include "constants.h"
-#include <stdio.h>
-#include <signal.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-#include <inttypes.h>
-#include <math.h>
-#include <stdbool.h>
-#include <stdint.h> 
-
-#include "snake.c"
-#include "board.c"
-#include "multiplayer_functions.c"
 
 int main() {
     int game_on = 1;
