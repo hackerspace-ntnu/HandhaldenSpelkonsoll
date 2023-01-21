@@ -1,8 +1,5 @@
 #include "board.h"
 #include "snake.h"
-#include <TFT_eSPI.h>
-
-TFT_eSPI tft;
 
 int tick = 0;
 int count_food = 0;
@@ -19,13 +16,11 @@ struct Snake snake2;
 int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
 int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
 
-void serial_print_board();
-void draw_board();
-void gfx_init();
+// void draw_board();
+// void gfx_init();
 
-void setup() {
-  Serial.begin(115200);
-  gfx_init();
+int main() {
+//   gfx_init();
   // multi_info_buffer = (struct multiplayer_info**)malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
   // *multi_info_buffer_stack_pointer = 0;
   init_board();
@@ -60,15 +55,12 @@ void setup() {
     default:
         break;
     }
-}
-
-void loop() {
-  if (snake1.isAlive) {
+    while (snake1.isAlive) {
 
         //Just to test multiple snake movement
         set_direction(&snake2, (rand() % 4));
-        Serial.printf("Snake1 x: %d, y: %d\n", snake1.direction_x, snake1.direction_y);
-        Serial.printf("Snake2 x: %d, y: %d\n", snake2.direction_x, snake2.direction_y);  
+        printf("Snake1 x: %d, y: %d\n", snake1.direction_x, snake1.direction_y);
+        printf("Snake2 x: %d, y: %d\n", snake2.direction_x, snake2.direction_y);  
 
         if(do_movement){ //Should be set to 1 every second
             move(&snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
@@ -83,41 +75,25 @@ void loop() {
     }
 }
 
-// for debugging purposes
-void serial_print_board(){
-    char string_board[BOARD_HEIGHT * BOARD_WIDTH + BOARD_HEIGHT];
-    char *current_char = &string_board[0];
-    char board_value;
-    for (int i = 0; i<BOARD_HEIGHT; i++){
-        for (int j= 0; j<BOARD_WIDTH; j++){
-            board_value = convert_board_int(board[i][j]); 
-            *current_char = board_value; 
-            current_char++;
-        }
-        *current_char = '\n';
-        current_char++;
-    }
-    Serial.printf("%s", string_board);
-}
 
 
-void draw_board() {
-     for (int i = 0; i<BOARD_HEIGHT; i++) {
-        for (int j = 0; j<BOARD_WIDTH; j++) {
-            struct BoardPiece temp = board[i][j];
-            if (temp.piece_type == BLOCK_SNAKE) {
-                tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_RED);
-            } else if (temp.piece_type == BLOCK_FOOD) {
-                tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_GREEN);
-            } else {
-              tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
-            }
-        }
-    }
-}
+// void draw_board() {
+//      for (int i = 0; i<BOARD_HEIGHT; i++) {
+//         for (int j = 0; j<BOARD_WIDTH; j++) {
+//             struct BoardPiece temp = board[i][j];
+//             if (temp.piece_type == BLOCK_SNAKE) {
+//                 tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_RED);
+//             } else if (temp.piece_type == BLOCK_FOOD) {
+//                 tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_GREEN);
+//             } else {
+//               tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
+//             }
+//         }
+//     }
+// }
 
-void gfx_init() {
-  tft.init();
-  tft.setRotation(3); // when the pins are on the left side, the top left corner is now (0,0)
-  tft.fillScreen(TFT_BLACK); // black background
-}
+// void gfx_init() {
+//   tft.init();
+//   tft.setRotation(3); // when the pins are on the left side, the top left corner is now (0,0)
+//   tft.fillScreen(TFT_BLACK); // black background
+// }
