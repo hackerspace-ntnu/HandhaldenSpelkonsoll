@@ -1,7 +1,7 @@
 # HandhaldenSpelkonsoll
   
 Dette er et prosjekt med mål om å utvikle en håndholdt spillkonsoll basert på ESP32 og skjermkontrolleren ILI9488.  
-Spillkonsollen kommer med et egetutviklet multiplayer snake-spill slik at opptil 4 stykker kan spille med hverandre. 
+Spillkonsollen kommer med et egetutviklet multiplayer snake-spill slik at opptil 2(!) stykker kan spille med hverandre. 
   
 # Features som er planlagt og i utvikling:  
 #### Hardware:  
@@ -13,17 +13,15 @@ Spillkonsollen kommer med et egetutviklet multiplayer snake-spill slik at opptil
 
 #### Software:  
 * Spill: snake  
-* Foreløpig brukes biblioteket [TFT_eSPI](https://github.com/Bodmer/TFT_eSPI) for å skrive til skjermene. 
+* Grafikk: Skal implementere [LovyanGFX](https://github.com/lovyan03/LovyanGFX) eller kanskje [LVGL](https://github.com/lvgl/lvgl)
 * Kommunikasjonsprotokoll: [ESP-NOW](https://github.com/espressif/esp-now) 
 
 
 ### TODO:
-* ~~Lage logikk for å kjøre et faktisk snake spill i c~~, deretter implementer multiplayer. (coming soon)
-* Få spillet til å kjøres på skjermen (Vise grafikk) "det er trivielt" -Joakim ([påbegynt](https://github.com/hackerspace-ntnu/HandhaldenSpelkonsoll/pull/12))
-* Lag system for å ta inn input (Knappetrykk påvirker spillet) "det er trivielt" -Joakim
-* Sette opp trådløs kommunikasjon mellom kontroller (Nødvendig for multiplayer) ([påbegynt](https://github.com/hackerspace-ntnu/HandhaldenSpelkonsoll/pull/14))
-* Implementere meny-system (instillinger start pause eventuelt mulig for flere minigames)
+* Bytte fra Arduino til ESP-IDF. 
+* Implementere grafikk og GUI
+* Lag system for å ta inn input
+* Sette opp trådløs kommunikasjon mellom kontroller (Nødvendig for multiplayer)
 * Rense opp i minnebruk, har bare 384 kiB (bare gå gjennom koden og free mallocer som det har blitt glemt å frigjøres)
-* Lag revidert utgave av kretskort, aka fiks det som må fikses ([påbegynt](https://github.com/hackerspace-ntnu/HandhaldenSpelkonsoll/tree/circuit-board-design))
+* Lag revidert utgave av kretskort, aka fiks det som må fikses
 * TO MØTER MED PIZZA (eller annen mat)!!
-* ~~Test spillet litt mer og se etter bugs (Nåværende, mest oppdaterte branch er an-attempt-at-game, hvor en del bugs allerede er blitt fikset)~~
