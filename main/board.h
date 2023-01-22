@@ -8,9 +8,7 @@ struct BoardPiece {
     struct Body* part;
 };
 
-#ifdef __cplusplus
- extern "C" {
-#endif
+static struct BoardPiece board[BOARD_HEIGHT][BOARD_WIDTH];
 
 void init_board(void);
 struct BoardPiece get_square_value(int x, int y);
@@ -21,10 +19,5 @@ void place_food_at_coords(int x, int y, int* count_food);
 char convert_board_int(struct BoardPiece piece);
 void print_board();
 
-struct BoardPiece board[BOARD_HEIGHT][BOARD_WIDTH];
-
-#ifdef __cplusplus
- }
-#endif
 
 #endif

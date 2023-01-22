@@ -181,7 +181,7 @@ void move(struct Snake* snake, struct Body** node, short int direction_x, short 
     printf("Poyo\n");
     // Prevents snake from moving into its own neck
     if(neck != NULL){
-       if (new_x == neck->x & new_y == neck->y){
+       if ((new_x == neck->x) & (new_y == neck->y)){
             printf("Don't eat your own neck >:^(\n");
             return;
         } 
