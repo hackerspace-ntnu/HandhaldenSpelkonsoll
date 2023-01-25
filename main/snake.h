@@ -39,10 +39,6 @@ typedef struct move_all{
 }move_all;
 
 
-#ifdef __cplusplus
- extern "C" {
-#endif
-
 void push(struct Body** head_ref, struct Snake* snake, short int new_x, short int new_y);
 void insertAfter(struct Body* prev_node, short int new_x, short int new_y);
 void append(struct Body** head_ref, short int new_x, short int new_y);
@@ -53,9 +49,5 @@ void set_direction(struct Snake* snake, int direction);
 void split_snake(struct Snake* snake, struct Body** node, int* count_food);
 struct Snake create_snake(int length, int coords[][2], int* snake_id_counter);
 int get_snake_length(struct Body* head);
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

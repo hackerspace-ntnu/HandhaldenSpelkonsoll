@@ -1,25 +1,40 @@
 #include "board.h"
 #include "snake.h"
+#include "constants.h"
 
-int tick = 0;
-int count_food = 0;
-int do_movement = 1;
-
-// struct multiplayer_info **multi_info_buffer = NULL;
-
-// int *multi_info_buffer_stack_pointer = (int*)malloc(sizeof(int));
-int snake_id_counter = 0;
-
-struct Snake snake1;
-struct Snake snake2;
-
-int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
-int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
+// void get_multiplayer_struct(struct multiplayer_info *multi_info, struct multiplayer_info **multi_info_buffer, int *stack_pointer){
+//     if(multi_info->id > 3){ // Our snakes have ids in the 0-4 range
+//         printf("Unknown snake id: %d", multi_info->id);
+//     }
+//     if (*stack_pointer < MULTIPLAYER_BUFFER_SIZE){
+//         multi_info_buffer[*stack_pointer] = multi_info;
+//         *stack_pointer++;
+//     }    
+//     else{
+//         printf("No more space on stack, struct dropped\n");
+//     }
+// }
 
 // void draw_board();
 // void gfx_init();
 
-int main() {
+void app_main(void) {
+
+    
+    int tick = 0;
+    int count_food = 0;
+    int do_movement = 1;
+
+    // struct multiplayer_info **multi_info_buffer = NULL;
+
+    // int *multi_info_buffer_stack_pointer = (int*)malloc(sizeof(int));
+    int snake_id_counter = 0;
+
+    struct Snake snake1;
+    struct Snake snake2;
+
+    int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
+    int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
 //   gfx_init();
   // multi_info_buffer = (struct multiplayer_info**)malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
   // *multi_info_buffer_stack_pointer = 0;
@@ -66,13 +81,15 @@ int main() {
             move(&snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
             move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
         }
-        draw_board();  
+        print_board();  
         tick++;          
     }
     if (tick > 20){
       snake1.isAlive = false;
       snake2.isAlive = false;
     }
+
+
 }
 
 
