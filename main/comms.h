@@ -38,6 +38,7 @@
 #endif
 
 #define ESPNOW_QUEUE_SIZE 6
+#define ESPNOW_MAXDELAY 512
 
 #define IS_BROADCAST_ADDR(addr) (memcmp(addr, s_broadcast_mac, ESP_NOW_ETH_ALEN) == 0)
 
