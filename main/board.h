@@ -11,7 +11,7 @@
 // } board_piece_t;
 
 
-void init_board(board_piece_t* board);
+void init_board(board_piece_t** board);
 board_piece_t get_square_value(board_piece_t** board, int x, int y);
 void set_square_value(board_piece_t** board, int x, int y, short int piece_type, body_t* part);
 void add_snake_to_board(board_piece_t** board, body_t* snake_head);
