@@ -48,7 +48,7 @@ menu "ESPNOW Configuration"
     config ESPNOW_SEND_LEN
         int "Send len"
         range 10 250
-        default 10
+        default 32
         help
             Length of ESPNOW data to be sent, unit: byte.
 
