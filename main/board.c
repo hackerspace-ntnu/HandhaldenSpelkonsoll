@@ -3,7 +3,7 @@
 #include <stddef.h>
 
 
-void init_board(board_piece_t** board) {
+void init_board(board_piece_t* board) {
 	// Initialize the board with only 0s (clear blocks)
 	for (int i = 0; i < BOARD_HEIGHT; i++) {
 		for (int j = 0; j < BOARD_WIDTH; j++) {
@@ -12,7 +12,7 @@ void init_board(board_piece_t** board) {
 	}
 }
 
-board_piece_t get_square_value(board_piece_t** board, int x, int y) {
+board_piece_t get_square_value(board_piece_t* board, int x, int y) {
     if (x >= BOARD_WIDTH) x = BOARD_WIDTH - 1;
     else if (x < 0) x = 0;
     

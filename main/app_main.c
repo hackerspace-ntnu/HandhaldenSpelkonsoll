@@ -31,16 +31,15 @@ void app_main(void) {
 
     snake_t snake1;
     snake_t snake2;
-    board_piece_t board[BOARD_HEIGHT][BOARD_WIDTH];
-    board_piece_t** p = &board;
-
+    board_piece_t board[BOARD_HEIGHT* BOARD_WIDTH];
+    board_piece_t* p = &board[0];
     int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
     int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
 //   gfx_init();
   // multi_info_buffer = (struct multiplayer_info**)malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
   // *multi_info_buffer_stack_pointer = 0;
     init_board(p);
-    print_board(&p);
+    print_board(p);
 
     // switch (PLAYER_NUMBER){
     //     case 1:
