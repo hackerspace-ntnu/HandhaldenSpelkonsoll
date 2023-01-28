@@ -1,6 +1,7 @@
 #include "board.h"
 #include "snake.h"
 #include "constants.h"
+#include "multiplayer.h"
 
 // void get_multiplayer_struct(struct multiplayer_info *multi_info, struct multiplayer_info **multi_info_buffer, int *stack_pointer){
 //     if(multi_info->id > 3){ // Our snakes have ids in the 0-4 range
@@ -20,7 +21,7 @@
 
 void app_main(void) {
 
-    
+
     int tick = 0;
     int count_food = 0;
     int do_movement = 1;
@@ -73,7 +74,7 @@ void app_main(void) {
     while (snake1.isAlive) {
 
         //Just to test multiple snake movement
-        set_direction(&snake2, (rand() % 4));
+        // set_direction(&snake2, (rand() % 4));
         printf("Snake1 x: %d, y: %d\n", snake1.direction_x, snake1.direction_y);
         printf("Snake2 x: %d, y: %d\n", snake2.direction_x, snake2.direction_y);  
 
@@ -82,35 +83,11 @@ void app_main(void) {
             move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
         }
         print_board();  
-        tick++;          
+        tick++;     
+        vTaskDelay(1000/portTICK_PERIOD_MS);   
     }
     if (tick > 20){
       snake1.isAlive = false;
       snake2.isAlive = false;
     }
-
-
 }
-
-
-
-// void draw_board() {
-//      for (int i = 0; i<BOARD_HEIGHT; i++) {
-//         for (int j = 0; j<BOARD_WIDTH; j++) {
-//             struct BoardPiece temp = board[i][j];
-//             if (temp.piece_type == BLOCK_SNAKE) {
-//                 tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_RED);
-//             } else if (temp.piece_type == BLOCK_FOOD) {
-//                 tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_GREEN);
-//             } else {
-//               tft.fillRect(j*BLOCK_SIZE, i*BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE, TFT_BLACK);
-//             }
-//         }
-//     }
-// }
-
-// void gfx_init() {
-//   tft.init();
-//   tft.setRotation(3); // when the pins are on the left side, the top left corner is now (0,0)
-//   tft.fillScreen(TFT_BLACK); // black background
-// }
