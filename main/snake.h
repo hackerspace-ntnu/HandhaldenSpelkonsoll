@@ -5,23 +5,30 @@
 #ifndef SNAKE_H
 #define SNAKE_H
 
-struct Body {
+struct snake_t;
+
+typedef struct body_t {
     short int x;
     short int y;
     bool isHead; // (1=true, 0=false)
-    struct Body* next; // Pointer to next part of Body
-    struct Body* prev; // Pointer to previous part of Body
-    struct Snake* snake;
-};
+    struct  body_t* next; // Pointer to next part of Body
+    struct body_t* prev; // Pointer to previous part of Body
+    struct snake_t* snake;
+} body_t;
 
-struct Snake {
+typedef struct board_piece_t {
+    short int piece_type;
+    body_t* part;
+} board_piece_t;
+
+typedef struct snake_t {
     short int id;
     short int direction_x;
     short int direction_y;
-    struct Body* head;
+    body_t* head;
     bool isAlive;
     //Add colour for easier multiplayer?
-};
+} snake_t;
 
 struct multiplayer_info{
     short int id; // To know which snake to update
@@ -39,15 +46,15 @@ typedef struct move_all{
 }move_all;
 
 
-void push(struct Body** head_ref, struct Snake* snake, short int new_x, short int new_y);
-void insertAfter(struct Body* prev_node, short int new_x, short int new_y);
-void append(struct Body** head_ref, short int new_x, short int new_y);
-struct Body* get_head(struct Body* bodypart);
-struct Body* get_tail(struct Body* bodypart);
-void move(struct Snake* snake, struct Body** node, short int direction_x, short int direction_y, int* count_food);
-void set_direction(struct Snake* snake, int direction);
-void split_snake(struct Snake* snake, struct Body** node, int* count_food);
-struct Snake create_snake(int length, int coords[][2], int* snake_id_counter);
-int get_snake_length(struct Body* head);
+void push(board_piece_t** board, body_t** head_ref, snake_t* snake, short int new_x, short int new_y);
+void insertAfter(board_piece_t** board, body_t* prev_node, short int new_x, short int new_y);
+void append(board_piece_t** board, body_t** head_ref, short int new_x, short int new_y);
+body_t* get_head(body_t* bodypart);
+body_t* get_tail(body_t* bodypart);
+void move(board_piece_t** board, snake_t* snake, body_t** node, short int direction_x, short int direction_y, int* count_food);
+void set_direction(snake_t* snake, int direction);
+void split_snake(board_piece_t** board, snake_t* snake, body_t** node, int* count_food);
+snake_t create_snake(board_piece_t** board, int length, int coords[][2], int* snake_id_counter);
+int get_snake_length(body_t* head);
 
 #endif

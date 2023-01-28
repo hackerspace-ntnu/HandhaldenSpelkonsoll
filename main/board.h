@@ -1,23 +1,24 @@
 #include "constants.h"
+#include "snake.h"
 
 #ifndef BOARD_H
 #define BOARD_H
 
-struct BoardPiece {
-    short int piece_type;
-    struct Body* part;
-};
 
-static struct BoardPiece board[BOARD_HEIGHT][BOARD_WIDTH];
+// typedef struct {
+//     short int piece_type;
+//     body_t* part;
+// } board_piece_t;
 
-void init_board(void);
-struct BoardPiece get_square_value(int x, int y);
-void set_square_value(int x, int y, short int piece_type, struct Body* part);
-void add_snake_to_board(struct Body* snake_head);
-void place_random_food(int* count_food);
-void place_food_at_coords(int x, int y, int* count_food);
-char convert_board_int(struct BoardPiece piece);
-void print_board();
+
+void init_board(board_piece_t* board);
+board_piece_t get_square_value(board_piece_t** board, int x, int y);
+void set_square_value(board_piece_t** board, int x, int y, short int piece_type, body_t* part);
+void add_snake_to_board(board_piece_t** board, body_t* snake_head);
+void place_random_food(board_piece_t** board, int* count_food);
+void place_food_at_coords(board_piece_t** board, int x, int y, int* count_food);
+char convert_board_int(board_piece_t piece);
+void print_board(board_piece_t** board);
 
 
 #endif
