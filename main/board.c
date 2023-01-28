@@ -19,22 +19,22 @@ board_piece_t get_square_value(board_piece_t* board, int x, int y) {
     if (y >= BOARD_HEIGHT) y = BOARD_HEIGHT - 1;
     else if (y < 0) y = 0;
 
-    return board[y][x];
+    return board[y * BOARD_WIDTH + x];
 }
 
-void set_square_value(board_piece_t** board, int x, int y, short int piece_type, body_t* part) {
+void set_square_value(board_piece_t* board, int x, int y, short int piece_type, body_t* part) {
     if (x < 0 || x >= BOARD_WIDTH || y < 0 || y >= BOARD_HEIGHT) {
         return;
     }
     
-    board_piece_t piece = board[y][x];
+    board_piece_t piece = board[y * BOARD_WIDTH + x];
     piece.piece_type = piece_type;
     piece.part = part;
-    board[y][x] = piece;
+    board[y * BOARD_WIDTH + x] = piece;
 }
 
 // To be used under initialization, put a whole snake on the board
-void add_snake_to_board(board_piece_t** board, body_t* snake_head){
+void add_snake_to_board(board_piece_t* board, body_t* snake_head){
     body_t* snake_part = snake_head;
     do {
         set_square_value(board, snake_part->x, snake_part->y, BLOCK_SNAKE, snake_part);
@@ -44,13 +44,13 @@ void add_snake_to_board(board_piece_t** board, body_t* snake_head){
 }
 
 // Creates and prints printable board out of current board
-void print_board(board_piece_t** board){
+void print_board(board_piece_t* board){
     char string_board[BOARD_HEIGHT * BOARD_WIDTH + BOARD_HEIGHT];
     char *current_char = &string_board[0];
     char board_value;
     for (int i = 0; i<BOARD_HEIGHT; i++){
         for (int j= 0; j<BOARD_WIDTH; j++){
-            board_value = convert_board_int(board[i][j]); // Translates int on the board to a defined char
+            board_value = convert_board_int(board[i * BOARD_WIDTH + j]); // Translates int on the board to a defined char
             *current_char = board_value; // Adds the character to the printed board
             current_char++;
         }
@@ -71,7 +71,7 @@ char convert_board_int(board_piece_t piece){
     }
 }
 
-void place_random_food(board_piece_t** board, int* count_food) {
+void place_random_food(board_piece_t* board, int* count_food) {
     int x;
     int y;
     int existing_value;
@@ -89,7 +89,7 @@ void place_random_food(board_piece_t** board, int* count_food) {
     place_food_at_coords(board, x, y, count_food);
 }
 
-void place_food_at_coords(board_piece_t** board, int x, int y, int* count_food) {
+void place_food_at_coords(board_piece_t* board, int x, int y, int* count_food) {
     set_square_value(board, x, y, BLOCK_FOOD, NULL);
     (*count_food)++;
 }

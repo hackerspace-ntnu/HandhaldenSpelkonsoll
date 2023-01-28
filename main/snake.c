@@ -5,7 +5,7 @@
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
 /* Add new Body element on top of head. */
-void push(board_piece_t** board, body_t** head_ref, snake_t* snake, short int new_x, short int new_y)
+void push(board_piece_t* board, body_t** head_ref, snake_t* snake, short int new_x, short int new_y)
 {
     /* 1. allocate node */
     body_t* new_node = (body_t*)malloc(sizeof(body_t));
@@ -35,7 +35,7 @@ void push(board_piece_t** board, body_t** head_ref, snake_t* snake, short int ne
 
 /* Given a node as prev_node, insert a new node after it*/
 //(Put node behind prev_node)
-void insertAfter(board_piece_t** board, body_t* prev_node, short int new_x, short int new_y)
+void insertAfter(board_piece_t* board, body_t* prev_node, short int new_x, short int new_y)
 {
 	/*1. check if the given prev_node is NULL */
 	if (prev_node == NULL) {
@@ -70,7 +70,7 @@ void insertAfter(board_piece_t** board, body_t* prev_node, short int new_x, shor
 /* Given a reference (pointer to pointer) to the head
 of a DLL and an int, appends a new node at the end.
 AKA puts more booty on Susan Ibaka*/
-void append(board_piece_t** board, body_t** head_ref, short int new_x, short int new_y)
+void append(board_piece_t* board, body_t** head_ref, short int new_x, short int new_y)
 {
 	/* 1. allocate node */
 	body_t* new_node = (body_t*)malloc(sizeof(body_t));
@@ -124,7 +124,7 @@ body_t* get_tail(body_t* bodypart) {
     return bodypart;
 }
 
-void move(board_piece_t** board, snake_t* snake, body_t** node, short int direction_x, short int direction_y, int* count_food) {
+void move(board_piece_t* board, snake_t* snake, body_t** node, short int direction_x, short int direction_y, int* count_food) {
     if (!snake->isAlive) {
         return;
     }
@@ -281,7 +281,7 @@ void set_direction(snake_t* snake, int direction) {
     }
 }
 
-void split_snake(board_piece_t** board, snake_t* snake, body_t** node, int* count_food) {
+void split_snake(board_piece_t* board, snake_t* snake, body_t** node, int* count_food) {
     body_t* bodypart = *node;
     body_t* current = *node;
     
@@ -312,10 +312,10 @@ int get_snake_length(body_t* head) {
     return length;
 }
 
-snake_t create_snake(board_piece_t** board, int length, int coords[][2], int* snake_id_counter) {
+snake_t create_snake(board_piece_t* board, int length, int coords[][2], int* snake_id_counter) {
     body_t* head = NULL;
 
-    snake_t* snake = (snake_t*)malloc(sizeof (snake_t));
+    snake_t* snake = (snake_t*)malloc(sizeof(snake_t));
 
     snake->id = *snake_id_counter;
     snake->direction_x = 1;

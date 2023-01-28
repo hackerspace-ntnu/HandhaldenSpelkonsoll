@@ -20,21 +20,21 @@
 void app_main(void) {
 
     
-    int tick = 0;
-    int count_food = 0;
-    int do_movement = 1;
+    // int tick = 0;
+    // int count_food = 0;
+    // int do_movement = 1;
 
     // struct multiplayer_info **multi_info_buffer = NULL;
 
     // int *multi_info_buffer_stack_pointer = (int*)malloc(sizeof(int));
-    int snake_id_counter = 0;
+    // int snake_id_counter = 0;
 
-    snake_t snake1;
-    snake_t snake2;
-    board_piece_t board[BOARD_HEIGHT* BOARD_WIDTH];
+    // snake_t snake1;
+    // snake_t snake2;
+    board_piece_t board[BOARD_HEIGHT * BOARD_WIDTH];
     board_piece_t* p = &board[0];
-    int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
-    int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
+    // int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
+    // int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
 //   gfx_init();
   // multi_info_buffer = (struct multiplayer_info**)malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
   // *multi_info_buffer_stack_pointer = 0;
