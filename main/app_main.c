@@ -44,18 +44,18 @@ void app_main(void) {
   switch (PLAYER_NUMBER){
     case 1:
         // Middle of the board (There must be a better way to implement this, but I'm sleepy)
-        init_coordinates1[0][0] = (BOARD_WIDTH/2);
-        init_coordinates1[1][0] = (BOARD_WIDTH/2)+1;
-        init_coordinates1[2][0] = (BOARD_WIDTH/2)+2;
-        init_coordinates1[0][1] = BOARD_HEIGHT/2;
-        init_coordinates1[1][1] = BOARD_HEIGHT/2;
-        init_coordinates1[2][1] = BOARD_HEIGHT/2;
+        init_coordinates1[0][0] = (BOARD_WIDTH/2); 
+        init_coordinates1[1][0] = (BOARD_WIDTH/2)+1; 
+        init_coordinates1[2][0] = (BOARD_WIDTH/2)+2; 
+        init_coordinates1[0][1] = BOARD_HEIGHT/2; 
+        init_coordinates1[1][1] = BOARD_HEIGHT/2; 
+        init_coordinates1[2][1] = BOARD_HEIGHT/2; 
 
         snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
         add_snake_to_board(snake1.head);
 
         //initial food
-        place_random_food(&count_food);
+        place_random_food(&count_food); 
         break;
 
     case 2:
@@ -67,10 +67,10 @@ void app_main(void) {
         //initial food
         place_random_food(&count_food);
         break;
-
+    
     default:
         break;
-  }
+    }
     while (snake1.isAlive) {
 
         //Just to test multiple snake movement
@@ -89,6 +89,8 @@ void app_main(void) {
       snake1.isAlive = false;
       snake2.isAlive = false;
     }
+
+
 }
 
 
