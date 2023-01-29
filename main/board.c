@@ -1,7 +1,4 @@
-#include "snake.h"
 #include "board.h"
-#include <stddef.h>
-
 
 void init_board(board_piece_t* board) {
 	// Initialize the board with only 0s (clear blocks)

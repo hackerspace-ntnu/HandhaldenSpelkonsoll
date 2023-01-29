@@ -1,6 +1,5 @@
-#include "constants.h"
 #include "snake.h"
-#include "board.h" 
+#include "board.h"
 
 /*Making the base based on linked list code that we borrowed from the internet:*/
 
