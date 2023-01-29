@@ -37,19 +37,8 @@ F 5 "Espressif Systems" H 9300 2150 50  0001 L BNN "MANUFACTURER"
 	1    9300 2150
 	1    0    0    -1  
 $EndComp
-$Comp
-L spelkonsoll-rescue:+5V-power #PWR021
-U 1 1 61F50C10
-P 8400 3050
-F 0 "#PWR021" H 8400 2900 50  0001 C CNN
-F 1 "+5V" V 8415 3178 50  0000 L CNN
-F 2 "" H 8400 3050 50  0001 C CNN
-F 3 "" H 8400 3050 50  0001 C CNN
-	1    8400 3050
-	0    -1   -1   0   
-$EndComp
 Wire Wire Line
-	8500 3050 8400 3050
+	8500 1250 8400 1250
 $Comp
 L spelkonsoll-rescue:GND-power #PWR022
 U 1 1 61F5615F
@@ -128,7 +117,6 @@ Text GLabel 8500 2350 0    50   Input ~ 0
 BTN_DP_LEFT
 Text GLabel 8500 2650 0    50   Input ~ 0
 BTN_DP_RIGHT
-NoConn ~ 8500 1250
 NoConn ~ 8500 1350
 NoConn ~ 8500 1450
 NoConn ~ 8500 1550
@@ -732,4 +720,15 @@ $EndComp
 Wire Wire Line
 	6900 1900 6900 2000
 NoConn ~ 7000 2400
+$Comp
+L spelkonsoll-rescue:+5V-power #PWR021
+U 1 1 61F50C10
+P 8400 1250
+F 0 "#PWR021" H 8400 1100 50  0001 C CNN
+F 1 "+5V" V 8415 1378 50  0000 L CNN
+F 2 "" H 8400 1250 50  0001 C CNN
+F 3 "" H 8400 1250 50  0001 C CNN
+	1    8400 1250
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC
