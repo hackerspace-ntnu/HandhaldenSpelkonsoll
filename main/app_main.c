@@ -39,50 +39,42 @@ void app_main(void) {
 //   gfx_init();
   // multi_info_buffer = (struct multiplayer_info**)malloc(sizeof(struct multiplayer_info)*MULTIPLAYER_BUFFER_SIZE);
   // *multi_info_buffer_stack_pointer = 0;
-    init_board();
-    init_buttons();
-    switch (PLAYER_NUMBER){
-        case 1:
-            // Middle of the board (There must be a better way to implement this, but I'm sleepy)
-            init_coordinates1[0][0] = (BOARD_WIDTH/2); 
-            init_coordinates1[1][0] = (BOARD_WIDTH/2)+1; 
-            init_coordinates1[2][0] = (BOARD_WIDTH/2)+2; 
-            init_coordinates1[0][1] = BOARD_HEIGHT/2; 
-            init_coordinates1[1][1] = BOARD_HEIGHT/2; 
-            init_coordinates1[2][1] = BOARD_HEIGHT/2; 
+  init_board();
 
-            snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
-            add_snake_to_board(snake1.head);
+  switch (PLAYER_NUMBER){
+    case 1:
+        // Middle of the board (There must be a better way to implement this, but I'm sleepy)
+        init_coordinates1[0][0] = (BOARD_WIDTH/2);
+        init_coordinates1[1][0] = (BOARD_WIDTH/2)+1;
+        init_coordinates1[2][0] = (BOARD_WIDTH/2)+2;
+        init_coordinates1[0][1] = BOARD_HEIGHT/2;
+        init_coordinates1[1][1] = BOARD_HEIGHT/2;
+        init_coordinates1[2][1] = BOARD_HEIGHT/2;
 
-            //initial food
-            place_random_food(&count_food); 
-            break;
+        snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
+        add_snake_to_board(snake1.head);
 
-        case 2:
-            snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
-            snake2 = create_snake(3, init_coordinates2, &snake_id_counter);
-            add_snake_to_board(snake1.head);
-            add_snake_to_board(snake2.head);
+        //initial food
+        place_random_food(&count_food);
+        break;
 
-            //initial food
-            place_random_food(&count_food);
-            break;
-        
-        default:
-            break;
-    }
+    case 2:
+        snake1 = create_snake(3, init_coordinates1, &snake_id_counter);
+        snake2 = create_snake(3, init_coordinates2, &snake_id_counter);
+        add_snake_to_board(snake1.head);
+        add_snake_to_board(snake2.head);
+
+        //initial food
+        place_random_food(&count_food);
+        break;
+
+    default:
+        break;
+  }
     while (snake1.isAlive) {
-        vTaskDelay(1000 / portTICK_PERIOD_MS); // program "runs" every second
 
         //Just to test multiple snake movement
-
-        // set_direction(&snake2, (rand() % 4));
-        if (read_button(BTN_DP_DOWN)) {
-            set_direction(&snake2, DIRECTION_DOWN);
-        }
-        if (read_button(BTN_DP_LEFT)) {
-            set_direction(&snake2, DIRECTION_LEFT);
-        }
+        set_direction(&snake2, (rand() % 4));
         printf("Snake1 x: %d, y: %d\n", snake1.direction_x, snake1.direction_y);
         printf("Snake2 x: %d, y: %d\n", snake2.direction_x, snake2.direction_y);  
 
@@ -91,13 +83,11 @@ void app_main(void) {
             move(&snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
         }
         print_board();  
-        printf("\nDown: %d \n", read_button(BTN_DP_DOWN));
-        printf("\Left: %d \n", read_button(BTN_DP_LEFT));
         tick++;          
     }
     if (tick > 20){
-        snake1.isAlive = false;
-        snake2.isAlive = false;
+      snake1.isAlive = false;
+      snake2.isAlive = false;
     }
 }
 
