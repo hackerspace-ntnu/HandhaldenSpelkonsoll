@@ -1,5 +1,8 @@
 #include "board.h"
 #include "snake.h"
+#include "button.h"
+
+
 // void get_multiplayer_struct(struct multiplayer_info *multi_info, struct multiplayer_info **multi_info_buffer, int *stack_pointer){
 //     if(multi_info->id > 3){ // Our snakes have ids in the 0-4 range
 //         printf("Unknown snake id: %d", multi_info->id);
