@@ -1,0 +1,7 @@
+# NOTES:
+# - default <> if <> work only when no prompt is available for the user
+menu "LVGL ESP Drivers"
+
+    rsource "main/Kconfig"
+
+endmenu
