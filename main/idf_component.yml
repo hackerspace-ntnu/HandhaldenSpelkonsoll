@@ -1,7 +1,7 @@
 ## IDF Component Manager Manifest File
 dependencies:
   lvgl/lvgl_esp32_drivers: "^0.0.3"
-  lvgl/lvgl: ">=7.11.0"
+  lvgl/lvgl: ">=7.11.0" # lvgl_esp32_drivers requires version 7.11.0 of lvgl
   ## Required IDF version
   idf:
     version: ">=4.1.0"
