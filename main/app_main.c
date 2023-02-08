@@ -3,7 +3,7 @@
 #include "constants.h"
 #include "button.h"
 
-#include "lvgl/examples/lv_examples.h"
+#include "lvgl.h"
 
 // void get_multiplayer_struct(struct multiplayer_info *multi_info, struct multiplayer_info **multi_info_buffer, int *stack_pointer){
 //     if(multi_info->id > 3){ // Our snakes have ids in the 0-4 range
@@ -23,13 +23,24 @@
 
 void app_main(void) {
 
-    lv_obj_set_style_bg_color(lv_scr_act(), lv_color_hex(0x003a57), LV_PART_MAIN);
+    // lv_obj_set_style_local_bg_color(lv_scr_act(), lv_color_hex(0x003a57), LV_LED_PART_MAIN);
 
-    /*Create a white label, set its text and align it to the center*/
-    lv_obj_t* label = lv_label_create(lv_scr_act());
-    lv_label_set_text(label, "Hello world");
-    lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0xffffff), LV_PART_MAIN);
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+    // /*Create a white label, set its text and align it to the center*/
+    // lv_obj_t* label = lv_label_create(lv_scr_act());
+    // lv_label_set_text(label, "Hello world");
+    // lv_obj_set_style_text_color(lv_scr_act(), lv_color_hex(0xffffff), LV_LED_PART_MAIN);
+    // lv_obj_align(label, LV_ALIGN_CENTER, 0, 0);
+
+    lv_obj_t *bkgrnd = lv_obj_create(lv_scr_act(), NULL);
+	lv_obj_set_width(bkgrnd,135);
+	lv_obj_set_height(bkgrnd,22);
+	lv_obj_t *label = lv_label_create(bkgrnd, NULL);
+	lv_label_set_text(label, "This is a test");
+	lv_obj_set_style_local_text_color( label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE );
+	lv_obj_set_style_local_bg_color( bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK );
+
+	lv_obj_align(bkgrnd, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
+	lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
 
         
     //     int tick = 0;
