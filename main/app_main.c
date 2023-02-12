@@ -4,45 +4,70 @@
 #include "button.h"
 #include "lvgl.h"
 
-// void get_multiplayer_struct(struct multiplayer_info *multi_info, struct multiplayer_info **multi_info_buffer, int *stack_pointer){
-//     if(multi_info->id > 3){ // Our snakes have ids in the 0-4 range
-//         printf("Unknown snake id: %d", multi_info->id);
-//     }
-//     if (*stack_pointer < MULTIPLAYER_BUFFER_SIZE){
-//         multi_info_buffer[*stack_pointer] = multi_info;
-//         *stack_pointer++;
-//     }    
-//     else{
-//         printf("No more space on stack, struct dropped\n");
-//     }
-// }
+void my_flush_cb(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
+{
+    /*The most simple case (but also the slowest) to put all pixels to the screen one-by-one*/
+    int32_t x, y;
+    for(y = area->y1; y <= area->y2; y++) {
+        for(x = area->x1; x <= area->x2; x++) {
+            // put_px(x, y, *color_p);
+            color_p++;
+        }
+    }
 
-// void draw_board();
-// void gfx_init();
+    /* IMPORTANT!!!
+     * Inform the graphics library that you are ready with the flushing*/
+    lv_disp_flush_ready(disp_drv);
+
+}
+
+void my_px_cb(lv_disp_drv_t * disp_drv, uint8_t * buf, lv_coord_t buf_w, lv_coord_t x, lv_coord_t y, lv_color_t color, lv_opa_t opa)
+{
+    /* Write to the buffer as required for the display.
+     * Write only 1-bit for monochrome displays mapped vertically:*/
+ buf += buf_w * (y >> 3) + x;
+ if(lv_color_brightness(color) > 128) (*buf) |= (1 << (y % 8));
+ else (*buf) &= ~(1 << (y % 8));
+}
+
 
 void app_main(void) {
 
     lv_init();
 
-    lv_obj_set_style_local_bg_color(lv_scr_act(), LV_LED_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0x003a57));
 
-    /*Create a white label, set its text and align it to the center*/
-    lv_obj_t* label = lv_label_create(lv_scr_act(), NULL);
-    lv_label_set_text(label, "Hello world");
-    lv_obj_set_style_local_text_color(lv_scr_act(), LV_LED_PART_MAIN, LV_STATE_DEFAULT, lv_color_hex(0xffffff));
-    lv_obj_align(label, NULL,  LV_ALIGN_CENTER, 0, 0);
+    static lv_disp_buf_t disp_buf;
+   
+       /*Static or global buffer(s). The second buffer is optional*/
+    static lv_color_t buf_1[32 * 10];
+    static lv_color_t buf_2[32 * 10];
 
-    // lv_obj_t* bkgrnd = lv_obj_create(lv_scr_act(), NULL);
-	// lv_obj_set_width(bkgrnd, 135);
-	// lv_obj_set_height(bkgrnd, 22);
-	// lv_obj_t* label = lv_label_create(bkgrnd, NULL);
-	// lv_label_set_text(label, "This is a test");
-	// lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
-	// lv_obj_set_style_local_bg_color(bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+    /*Initialize `disp_buf` with the buffer(s) */
+    lv_disp_buf_init(&disp_buf, buf_1, buf_2, 32*10);
+
+    lv_disp_drv_t disp_drv;                 /*A variable to hold the drivers. Can be local variable*/
+    lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
+    disp_drv.buffer = &disp_buf;            /*Set an initialized buffer*/
+    disp_drv.hor_res = 480;
+    disp_drv.ver_res = 320;
+    // disp_drv.set_px_cb = my_px_cb;
+    disp_drv.flush_cb = my_flush_cb;        /*Set a flush callback to draw to the display*/
+    lv_disp_t* disp;
+    disp = lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
+    
+
+    lv_obj_t* bkgrnd = lv_obj_create(lv_scr_act(), NULL);
+	lv_obj_set_width(bkgrnd, 135);
+	lv_obj_set_height(bkgrnd, 22);
+	lv_obj_t* label = lv_label_create(bkgrnd, NULL);
+	lv_label_set_text(label, "This is a test");
+	lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+	lv_obj_set_style_local_bg_color(bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
 
 	// lv_obj_align(bkgrnd, NULL, LV_ALIGN_IN_TOP_LEFT, 10, 10);
 	// lv_obj_align(label, NULL, LV_ALIGN_CENTER, 0, 0);
 
+    // lv_tick_inc(10);
         
     //     int tick = 0;
     //     int count_food = 0;
@@ -114,7 +139,6 @@ void app_main(void) {
 
 
 }
-
 
 
 // void draw_board() {
