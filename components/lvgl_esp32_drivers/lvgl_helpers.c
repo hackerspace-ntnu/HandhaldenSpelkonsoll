@@ -11,11 +11,9 @@
 #include "esp_log.h"
 
 #include "lvgl_tft/disp_spi.h"
-#include "lvgl_touch/tp_spi.h"
 
 #include "lvgl_spi_conf.h"
 
-#include "lvgl_i2c/i2c_manager.h"
 
 #ifdef LV_LVGL_H_INCLUDE_SIMPLE
 #include "lvgl.h"
