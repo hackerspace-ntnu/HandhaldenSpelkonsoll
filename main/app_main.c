@@ -4,14 +4,10 @@
 #include "button.h"
 #include "lvgl.h"
 #include "lvgl_helpers.h"
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
 #include "esp_freertos_hooks.h"
 #include "freertos/semphr.h"
 #include "esp_system.h"
 #include "esp_timer.h"
-#include "driver/gpio.h"
 
 
 #define LV_TICK_PERIOD_MS 1
