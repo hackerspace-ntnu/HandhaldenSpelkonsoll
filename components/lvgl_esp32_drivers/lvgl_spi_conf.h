@@ -43,26 +43,6 @@ extern "C" {
     #define DISP_SPI_CS (-1)
 #endif
 
-/* Define TOUCHPAD PINS when selecting a touch controller */
-#if !defined (CONFIG_LV_TOUCH_CONTROLLER_NONE)
-
-/* Handle FT81X special case */
-#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X) && \
-    defined (CONFIG_LV_TOUCH_CONTROLLER_FT81X)
-
-    #define TP_SPI_MOSI CONFIG_LV_DISP_SPI_MOSI
-    #define TP_SPI_MISO CONFIG_LV_DISP_SPI_MISO
-    #define TP_SPI_CLK  CONFIG_LV_DISP_SPI_CLK
-    #define TP_SPI_CS   CONFIG_LV_DISP_SPI_CS
-#else
-    #define TP_SPI_MOSI CONFIG_LV_TOUCH_SPI_MOSI
-    #define TP_SPI_MISO CONFIG_LV_TOUCH_SPI_MISO
-    #define TP_SPI_CLK  CONFIG_LV_TOUCH_SPI_CLK
-    #define TP_SPI_CS   CONFIG_LV_TOUCH_SPI_CS
-#endif
-#endif
-
-#define ENABLE_TOUCH_INPUT  CONFIG_LV_ENABLE_TOUCH
 
 #if defined (CONFIG_LV_TFT_DISPLAY_SPI_HSPI)
 #if defined (CONFIG_IDF_TARGET_ESP32C3)
@@ -98,15 +78,6 @@ extern "C" {
 #define TOUCH_SPI_HOST FSPI_HOST
 #endif
 
-/* Handle the FT81X Special case */
-#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X)
-
-#if defined (CONFIG_LV_TOUCH_CONTROLLER_FT81X)
-#define SHARED_SPI_BUS
-#else
-/* Empty */
-#endif
-
 #else
 // Detect the use of a shared SPI Bus and verify the user specified the same SPI bus for both touch and tft
 #if defined (CONFIG_LV_TOUCH_DRIVER_PROTOCOL_SPI) && TP_SPI_MOSI == DISP_SPI_MOSI && TP_SPI_CLK == DISP_SPI_CLK
@@ -117,7 +88,6 @@ extern "C" {
 #define SHARED_SPI_BUS
 #endif
 
-#endif
 
 /**********************
  *      TYPEDEFS
@@ -127,15 +97,7 @@ extern "C" {
 
 #define SPI_BUS_MAX_TRANSFER_SZ (DISP_BUF_SIZE * 3)
 
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9341)  || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7789)   || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S)  || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_HX8357)   || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_SH1107)   || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X)    || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_IL3820)   || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_JD79653A) || \
-      defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9163C)
+#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9341)
 
 #define SPI_BUS_MAX_TRANSFER_SZ (DISP_BUF_SIZE * 2)
 
@@ -146,15 +108,7 @@ extern "C" {
 #if defined (CONFIG_LV_TFT_USE_CUSTOM_SPI_CLK_DIVIDER)
 #define SPI_TFT_CLOCK_SPEED_HZ ((80 * 1000 * 1000) / CONFIG_LV_TFT_CUSTOM_SPI_CLK_DIVIDER)
 #else
-#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7789)
-#define SPI_TFT_CLOCK_SPEED_HZ  (20*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S)
-#define SPI_TFT_CLOCK_SPEED_HZ  (40*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_HX8357)
-#define SPI_TFT_CLOCK_SPEED_HZ  (26*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_SH1107)
-#define SPI_TFT_CLOCK_SPEED_HZ  (8*1000*1000)
-#elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9481)
+#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9481)
 #define SPI_TFT_CLOCK_SPEED_HZ  (16*1000*1000)
 #elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9486)
 #define SPI_TFT_CLOCK_SPEED_HZ  (20*1000*1000)
@@ -162,10 +116,6 @@ extern "C" {
 #define SPI_TFT_CLOCK_SPEED_HZ  (40*1000*1000)
 #elif defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9341)
 #define SPI_TFT_CLOCK_SPEED_HZ  (40*1000*1000)
-#elif defined(CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9163C)
-#define SPI_TFT_CLOCK_SPEED_HZ (40 * 1000 * 1000)
-#elif defined(CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X)
-#define SPI_TFT_CLOCK_SPEED_HZ  (32*1000*1000)
 #else
 #define SPI_TFT_CLOCK_SPEED_HZ  (40*1000*1000)
 #endif
@@ -173,20 +123,8 @@ extern "C" {
 #endif
 
 
-#if defined (CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7789)
-#define SPI_TFT_SPI_MODE    (2)
-#else
 #define SPI_TFT_SPI_MODE    (0)
-#endif
 
-/* Touch driver */
-#if (CONFIG_LV_TOUCH_CONTROLLER == TOUCH_CONTROLLER_STMPE610)
-#define SPI_TOUCH_CLOCK_SPEED_HZ    (1*1000*1000)
-#define SPI_TOUCH_SPI_MODE          (1)
-#else
-#define SPI_TOUCH_CLOCK_SPEED_HZ    (2*1000*1000)
-#define SPI_TOUCH_SPI_MODE          (0)
-#endif
 
 /**********************
  * GLOBAL PROTOTYPES
