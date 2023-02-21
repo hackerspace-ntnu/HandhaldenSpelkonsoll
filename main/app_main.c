@@ -91,17 +91,15 @@ static void guiTask(void *pvParameter) {
     /* Initialize SPI bus used by the drivers */
     lvgl_driver_init();
 
-    lv_color_t* buf1 = heap_caps_malloc(DISP_BUF_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
-    assert(buf1 != NULL);
-
     /* Use double buffered when not working with monochrome displays */
+    lv_color_t* buf1 = heap_caps_malloc(DISP_BUF_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
     lv_color_t* buf2 = heap_caps_malloc(DISP_BUF_SIZE * sizeof(lv_color_t), MALLOC_CAP_DMA);
+    assert(buf1 != NULL);
     assert(buf2 != NULL);
 
 
     static lv_disp_buf_t disp_buf;
-    uint32_t size_in_px = DISP_BUF_SIZE;
-    lv_disp_buf_init(&disp_buf, buf1, buf2, size_in_px); /*Initialize `disp_buf` with the buffer(s) */
+    lv_disp_buf_init(&disp_buf, buf1, buf2, DISP_BUF_SIZE); /*Initialize `disp_buf` with the buffer(s) */
     lv_disp_drv_t disp_drv; /*A variable to hold the drivers. Can be local variable*/
     lv_disp_drv_init(&disp_drv); /*Basic initialization*/
     disp_drv.flush_cb = disp_driver_flush; /*Set a flush callback to draw to the display*/

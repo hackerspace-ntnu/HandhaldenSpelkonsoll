@@ -24,34 +24,8 @@ extern "C" {
 #include "ili9481.h"
 #elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9488
 #include "ili9488.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7789
-#include "st7789.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7796S
-#include "st7796s.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ST7735S
-#include "st7735s.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_HX8357
-#include "hx8357.h"
 #elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9486
 #include "ili9486.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_SH1107
-#include "sh1107.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_SSD1306
-#include "ssd1306.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_FT81X
-#include "FT81x.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_IL3820
-#include "il3820.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_RA8875
-#include "ra8875.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_GC9A01
-#include "GC9A01.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_JD79653A
-#include "jd79653a.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_UC8151D
-#include "uc8151d.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9163C
-#include "ili9163c.h"
 #endif
 
 /*********************
