@@ -18,14 +18,8 @@ extern "C" {
 #include "lvgl/lvgl.h"
 #endif
 
-#if defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9341
-#include "ili9341.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9481
-#include "ili9481.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9488
+#if defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9488
 #include "ili9488.h"
-#elif defined CONFIG_LV_TFT_DISPLAY_CONTROLLER_ILI9486
-#include "ili9486.h"
 #endif
 
 /*********************
