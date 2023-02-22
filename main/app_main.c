@@ -10,13 +10,8 @@
 
 #define LV_TICK_PERIOD_MS 1
 
-
-/**********************
- *  STATIC PROTOTYPES
- **********************/
 static void lv_tick_task(void *arg);
 static void guiTask(void *pvParameter);
-
 
 void app_main(void){
 
@@ -69,7 +64,7 @@ void app_main(void){
             move(p_board, &snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
             move(p_board, &snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
         }
-        print_board(p_board);  
+        // print_board(p_board);  
         tick++;         
     }
     if (tick > 20){
@@ -120,8 +115,8 @@ static void guiTask(void *pvParameter) {
     lv_obj_set_width(bkgrnd, 135);
     lv_obj_set_height(bkgrnd, 22);
     lv_obj_t* label = lv_label_create(bkgrnd, NULL);
-    lv_label_set_text(label, "This is a test");
-    lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+    lv_label_set_text(label, "Hackerspace");
+    lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
     lv_obj_set_style_local_bg_color(bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLUE);
 
     while (1) {
