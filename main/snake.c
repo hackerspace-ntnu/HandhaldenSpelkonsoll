@@ -38,7 +38,7 @@ void insertAfter(board_piece_t* board, body_t* prev_node, short int new_x, short
 {
 	/*1. check if the given prev_node is NULL */
 	if (prev_node == NULL) {
-		printf("the given previous node cannot be NULL");
+		// printf("the given previous node cannot be NULL");
 		return;
 	}
 
@@ -143,7 +143,7 @@ void move(board_piece_t* board, snake_t* snake, body_t** node, short int directi
     // Checks if new head will be inside a wall
     // If clipping is turned on, head will be put on the opposite side of the field
     // If clipping is turned off, the snake dies
-    printf("Calculated new position\n");
+    // printf("Calculated new position\n");
     if (new_x > (BOARD_WIDTH - 1)) {
         new_x = 0;
         if (!WRAPPING_ENABLED){
@@ -177,22 +177,22 @@ void move(board_piece_t* board, snake_t* snake, body_t** node, short int directi
         }
     }
 
-    printf("Poyo\n");
+    // printf("Poyo\n");
     // Prevents snake from moving into its own neck
     if(neck != NULL){
        if ((new_x == neck->x) & (new_y == neck->y)){
-            printf("Don't eat your own neck >:^(\n");
+            // printf("Don't eat your own neck >:^(\n");
             return;
         } 
     }
 
-    printf("Wah\n");
+    // printf("Wah\n");
     // Get the value of the next square where the snake would move to,
     // and determine whether that square is a body part
     board_piece_t next_piece = get_square_value(board, new_x, new_y);
     bool next_is_body_part = next_piece.piece_type == BLOCK_SNAKE;
     
-    printf("Next square is %s\n", next_is_body_part ? "body" : "not body");
+    // printf("Next square is %s\n", next_is_body_part ? "body" : "not body");
     if (next_is_body_part) {
         body_t* part = next_piece.part;
 
@@ -200,7 +200,7 @@ void move(board_piece_t* board, snake_t* snake, body_t** node, short int directi
         if (part->snake->id == snake->id) {
             split_snake(board, snake, &head, count_food);
             snake->isAlive = false;
-            printf("self collision\n");
+            // printf("self collision\n");
             return;
         }
 
