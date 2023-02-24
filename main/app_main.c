@@ -116,7 +116,7 @@ static void guiTask(void *pvParameter) {
     lv_obj_set_height(bkgrnd, 22);
     lv_obj_t* label = lv_label_create(bkgrnd, NULL);
     lv_label_set_text(label, "Hackerspace");
-    lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+    lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
     lv_obj_set_style_local_bg_color(bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLUE);
 
     while (1) {
