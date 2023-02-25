@@ -1,0 +1,7 @@
+version: "7.11.0"
+description: LVGL - Light and Versatile Graphics Library
+url: https://github.com/lvgl/lvgl 
+files:
+  exclude:
+    - ".git"
+    - ".github"

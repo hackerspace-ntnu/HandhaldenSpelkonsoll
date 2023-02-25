@@ -12,8 +12,8 @@
 | SDO(MISO) |  19   | Master In Slave Out|
 | SDO(MOSI) |  23   | Master out Slave In|
 | SCK       |  18   | Clock Signal       | 
-| CS        |   5   | Chip Select        |
-| DC/RS     |   2   | Data Command       | 
+| CS        |  16   | Chip Select        |
+| DC/RS     |  17   | Data Command       | 
 | RST       |   4   | Reset              |
 | VCC       |  5V   | Or 3.3V            |
 | LED       |  5V   | Or 3.3V            |

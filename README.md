@@ -13,15 +13,12 @@ Spillkonsollen kommer med et egetutviklet multiplayer snake-spill slik at opptil
 
 #### Software:  
 * Spill: snake  
-* Grafikk: Skal implementere [LovyanGFX](https://github.com/lovyan03/LovyanGFX) eller kanskje [LVGL](https://github.com/lvgl/lvgl)
+* Grafikk: [LVGL](https://github.com/lvgl/lvgl)
 * Kommunikasjonsprotokoll: [ESP-NOW](https://github.com/espressif/esp-now) 
 
 
 ### TODO:
-* Bytte fra Arduino til ESP-IDF. 
-* Implementere grafikk og GUI
-* Lag system for å ta inn input
-* Sette opp trådløs kommunikasjon mellom kontroller (Nødvendig for multiplayer)
+* Implementere GUI
+* Sette sammen grafikk og trådløs kommunikasjon mellom enheter
 * Rense opp i minnebruk, har bare 384 kiB (bare gå gjennom koden og free mallocer som det har blitt glemt å frigjøres)
-* Lag revidert utgave av kretskort, aka fiks det som må fikses
 * TO MØTER MED PIZZA (eller annen mat)!!
