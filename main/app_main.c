@@ -1,6 +1,7 @@
 #include "board.h"
 #include "snake.h"
 #include "button.h"
+#include "multiplayer.h"
 #include "constants.h"
 #include "lvgl.h"
 #include "lvgl_helpers.h"
@@ -8,7 +9,6 @@
 #include "freertos/semphr.h"
 #include "esp_system.h"
 #include "esp_timer.h"
-#include "multiplayer.h"
 
 #define LV_TICK_PERIOD_MS 1
 
@@ -16,7 +16,6 @@ static void lv_tick_task(void *arg);
 static void guiTask(void *pvParameter);
 
 void app_main(void){
-    srand(esp_random());
     int tick = 0;
     int count_food = 0;
     int do_movement = 1;
@@ -62,7 +61,6 @@ void app_main(void){
             break;
     }
     while (snake1.isAlive) {
-
         //Just to test multiple snake movement
         set_direction(&snake2, (rand() % 4));
         printf("Snake1 x: %d, y: %d\n", snake1.direction_x, snake1.direction_y);
