@@ -242,8 +242,8 @@ void espnow_task(void *pvParameter) {
                 else if (ret == ESPNOW_DATA_UNICAST) {
                     ESP_LOGI(TAG, "Receive %dth unicast data from: "MACSTR", len: %d", recv_seq, MAC2STR(recv_cb->mac_addr), recv_cb->data_len);
                     print_multiplayer_data(recv_cb->data);
-                    int a = 1;
-                    place_food_at_coords(((multiplayer_data_t*)recv_cb->data)->food_coord_x, ((multiplayer_data_t*)recv_cb->data)->food_coord_y, &a);
+                    // int a = 1;
+                    // place_food_at_coords(((multiplayer_data_t*)recv_cb->data)->food_coord_x, ((multiplayer_data_t*)recv_cb->data)->food_coord_y, &a);
                     free(recv_cb->data);
                     /* If receive unicast ESPNOW data, also stop sending broadcast ESPNOW data. */
                     send_param->broadcast = false;

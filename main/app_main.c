@@ -1,17 +1,14 @@
 #include "board.h"
 #include "snake.h"
-<<<<<<< HEAD
-#include "constants.h"
-#include "multiplayer.h"
-=======
 #include "button.h"
+#include "constants.h"
 #include "lvgl.h"
 #include "lvgl_helpers.h"
 #include "esp_freertos_hooks.h"
 #include "freertos/semphr.h"
 #include "esp_system.h"
 #include "esp_timer.h"
->>>>>>> 5ba565e3f1ddd97bfd589f2c076e1f3f05823fb2
+#include "multiplayer.h"
 
 #define LV_TICK_PERIOD_MS 1
 
@@ -19,11 +16,7 @@ static void lv_tick_task(void *arg);
 static void guiTask(void *pvParameter);
 
 void app_main(void){
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 5ba565e3f1ddd97bfd589f2c076e1f3f05823fb2
+    srand(esp_random());
     int tick = 0;
     int count_food = 0;
     int do_movement = 1;
@@ -69,35 +62,25 @@ void app_main(void){
             break;
     }
     while (snake1.isAlive) {
-<<<<<<< HEAD
 
         //Just to test multiple snake movement
         // set_direction(&snake2, (rand() % 4));
         printf("Snake1 x: %d, y: %d\n", snake1.direction_x, snake1.direction_y);
         printf("Snake2 x: %d, y: %d\n", snake2.direction_x, snake2.direction_y);  
 
-=======
->>>>>>> 5ba565e3f1ddd97bfd589f2c076e1f3f05823fb2
         if(do_movement){ //Should be set to 1 every second
             move(p_board, &snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
             move(p_board, &snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
         }
-<<<<<<< HEAD
-        print_board();  
+        print_board(p_board);  
         tick++;     
         vTaskDelay(1000/portTICK_PERIOD_MS);   
-=======
-        // print_board(p_board);  
-        tick++;         
->>>>>>> 5ba565e3f1ddd97bfd589f2c076e1f3f05823fb2
     }
     if (tick > 20){
         snake1.isAlive = false;
         snake2.isAlive = false;
     }
 }
-<<<<<<< HEAD
-=======
 
 SemaphoreHandle_t xGuiSemaphore;
 
@@ -167,4 +150,3 @@ static void lv_tick_task(void *arg) {
 
     lv_tick_inc(LV_TICK_PERIOD_MS);
 }
->>>>>>> 5ba565e3f1ddd97bfd589f2c076e1f3f05823fb2
