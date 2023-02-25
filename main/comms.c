@@ -6,8 +6,11 @@
 
 #include "comms.h"
 
+
 const char *TAG = "espnow";
+
 QueueHandle_t s_espnow_queue;
+
 uint8_t s_broadcast_mac[ESP_NOW_ETH_ALEN] = { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF };
 uint16_t s_espnow_seq[ESPNOW_DATA_MAX] = { 0, 0 };
 
@@ -121,7 +124,7 @@ void espnow_task(void *pvParameter) {
     bool is_broadcast = false;
     int ret;
 
-    vTaskDelay(10);
+    vTaskDelay(5000 / portTICK_PERIOD_MS); // every 5 second
     ESP_LOGI(TAG, "Start sending broadcast data");
 
     /* Start sending broadcast ESPNOW data. */
@@ -156,7 +159,7 @@ void espnow_task(void *pvParameter) {
 
                 /* Delay a while before sending the next data. */
                 if (send_param->delay > 0) {
-                   vTaskDelay(send_param->delay/portTICK_PERIOD_MS);
+                    vTaskDelay(send_param->delay/portTICK_PERIOD_MS);
                 }
 
                 ESP_LOGI(TAG, "send data to "MACSTR"", MAC2STR(send_cb->mac_addr));
@@ -324,10 +327,9 @@ void espnow_deinit(espnow_send_param_t *send_param) {
     esp_now_deinit();
 }
 
-/*
-
 void app_main(void) {
-     esp_err_t ret = nvs_flash_init();
+    // Initialize NVS
+    esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
         ESP_ERROR_CHECK(nvs_flash_erase());
         ret = nvs_flash_init();
@@ -337,5 +339,3 @@ void app_main(void) {
     wifi_init();
     espnow_init();
 }
-
-*/

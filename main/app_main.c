@@ -64,7 +64,7 @@ void app_main(void){
     while (snake1.isAlive) {
 
         //Just to test multiple snake movement
-        // set_direction(&snake2, (rand() % 4));
+        set_direction(&snake2, (rand() % 4));
         printf("Snake1 x: %d, y: %d\n", snake1.direction_x, snake1.direction_y);
         printf("Snake2 x: %d, y: %d\n", snake2.direction_x, snake2.direction_y);  
 
@@ -80,6 +80,8 @@ void app_main(void){
         snake1.isAlive = false;
         snake2.isAlive = false;
     }
+
+
 }
 
 SemaphoreHandle_t xGuiSemaphore;
