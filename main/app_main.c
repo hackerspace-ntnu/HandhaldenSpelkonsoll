@@ -7,6 +7,7 @@
 #include "freertos/semphr.h"
 #include "esp_system.h"
 #include "esp_timer.h"
+#include "esp_heap_caps.h"
 
 #define LV_TICK_PERIOD_MS 1
 
@@ -66,10 +67,10 @@ void app_main(void){
         }
         // print_board(p_board);  
         tick++;         
-    }
-    if (tick > 20){
-        snake1.isAlive = false;
-        snake2.isAlive = false;
+        if (tick > 5){
+            snake1.isAlive = false;
+            snake2.isAlive = false;
+        }
     }
 }
 

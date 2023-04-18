@@ -7,8 +7,9 @@
 void push(board_piece_t* board, body_t** head_ref, snake_t* snake, short int new_x, short int new_y)
 {
     /* 1. allocate node */
+    // body_t* new_node = (body_t*)heap_caps_malloc(sizeof(body_t), MALLOC_CAP_DMA);
     body_t* new_node = (body_t*)malloc(sizeof(body_t));
- 
+    
     /* 2. set x and y. Push adds to the front of the list so new node is the head, therefore set isHead is 1  */
     new_node->x = new_x;
     new_node->y = new_y;
@@ -237,7 +238,7 @@ void move(board_piece_t* board, snake_t* snake, body_t** node, short int directi
             (*count_food)--;
         }
     } else {
-        //printf("is tail null: %s\n", tail == NULL ? "yes" : "no");
+        // printf("is tail null: %s\n", tail == NULL ? "yes" : "no");
         if (!single_piece_snake){
             tail->prev->next = NULL;
         }
@@ -245,6 +246,7 @@ void move(board_piece_t* board, snake_t* snake, body_t** node, short int directi
     }
 
     // Create new head
+    // printf("create new head\n");
     push(board, &head, snake, new_x, new_y);
     set_square_value(board, new_x, new_y, BLOCK_SNAKE, head);
 
@@ -314,7 +316,8 @@ int get_snake_length(body_t* head) {
 snake_t create_snake(board_piece_t* board, int length, int coords[][2], int* snake_id_counter) {
     body_t* head = NULL;
 
-    snake_t* snake = (snake_t*)malloc(sizeof(snake_t));
+    // snake_t* snake = (snake_t*)heap_caps_malloc(sizeof(snake_t), MALLOC_CAP_DMA); // maybe try heap_caps_malloc
+    snake_t* snake = (snake_t*)malloc(sizeof(snake_t)); // maybe try heap_caps_malloc
 
     snake->id = *snake_id_counter;
     snake->direction_x = 1;
