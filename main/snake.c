@@ -238,7 +238,7 @@ void move(board_piece_t* board, snake_t* snake, body_t** node, short int directi
             (*count_food)--;
         }
     } else {
-        printf("is tail null: %s\n", tail == NULL ? "yes" : "no");
+        // printf("is tail null: %s\n", tail == NULL ? "yes" : "no");
         if (!single_piece_snake){
             tail->prev->next = NULL;
         }
