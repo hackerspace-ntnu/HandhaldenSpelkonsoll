@@ -66,10 +66,10 @@ void app_main(void){
         }
         // print_board(p_board);  
         tick++;         
-    }
-    if (tick > 20){
-        snake1.isAlive = false;
-        snake2.isAlive = false;
+        if (tick > 5){
+            snake1.isAlive = false;
+            snake2.isAlive = false;
+        }
     }
 }
 
