@@ -7,6 +7,7 @@
 #include "freertos/semphr.h"
 #include "esp_system.h"
 #include "esp_timer.h"
+#include "esp_heap_caps.h"
 
 #define LV_TICK_PERIOD_MS 1
 
