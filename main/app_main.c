@@ -11,8 +11,13 @@
 
 #define LV_TICK_PERIOD_MS 1
 
+board_piece_t* p_board;
+snake_t test_snake;
+int tick = 0;
+
 static void lv_tick_task(void *arg);
 static void guiTask(void *pvParameter);
+void draw_board(board_piece_t* p);
 
 void app_main(void){
 
@@ -102,6 +107,38 @@ static void guiTask(void *pvParameter) {
     disp_drv.buffer = &disp_buf; /*Set an initialized buffer*/
     lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 
+
+
+    while(test_snake.isAlive) {
+// printf("in the loop");
+
+        for (int i = 0; i < BOARD_HEIGHT; i++) {
+            for (int j = 0; j < BOARD_WIDTH; j++) {
+                lv_obj_t* bkgrnd = lv_obj_create(lv_scr_act(), NULL);
+                lv_obj_set_width(bkgrnd, SCREEN_WIDTH);
+                lv_obj_set_height(bkgrnd, SCREEN_HEIGHT);
+                lv_obj_set_style_local_bg_color(bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+                board_piece_t temp = get_square_value(p_board, j, i);
+                if (temp.piece_type == BLOCK_SNAKE) {
+                    lv_obj_t* block = lv_obj_create(bkgrnd, NULL);
+                    lv_obj_set_height(block, BLOCK_SIZE);
+                    lv_obj_set_width(block, BLOCK_SIZE);
+                    lv_obj_set_style_local_bg_color(block, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLUE);
+
+                }
+                else if (temp.piece_type == BLOCK_FOOD) {
+                    lv_obj_t* block = lv_obj_create(bkgrnd, NULL);
+                    lv_obj_set_height(block, BLOCK_SIZE);
+                    lv_obj_set_width(block, BLOCK_SIZE);
+                    lv_obj_set_style_local_bg_color(block, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_RED);
+                    }
+            }
+        }
+        tick++; 
+        if (tick > 100){
+            test_snake.isAlive = false;
+        }
+}
 
     /* Create and start a periodic timer interrupt to call lv_tick_inc */
     // const esp_timer_create_args_t periodic_timer_args = {
