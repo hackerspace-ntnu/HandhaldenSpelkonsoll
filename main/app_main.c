@@ -15,6 +15,13 @@ board_piece_t* p_board;
 snake_t test_snake;
 int tick = 0;
 
+lv_obj_t* brd_lv_obj_t[BOARD_HEIGHT*BOARD_WIDTH];
+lv_obj_t* bkgrnd;
+lv_obj_t* block;
+
+static board_piece_t board[BOARD_HEIGHT * BOARD_WIDTH];
+board_piece_t* p_board = &board[0];
+
 static void lv_tick_task(void *arg);
 static void guiTask(void *pvParameter);
 void draw_board(board_piece_t* p);
@@ -28,12 +35,10 @@ void app_main(void){
 
     snake_t snake1;
     snake_t snake2;
-    static board_piece_t board[BOARD_HEIGHT * BOARD_WIDTH];
-    board_piece_t* p_board = &board[0];
+
     int init_coordinates1[][2] = {{0, 0}, {1, 0}, {2, 0}}; 
     int init_coordinates2[][2] = {{BOARD_WIDTH-0, BOARD_HEIGHT-1}, {BOARD_WIDTH-2, BOARD_HEIGHT-1}, {BOARD_WIDTH-3, BOARD_HEIGHT-1}}; 
     init_board(p_board);
-    xTaskCreatePinnedToCore(guiTask, "gui", 4096*2, NULL, 0, NULL, 1);
 
     switch (PLAYER_NUMBER){
         case 1:
@@ -45,8 +50,8 @@ void app_main(void){
             init_coordinates1[1][1] = BOARD_HEIGHT/2; 
             init_coordinates1[2][1] = BOARD_HEIGHT/2; 
 
-            snake1 = create_snake(p_board, 3, init_coordinates1, &snake_id_counter);
-            add_snake_to_board(p_board, snake1.head);
+            test_snake = create_snake(p_board, 3, init_coordinates1, &snake_id_counter);
+            add_snake_to_board(p_board, test_snake.head);
 
             //initial food
             place_random_food(p_board, &count_food); 
@@ -65,17 +70,12 @@ void app_main(void){
         default:
             break;
     }
-    while (snake1.isAlive) {
-        if(do_movement){ //Should be set to 1 every second
-            move(p_board, &snake1, &snake1.head, snake1.direction_x, snake1.direction_y, &count_food);
-            move(p_board, &snake2, &snake2.head, snake2.direction_x, snake2.direction_y, &count_food);
-        }
-        // print_board(p_board);  
-        tick++;         
-        if (tick > 5){
-            snake1.isAlive = false;
-            snake2.isAlive = false;
-        }
+    
+    xTaskCreatePinnedToCore(guiTask, "gui", 4096*2, NULL, 0, NULL, 1);
+
+    
+    while (test_snake.isAlive) {
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 
@@ -108,38 +108,6 @@ static void guiTask(void *pvParameter) {
     lv_disp_drv_register(&disp_drv); /*Register the driver and save the created display objects*/
 
 
-
-    while(test_snake.isAlive) {
-// printf("in the loop");
-
-        for (int i = 0; i < BOARD_HEIGHT; i++) {
-            for (int j = 0; j < BOARD_WIDTH; j++) {
-                lv_obj_t* bkgrnd = lv_obj_create(lv_scr_act(), NULL);
-                lv_obj_set_width(bkgrnd, SCREEN_WIDTH);
-                lv_obj_set_height(bkgrnd, SCREEN_HEIGHT);
-                lv_obj_set_style_local_bg_color(bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLACK);
-                board_piece_t temp = get_square_value(p_board, j, i);
-                if (temp.piece_type == BLOCK_SNAKE) {
-                    lv_obj_t* block = lv_obj_create(bkgrnd, NULL);
-                    lv_obj_set_height(block, BLOCK_SIZE);
-                    lv_obj_set_width(block, BLOCK_SIZE);
-                    lv_obj_set_style_local_bg_color(block, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLUE);
-
-                }
-                else if (temp.piece_type == BLOCK_FOOD) {
-                    lv_obj_t* block = lv_obj_create(bkgrnd, NULL);
-                    lv_obj_set_height(block, BLOCK_SIZE);
-                    lv_obj_set_width(block, BLOCK_SIZE);
-                    lv_obj_set_style_local_bg_color(block, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_RED);
-                    }
-            }
-        }
-        tick++; 
-        if (tick > 100){
-            test_snake.isAlive = false;
-        }
-}
-
     /* Create and start a periodic timer interrupt to call lv_tick_inc */
     // const esp_timer_create_args_t periodic_timer_args = {
     //     .callback = &lv_tick_task,
@@ -149,14 +117,37 @@ static void guiTask(void *pvParameter) {
     // ESP_ERROR_CHECK(esp_timer_create(&periodic_timer_args, &periodic_timer));
     // ESP_ERROR_CHECK(esp_timer_start_periodic(periodic_timer, LV_TICK_PERIOD_MS * 1000));
 
-    lv_obj_t* bkgrnd = lv_obj_create(lv_scr_act(), NULL);
-    lv_obj_set_width(bkgrnd, 135);
-    lv_obj_set_height(bkgrnd, 22);
-    lv_obj_t* label = lv_label_create(bkgrnd, NULL);
-    lv_label_set_text(label, "Hackerspace");
-    lv_obj_set_style_local_text_color(label, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_WHITE);
-    lv_obj_set_style_local_bg_color(bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLUE);
+    bkgrnd = lv_obj_create(lv_scr_act(), NULL);
+    lv_obj_set_width(bkgrnd, SCREEN_WIDTH);
+    lv_obj_set_height(bkgrnd, SCREEN_HEIGHT);
+    lv_obj_set_style_local_bg_color(bkgrnd, LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_GREEN);
 
+    
+    for (int i = 0; i < BOARD_HEIGHT; i++) {
+        for (int j = 0; j < BOARD_WIDTH; j++) {
+            board_piece_t temp = get_square_value(p_board, j, i);
+            if (temp.piece_type == BLOCK_SNAKE) {
+                brd_lv_obj_t[i*j] = lv_obj_create(bkgrnd, NULL);
+                lv_obj_set_height(brd_lv_obj_t[i*j], BLOCK_SIZE);
+                lv_obj_set_width(brd_lv_obj_t[i*j], BLOCK_SIZE);
+                lv_obj_set_style_local_bg_color(brd_lv_obj_t[i*j], LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_BLUE);
+                lv_obj_set_x(brd_lv_obj_t[i*j], j*BLOCK_SIZE);
+                lv_obj_set_y(brd_lv_obj_t[i*j], i*BLOCK_SIZE);
+            }
+            else if (temp.piece_type == BLOCK_FOOD) {
+                brd_lv_obj_t[i*j] = lv_obj_create(bkgrnd, NULL);
+                lv_obj_set_height(brd_lv_obj_t[i*j], BLOCK_SIZE);
+                lv_obj_set_width(brd_lv_obj_t[i*j], BLOCK_SIZE);
+                lv_obj_set_style_local_bg_color(brd_lv_obj_t[i*j], LV_OBJ_PART_MAIN, LV_STATE_DEFAULT, LV_COLOR_RED);
+                lv_obj_set_x(brd_lv_obj_t[i*j], j*BLOCK_SIZE);
+                lv_obj_set_y(brd_lv_obj_t[i*j], i*BLOCK_SIZE);
+            }
+        }
+    }
+
+    
+    
+    
     while (1) {
         /* Delay 1 tick (assumes FreeRTOS tick is 10ms */
         vTaskDelay(pdMS_TO_TICKS(10));
