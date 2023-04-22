@@ -14,7 +14,7 @@
 
 #define SCREEN_HEIGHT 320
 #define SCREEN_WIDTH 480
-#define BLOCK_SIZE 10
+#define BLOCK_SIZE 40
 
 #define PLAYER_NUMBER 2 // Number of players in the game
 #define MAX_FOOD_AT_ONCE 1 //Will be adjusted on amount of players later
