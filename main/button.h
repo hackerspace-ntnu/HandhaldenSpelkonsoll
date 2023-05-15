@@ -20,9 +20,9 @@
 #define BTN_X  GPIO_NUM_33 
 #define BTN_Y  GPIO_NUM_25
 
-gpio_num_t button_pins[8] = {BTN_DP_RIGHT, BTN_DP_DOWN, BTN_DP_LEFT, BTN_DP_UP, BTN_A, BTN_B, BTN_X, BTN_Y};
+//gpio_num_t button_pins[8] = {BTN_DP_RIGHT, BTN_DP_DOWN, BTN_DP_LEFT, BTN_DP_UP, BTN_A, BTN_B, BTN_X, BTN_Y};
 
-void init_buttons();
-int read_button(gpio_num_t pin);
+//void init_buttons();
+//int read_button(gpio_num_t pin);
 
 #endif

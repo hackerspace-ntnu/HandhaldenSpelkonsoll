@@ -1,14 +1,14 @@
 #include "button.h"
 
-void init_buttons() {
-    for(int i=0; i<8; i++){
-        gpio_set_direction(button_pins[i], GPIO_MODE_INPUT);
-    }
-}
+//void init_buttons() {
+//    for(int i=0; i<8; i++){
+//        gpio_set_direction(button_pins[i], GPIO_MODE_INPUT);
+//    }
+//}
 
-int read_button(gpio_num_t pin) {
-    return gpio_get_level(pin);
-}
+//int read_button(gpio_num_t pin) {
+//    return gpio_get_level(pin);
+//}
 
 /*
     ----------------------------------------------------------
